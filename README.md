@@ -20,7 +20,7 @@ For more information, visit documentation for installing contributed modules and
 ## Settings
 * A new Levitate section has been added under local plugins.
 * The settings page allows administrators to get the API token.
-* Click on "get token," and it will ask for a username and password for the Levitate connection.
+* Click on "get token" and it will ask for a username and password for the Levitate connection.
 * To get the token, you need to have a user on levitate.coach with whatever credentials you want and paste them into Moodle.
 * If you don’t have a user in levitate.coach, kindly contact Human Logic.
 
