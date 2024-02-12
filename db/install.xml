@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/levitate/db" VERSION="2023031407" COMMENT="XMLDB file for Moodle local/levitate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+        <!-- form submitted data -->
+        <TABLE NAME="levitate_task_details" COMMENT="This table has the list of task_details">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="taskexecuted" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The task executed or not"/>
+                <FIELD NAME="formdata" TYPE="text" LENGTH="5000" NOTNULL="false" SEQUENCE="false" COMMENT="The form description which has course meta."/>
+                <FIELD NAME="coursedata" TYPE="text" LENGTH="5000" NOTNULL="true" SEQUENCE="false" COMMENT="The form description which has all the courses selected"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="User id who initiated the process"/>
+               <FIELD NAME="timecreated" TYPE="int" LENGTH="10"  NOTNULL="false" SEQUENCE="false" COMMENT="The form creation datetime"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="The unique id for form"/>
+            </KEYS>
+        </TABLE>
+
+    </TABLES>
+</XMLDB>
