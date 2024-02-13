@@ -1,5 +1,5 @@
 # Moodle Levitate Plugin  
-The Levitate plugin that enables LMS users to explore a wide range of interactive, immersive, microlearning courses and programs in both English and Arabic.
+The Levitate plugin enables LMS users to explore a wide range of interactive, immersive, microlearning courses and programs in both English and Arabic.
 
 
 ## Main features
