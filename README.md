@@ -1,33 +1,34 @@
-# Levitate
-LMS plugin to access a wide range of courses
-
 # Moodle Levitate Plugin  
-The Levitate plugin is an integration between LMS that allows users to explore a wide range of courses in both English and Arabic languages.
+The Levitate plugin that enables LMS users to explore a wide range of interactive, immersive, microlearning courses and programs in both English and Arabic.
+
 
 ## Main features
-*	A wide range of courses available in both Arabic and English along with the course metadata such as Course Duration, Description, and Learning outcomes.
-*	Multiple filters are available for course selection, such as Time range, Search, Keywords, Language, and Program filters.
-*	Selected courses can be created as a single course with multi-activities or different courses with a single activity.
-*	Background task: Course creation will be done in the background.
-*	Domain subscription is required, which can be done on the plugin settings page.
-*	All the course and user analytics will be provided.
+* An immersive and engaging eLearning library, that not only enhances employee skills but also simplifies organization’s learning strategy.
+- * A comprehensive catalog populated with 
+  - Course metadata and relevant information such as Course Duration, Description, Learning outcomes.
+  - Multiple options to filter course selection, such as Time range,  Keywords, Language, and Program filters.
+* Selected courses can be created as a single course with multi-activities or different courses with a single activity.
+* Course creation will be executed in the background as a scheduled task.
+* Levitate subscription tokens for the Domain(s) can be updated through the plugin settings page
+- * A detailed analytics page will display a comprehensive dashboard with dashlets showing:
+  - Seat consumption
+  - Course consumption
+  - Learner progress tracking
+  - Course completion tracking
+
 
 ## Installation
-1.	Copy this levitate plugin to the local directory of your Moodle instance:  local/levitate
+1.	Copy this levitate plugin to the local directory of your Moodle instance: git clone [https://github.com/Human-Logic-Software-LLC/levitate.git](https://github.com/Human-Logic-Software-LLC/levitate.git) local/levitate
 2.	Visit the notifications page to complete the installation process.
+
 For more information, visit the [documentation](https://docs.moodle.org/403/en/Installing_plugins) for installing contributed modules and plugins.
 
-## Settings
-* A new Levitate section has been added under local plugins.
-* The settings page allows administrators to get the API token.
-* Click on "get token" and it will ask for a username and password for the Levitate connection.
-* To get the token, you need to have a user on levitate.coach with whatever credentials you want and paste them into Moodle.
-* If you don’t have a user in levitate.coach, kindly contact Human Logic.
 
-## Integration
-There is one table that helps to store course form data.
-1.	Coursedata: Determines what courses are selected by the user.
-2.	Formdata: To store Course metadata which helps in creating courses in the Moodle instance.
+## Settings
+* To subscribe to Levitate, kindly contact us through [https://www.levitate.coach](https://www.levitate.coach/).
+* Navigate to Levitate section under local plugins. 
+* Click on "get token" and login with your Levitate credentials to obtain the license token automatically. 
+
 
 # Useful links
 *	[Website URL](https://www.levitate.coach/)
