@@ -1039,3 +1039,6 @@ span.chevron-down.fa.fa-chevron-down:before {
 #course_selection .course_count_div p {
     margin-bottom: 0 !important;
 }
+.pull-right {
+    float: right;
+}
