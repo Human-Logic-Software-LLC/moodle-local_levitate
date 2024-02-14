@@ -95,6 +95,11 @@
 
 .explorecourses .coursecard .coursebody .coursedescription{
 	margin-bottom:10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-bottom: 5px;
 }
 
 .explorecourses .coursecard .coursebody h2.coursetitle{
@@ -107,12 +112,8 @@
 	height: auto;*/
 }
 
-.explorecourses .coursecard .coursebody .coursedescription p{
-	overflow: hidden;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2;
-	margin-bottom:5px;
+.explorecourses .coursecard .coursebody .coursedescription p:empty{
+    display:none;
 }
 .explorecourses .coursecard .coursebody .coursefooter{
 	display: flex;
