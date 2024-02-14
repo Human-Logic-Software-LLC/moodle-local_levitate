@@ -35,3 +35,4 @@ For more information, visit the [documentation](https://docs.moodle.org/403/en/I
 *	[Source control URL](https://github.com/Human-Logic-Software-LLC/Levitate)
 *	[Bug tracker](https://github.com/Human-Logic-Software-LLC/Levitate/issues)
 
+![levitate_logo_v1_1](https://github.com/Human-Logic-Software-LLC/mdl_levitate/assets/159756112/d40ec883-0dc6-4157-aebb-3b51fc011f8e)
