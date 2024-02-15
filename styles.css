@@ -100,6 +100,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     margin-bottom: 5px;
+
 }
 
 .explorecourses .coursecard .coursebody h2.coursetitle{
@@ -121,6 +122,7 @@
     background: rgba(0,0,0,0.02);
     padding: 5px 10px;
     border-radius: 5px;
+    margin-top: 15px;
 }
 
 .explorecourses .coursecard .coursebody .coursefooter .courselanguage{
@@ -1040,6 +1042,56 @@ span.chevron-down.fa.fa-chevron-down:before {
 #course_selection .course_count_div p {
     margin-bottom: 0 !important;
 }
-.pull-right {
+.pull-right{
     float: right;
+}
+.coursebody.ar ,
+.dir-rtl .coursebody.ar{
+    direction: rtl;
+    text-align: right;
+}
+.coursebody.en,
+.dir-rtl .coursebody.en{
+    direction: ltr;
+    text-align: left;
+}
+.dir-rtl .explorecourses .coursecard .coursebody.ar .coursefooter .coursetime,
+.explorecourses .coursecard .coursebody.ar .coursefooter .coursetime {
+    text-align: left;
+}
+.dir-rtl .explorecourses .coursecard .coursebody.en .coursefooter .coursetime,
+.explorecourses .coursecard .coursebody.en .coursefooter .coursetime {
+    text-align: right;
+}
+
+.explore-details.ar,
+.dir-rtl .explore-details.ar{
+	direction: rtl;
+    text-align: right;
+}
+
+.explore-details.en,
+.dir-rtl .explore-details.en{
+	direction: ltr;
+    text-align: left;
+}
+
+.explore-details.ar .pull-right,
+.dir-rtl .explore-details.ar .pull-right{
+    float: left;
+}
+
+.explore-details.en .pull-right,
+.dir-rtl .explore-details.en .pull-right{
+    float: right;
+}
+
+.dir-rtl .explore-details.ar,
+.dir-rtl .explore-details.en,
+.dir-rtl .explorecourses .coursecard{
+	box-shadow: 0 0 10px 0 rgba(0,0,0,.15) !important;
+}
+
+.dir-rtl .common-checkboxIndicator:after{
+	border-style: none none solid solid !important;
 }
