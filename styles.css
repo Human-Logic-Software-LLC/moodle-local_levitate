@@ -296,8 +296,9 @@
     border-radius: 0.5rem;
     text-align: center;
     vertical-align: middle;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, 
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition:
+        color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .path-local-levitate #course_selection .text-container input[type="submit"]:hover,
@@ -1015,10 +1016,8 @@
         flex-direction: row;
     }
 
-    .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection 
-    .explore-details-content .explore-details-main,
-    .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection 
-    .explore-details-content .explore-details-main + .col-md-4 {
+    .path-local-levitate form#course_selection .explore-details-content .explore-details-main,
+    .path-local-levitate form#course_selection .explore-details-content .explore-details-main + .col-md-4 {
         width: 100%;
         flex: 0 0 100%;
         max-width: 100%;
@@ -1052,7 +1051,7 @@
 
 .path-local-levitate span.chevron-down.fa.fa-chevron-down:before {
     transform: rotate(90deg);
-    top: 0px;
+    top: 0;
     width: 10px;
     height: 15px;
 }
