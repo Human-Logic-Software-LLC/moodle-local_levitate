@@ -77,6 +77,11 @@ class local_levitate_form extends moodleform {
 }
 /**
  * local_levitate_storedfile to store the file
+ *
+ * @param string $name give file name.
+ * @param string $packageid contains the scormid
+ * @param string $scorm has scorm content to store
+ * @return string the file path.
  */
 function local_levitate_storedfile($name, $packageid, $scorm) {
     global $USER;
@@ -106,6 +111,9 @@ function local_levitate_storedfile($name, $packageid, $scorm) {
 }
 /**
  * local_levitate_curlcall to make the curl calls
+ * @param string $fnname function name to make the curl call.
+ * @param string $jsondata params for curl call.
+ * @return string the contents of the requested call.
  */
 function local_levitate_curlcall($fnname = '', $jsondata='') {
     $tokensettings = get_config('local_levitate');
@@ -118,6 +126,9 @@ function local_levitate_curlcall($fnname = '', $jsondata='') {
 }
 /**
  * local_levitate_get_option_text to create options for select
+ * @param string $params list of option values.
+ * @param string $idvalue params.
+ * @return string the list of options for the requested select.
  */
 function local_levitate_get_option_text ($params, $idvalue) {
     foreach ($params as $trmparr) {
@@ -133,8 +144,17 @@ function local_levitate_get_option_text ($params, $idvalue) {
 }
 /**
  * local_levitate_add_scorm_module to add scorm to the course
+ * @param string $course course id.
+ * @param string $name scorm name.
+ * @param string $itemid activity id.
+ * @param string $descriptionhtml description for scorm.
+ * @param string $assessable params.
+ * @param string $section decides the activity type.
+ * @param string $scormcontentvalue scorm value.
+ * @return string the module info id.
  */
-function local_levitate_add_scorm_module($course, $name, $itemid, $descriptionhtml, $assessable, $section = 0, $scormcontentvalue=null) {
+function local_levitate_add_scorm_module($course, $name, $itemid, $descriptionhtml,
+$assessable, $section = 0, $scormcontentvalue=null) {
     global $CFG, $DB;
     require_once($CFG->dirroot.'/mod/scorm/lib.php');
     require_once($CFG->dirroot . '/course/modlib.php');
@@ -168,4 +188,3 @@ function local_levitate_add_scorm_module($course, $name, $itemid, $descriptionht
     $moduleinfo->packagefile = $packagefile->get_itemid();
     return add_moduleinfo($moduleinfo, $course);
 }
-
