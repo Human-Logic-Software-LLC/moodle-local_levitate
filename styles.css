@@ -1041,10 +1041,6 @@
     box-shadow: 0.1px 4px 30px 0.1px rgba(81, 45, 168, 0.10);
 }
 
-.path-local-levitate .graph svg {
-    width: 100%;
-}
-
 .path-local-levitate span.chevron-down.fa.fa-chevron-down {
     width: 10px;
     height: 10px;
