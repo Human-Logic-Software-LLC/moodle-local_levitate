@@ -2,7 +2,7 @@
 <XMLDB PATH="local/levitate/db" VERSION="2023031407" COMMENT="XMLDB file for Moodle local/levitate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
     <TABLES>
         <!-- form submitted data -->
-        <TABLE NAME="levitate_task_details" COMMENT="This table has the list of task_details">
+        <TABLE NAME="local_levitate_task_details" COMMENT="This table has the list of task_details">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
                 <FIELD NAME="taskexecuted" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The task executed or not"/>

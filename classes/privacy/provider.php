@@ -21,9 +21,21 @@
  * @author     Sreenu Malae <sreenivas@human-logic.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once('../../config.php');
-global $CFG, $DB, $PAGE;
-require_once($CFG->dirroot . '/local/levitate/lib.php');
-require_login();
-$response = local_levitate_curlcall('mod_levitateserver_get_analytics');
-echo $response;
+namespace local_levitate\privacy;
+/**
+ * provider to state the privacy of plugin
+ */
+class provider implements
+    // This plugin does not store any personal user data.
+    \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason(): string {
+        return 'privacy:metadata';
+    }
+}

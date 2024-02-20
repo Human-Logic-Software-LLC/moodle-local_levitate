@@ -29,6 +29,7 @@ require_once('../../lib/adminlib.php');
 require_once('../../mod/scorm/locallib.php');
 require_once('../../course/modlib.php');
 global $CFG, $USER, $DB;
+require_once($CFG->dirroot . '/local/levitate/lib.php');
 
 require_login();
 
@@ -41,58 +42,11 @@ $PAGE->set_pagelayout('base');
 echo $OUTPUT->header();
 
 echo "<h4>".get_string('coursesettings', 'local_levitate')."</h4>";
- /**
-  * The class simplehtml_form stores the list of courses selected by the user.
-  */
-class simplehtml_form extends moodleform {
-    /**
-     * Instantiate simplehtml_form
-     */
-    public function definition() {
-        global $DB, $CFG;
-        $imageurls = optional_param('image_urls', '', PARAM_TEXT);
-        $contextid = optional_param('context_id', '', PARAM_TEXT);
-        $enrollusers = optional_param('enrollusers', '', PARAM_TEXT);
-        $wstoken = optional_param('wstoken', '', PARAM_TEXT);
-        $passdata = [
-            "image_urls" => json_encode($imageurls),
-            "context_id" => json_encode($contextid),
-            "enrollusers" => json_encode($enrollusers),
-            "wwstoken" => $wstoken,
-        ];
-        $mform = $this->_form;
-        $radioarray = [];
-        $radioarray[] = $mform->createElement('radio', 'course_type', '',
-                            get_string('multi_coursetype', 'local_levitate'), 0, $attributes);
-        $radioarray[] = $mform->createElement('radio', 'course_type', '',
-                            get_string('single_coursetype', 'local_levitate'), 1, $attributes);
-        $mform->addGroup($radioarray, 'radioar', get_string('coursetype', 'local_levitate'), [''], false);
-        $mform->setDefault('course_type', 0);
-        $mform->addHelpButton ( 'radioar', 'coursetype', 'local_levitate');
-        $radioarray1 = [];
-        $radioarray1[] = $mform->createElement('radio', 'courseformat', '',
-                                   get_string('single_activity_course', 'local_levitate'), 0, $attributes);
-        $radioarray1[] = $mform->createElement('radio', 'courseformat', '',
-                                   get_string('multi_activity_course', 'local_levitate'), 1, $attributes);
-        $mform->addGroup($radioarray1, 'radioar1', get_string('coursecreation', 'local_levitate'), [''], false);
-        $mform->setDefault('courseformat', 0);
-        $mform->addHelpButton ( 'radioar1', 'coursecreation', 'local_levitate');
-        $mform->addElement('text', 'coursefullname', get_string('coursefullname', 'local_levitate'));
-        $mform->addElement('text', 'courseshortname', get_string('courseshortname', 'local_levitate'));
-        $coursecategories[0] = get_string('selectcategory', 'local_levitate');
-        $query = "SELECT * FROM {course_categories}";
-        $categories = $DB->get_records_sql($query);
-        foreach ($categories as $category) {
-            $coursecategories[$category->id] = $category->name;
-        }
-        $mform->addElement('select', 'coursecategory', get_string('coursecategory', 'local_levitate'), $coursecategories);
-        $mform->addElement('hidden', 'previous_form_values', json_encode( $passdata ));
-        $this->add_action_buttons(get_string('cancel', 'local_levitate'), get_string('submit', 'local_levitate'));
-    }
+if (!has_capability('local/levitate:view_levitate_catalog', context_system::instance())) {
+    $url = $CFG->wwwroot.'/my/';
+    redirect($url, get_string('catalog_capability', 'local_levitate'));
 }
-
-// Instantiate simplehtml_form.
-$mform = new simplehtml_form();
+$mform = new local_levitate_form();
 $mform->display();
 
 // Form processing and displaying is done here.
@@ -124,7 +78,7 @@ if ($mform->is_cancelled()) {
         $notification = get_string('shortname_exists', 'local_levitate');
         \core\notification::info($notification);
     } else {
-        $updated = $DB->insert_record('levitate_task_details', $formvalues);
+        $updated = $DB->insert_record('local_levitate_task_details', $formvalues);
         $nexttaskruntime = $DB->get_field('task_scheduled', 'nextruntime',
                                   ['classname' => '\local_levitate\task\create_course'], MUST_EXIST);
         $notificationtext = get_string('task_time', 'local_levitate', date('l, d F Y, g:i A', $nexttaskruntime).PHP_EOL);

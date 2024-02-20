@@ -21,9 +21,23 @@
  * @author     Sreenu Malae <sreenivas@human-logic.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once('../../config.php');
-global $CFG, $DB, $PAGE;
-require_once($CFG->dirroot . '/local/levitate/lib.php');
-require_login();
-$response = local_levitate_curlcall('mod_levitateserver_get_analytics');
-echo $response;
+defined('MOODLE_INTERNAL') || die;
+
+$capabilities = [
+    'local/levitate:view_levitate_catalog' => [
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+    ],
+    'local/levitate:view_levitate_analytics' => [
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+    ],
+];
