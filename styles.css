@@ -297,8 +297,10 @@
     text-align: center;
     vertical-align: middle;
     transition:
-        color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-            border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
 }
 
 .path-local-levitate #course_selection .text-container input[type="submit"]:hover,
