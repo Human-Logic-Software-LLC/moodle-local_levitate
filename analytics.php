@@ -71,164 +71,171 @@ $utilized = (int)$jsondata["participant_count"];
 $utilizationpercentage = ($utilized / $totalpercent) * 100;
 $utilizationpercentage = number_format($utilizationpercentage, 1);
 $graphvalue = ($utilizationpercentage / 100) * 630;
+$logourl = $levitatedata->CompanyLogoUrl ? $levitatedata->CompanyLogoUrl : $CFG->wwwroot.'/local/levitate/images/company-logo.png';
+$datevalues = date("M d, Y", $levitatedata->subscriptionstart).' - '.date("M d, Y", $levitatedata->subscriptionend);
 ?>
 
 <head>
-<link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-<div class='dashboard'>
-  <div class='main-region'>
-    <div class='total-statistics'>
-      <div class='total-users'>
-        <div class='graph-icon'>&nbsp;</div>
-        <div class='stats'>
-          <div class='lead'><?php echo get_string('total_users', 'local_levitate'); ?> </div>
-          <div class='nums'><?php echo $totalusers; ?> </div>
-        </div>
-      </div>
-     <div class='total-minutes'>
-      <div class='graph-icon'>&nbsp;</div>
-        <div class='stats'>
-          <div class='lead'><?php echo get_string('total_minutes', 'local_levitate'); ?> </div>
-          <div class='nums'><?php echo $totaltimespent; ?></div>
-        </div>
-     </div>
-    <div class='total-courses'>
-      <div class='graph-icon'>&nbsp;</div>
-      <div class='stats'>
-        <div class='lead'><?php echo get_string('total_courses', 'local_levitate'); ?> </div>
-        <div class='nums'><?php echo $totalcourses; ?></div>
-      </div>
-    </div>
-</div>
-        <div class='graphs-container'>
-			<div class="course-statistics popular-courses" style="display:none">
-				<div class="heads">
-					<h2><?php echo get_string('course_statistics', 'local_levitate'); ?> </h2>
-					<select class="course_statistics">
-				   
-					</select>
-				</div>
-			   
-				<div class="graph" id="enroll_graph">
-				</div>
-			</div>
-			
-			<div class="course-statistics popular-courses">
-				<div class="heads">
-					<h2><?php echo get_string('completion_statistics', 'local_levitate'); ?> </h2>
-					<select class="completion_statistics">
-				   
-					</select>
-				</div>
-				<div class="legends">
-					<span class="ttl-enrolls"><?php echo get_string('total_enrolls', 'local_levitate'); ?> </span>
-					<span class="ttl-completes"><?php echo get_string('total_completions', 'local_levitate'); ?> </span>
-				</div>
-				<div class="graph" id="course_graph">
-				</div>
-			</div>
-		</div>
-        <div class="course-statistics popular-table">
-            <div class="heads">
-                <h2><?php echo get_string('popular_courses', 'local_levitate'); ?> </h2>
-                <select class="table_select"></select>
-            </div>
-            <div class="popular-table">
-                <table id="datatable">
-                   
-                </table>
-            </div>
-        </div>
-  </div>
-  <div class='right-region'>
-    <div class="blocks company-logo">
-        <img src="<?php echo $levitatedata->CompanyLogoUrl ? $levitatedata->CompanyLogoUrl : $CFG->wwwroot.'/local/levitate/images/company-logo.png';?>" />
-    </div>
-        <div class="blocks">
-            <div class="heads">
-                <h2><?php echo get_string('my_details', 'local_levitate'); ?> </h2>
-                <div class="chev-down"><img src="<?php echo $CFG->wwwroot;?>/local/levitate/images/chevron-down.svg" /></div>
-            </div>
-            <div class="detail-item">
-            <div class="detail-item-icon"><img src="<?php echo $CFG->wwwroot;?>/local/levitate/images/contact-person.svg" /></div>
-                <div class="details">
-                    <p class="lead"><?php echo get_string('contact_person', 'local_levitate'); ?> </p>
-                    <p><?php echo $levitatedata->contactname?></p>
-                    <p><?php echo $levitatedata->profession?></p>
+    <div class='dashboard'>
+        <div class='main-region'>
+            <div class='total-statistics'>
+                <div class='total-users'>
+                    <div class='graph-icon'>&nbsp;</div>
+                    <div class='stats'>
+                        <div class='lead'><?php echo get_string('total_users', 'local_levitate'); ?> </div>
+                        <div class='nums'><?php echo $totalusers; ?> </div>
+                    </div>
+                </div>
+                <div class='total-minutes'>
+                    <div class='graph-icon'>&nbsp;</div>
+                    <div class='stats'>
+                        <div class='lead'><?php echo get_string('total_minutes', 'local_levitate'); ?> </div>
+                        <div class='nums'><?php echo $totaltimespent; ?></div>
+                    </div>
+                </div>
+                <div class='total-courses'>
+                    <div class='graph-icon'>&nbsp;</div>
+                    <div class='stats'>
+                        <div class='lead'><?php echo get_string('total_courses', 'local_levitate'); ?> </div>
+                        <div class='nums'><?php echo $totalcourses; ?></div>
+                    </div>
                 </div>
             </div>
-            <div class="detail-item">
-            <div class="detail-item-icon"><img src="<?php echo $CFG->wwwroot;?>/local/levitate/images/contact-details.svg" /></div>
-                <div class="details">
-                    <p class="lead"><?php echo get_string('contact_details', 'local_levitate'); ?> </p>
-                    <p><?php echo $levitatedata->contactemail?></p>
-                    <p><?php echo $levitatedata->mobile?></p>
-                </div>
-            </div>
-            <div class="detail-item">
-            <div class="detail-item-icon"><img src="<?php echo $CFG->wwwroot;?>/local/levitate/images/access-domain.svg" /></div>
-                <div class="details">
-                    <p class="lead"><?php echo get_string('access_domain', 'local_levitate'); ?> </p>
-                    <p><?php echo $levitatedata->primarydomain?></p>
-                </div>
-            </div>
-            <div class="detail-item">
-                <div class="detail-item-icon"><img src="<?php echo $CFG->wwwroot;?>/local/levitate/images/calendar.svg" /></div>
-                <div class="details">
-                    <p class="lead"><?php echo get_string('subscripton_start', 'local_levitate'); ?> </p>
-                    <p><?php echo date("M d, Y", $levitatedata->subscriptionstart).' - '.date("M d, Y", $levitatedata->subscriptionend)?></p>
-                </div>
-            </div>
+            <div class='graphs-container'>
+                <div class="course-statistics popular-courses" style="display:none">
+                    <div class="heads">
+                        <h2><?php echo get_string('course_statistics', 'local_levitate'); ?> </h2>
+                        <select class="course_statistics">
 
-            <div class="seat-utilization">
+                        </select>
+                    </div>
+
+                    <div class="graph" id="enroll_graph">
+                    </div>
+                </div>
+
+                <div class="course-statistics popular-courses">
+                    <div class="heads">
+                        <h2><?php echo get_string('completion_statistics', 'local_levitate'); ?> </h2>
+                        <select class="completion_statistics">
+                        </select>
+                    </div>
+                    <div class="legends">
+                        <span class="ttl-enrolls"><?php echo get_string('total_enrolls', 'local_levitate'); ?> </span>
+                        <span class="ttl-completes"><?php echo get_string('total_completions', 'local_levitate'); ?>
+                        </span>
+                    </div>
+                    <div class="graph" id="course_graph">
+                    </div>
+                </div>
+            </div>
+            <div class="course-statistics popular-table">
                 <div class="heads">
-                    <h2><?php echo get_string('seat_utilization', 'local_levitate'); ?> </h2>
+                    <h2><?php echo get_string('popular_courses', 'local_levitate'); ?> </h2>
+                    <select class="table_select"></select>
                 </div>
-                <div class="progress">
-                    <div class="bar" data-name="SVG Skill" data-percent="<?php echo $utilizationpercentage;?>%">
-                        <svg viewBox="-10 -10 220 220">
-                        <g fill="none" stroke-width="9" transform="translate(100,100)">
-                        <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#cl1)"/>
-                        <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#cl1)"/>
-                        <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#cl1)"/>
-                        <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#cl1)"/>
-                        <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#cl1)"/>
-                        <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#cl1)"/>
-                        </g>
-                        </svg>
-                        <svg viewBox="-10 -10 220 220">
-                          <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,
-                                   100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z"
-                                   stroke-dashoffset="<?php echo $graphvalue; ?>">
-                          </path>
-                        </svg>
-                    </div>
+                <div class="popular-table">
+                    <table id="datatable">
 
-                <!--  Defining Angle Gradient Colors  -->
-                <svg width="0" height="0">
-                <defs>
-                <linearGradient id="cl1" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1">
-                    <stop stop-color="#4050E7"/>
-                    <stop offset="100%" stop-color="#4050E7"/>
-                </linearGradient>
-                </defs>
-                </svg>
+                    </table>
                 </div>
-                <div class="utilization">
-                    <div class="total-bought">
-                        <div class="lead"><?php echo get_string('seats_bought', 'local_levitate'); ?> </div>
-                        <div class="nums"><?php echo $levitatedata->seats; ?></div>
+            </div>
+        </div>
+        <div class='right-region'>
+            <div class="blocks company-logo">
+                <img src="<?php echo $logourl;?>" />
+            </div>
+            <div class="blocks">
+                <div class="heads">
+                    <h2><?php echo get_string('my_details', 'local_levitate'); ?> </h2>
+                    <div class="chev-down"><img
+                            src="<?php echo $CFG->wwwroot;?>/local/levitate/images/chevron-down.svg" /></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-item-icon"><img
+                            src="<?php echo $CFG->wwwroot;?>/local/levitate/images/contact-person.svg" /></div>
+                    <div class="details">
+                        <p class="lead"><?php echo get_string('contact_person', 'local_levitate'); ?> </p>
+                        <p><?php echo $levitatedata->contactname?></p>
+                        <p><?php echo $levitatedata->profession?></p>
                     </div>
-                    <div class="total-used">
-                        <div class="lead"><?php echo get_string('seats_used', 'local_levitate'); ?> </div>
-                        <div class="nums"><?php echo $levitatedata->seats - $totalusers; ?></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-item-icon"><img
+                            src="<?php echo $CFG->wwwroot;?>/local/levitate/images/contact-details.svg" /></div>
+                    <div class="details">
+                        <p class="lead"><?php echo get_string('contact_details', 'local_levitate'); ?> </p>
+                        <p><?php echo $levitatedata->contactemail?></p>
+                        <p><?php echo $levitatedata->mobile?></p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-item-icon"><img
+                            src="<?php echo $CFG->wwwroot;?>/local/levitate/images/access-domain.svg" /></div>
+                    <div class="details">
+                        <p class="lead"><?php echo get_string('access_domain', 'local_levitate'); ?> </p>
+                        <p><?php echo $levitatedata->primarydomain?></p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-item-icon"><img
+                            src="<?php echo $CFG->wwwroot;?>/local/levitate/images/calendar.svg" /></div>
+                    <div class="details">
+                        <p class="lead"><?php echo get_string('subscripton_start', 'local_levitate'); ?> </p>
+                        <p><?php echo $datevalues; ?>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="seat-utilization">
+                    <div class="heads">
+                        <h2><?php echo get_string('seat_utilization', 'local_levitate'); ?> </h2>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" data-name="SVG Skill" data-percent="<?php echo $utilizationpercentage;?>%">
+                            <svg viewBox="-10 -10 220 220">
+                                <g fill="none" stroke-width="9" transform="translate(100,100)">
+                                    <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#cl1)" />
+                                    <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#cl1)" />
+                                    <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#cl1)" />
+                                    <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#cl1)" />
+                                    <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#cl1)" />
+                                    <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#cl1)" />
+                                </g>
+                            </svg>
+                            <svg viewBox="-10 -10 220 220">
+                                <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,
+                                   100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z"
+                                    stroke-dashoffset="<?php echo $graphvalue; ?>">
+                                </path>
+                            </svg>
+                        </div>
+                        <svg width="0" height="0">
+                            <defs>
+                                <linearGradient id="cl1" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1">
+                                    <stop stop-color="#4050E7" />
+                                    <stop offset="100%" stop-color="#4050E7" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="utilization">
+                        <div class="total-bought">
+                            <div class="lead"><?php echo get_string('seats_bought', 'local_levitate'); ?> </div>
+                            <div class="nums"><?php echo $levitatedata->seats; ?></div>
+                        </div>
+                        <div class="total-used">
+                            <div class="lead"><?php echo get_string('seats_used', 'local_levitate'); ?> </div>
+                            <div class="nums"><?php echo $levitatedata->seats - $totalusers; ?></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-  </div>
-  </div>
+    </div>
 </body>
 <?php echo $OUTPUT->footer();

@@ -49,12 +49,8 @@ class create_course extends \core\task\scheduled_task {
     public function execute() {
         global $DB, $CFG;
         require_once($CFG->dirroot.'/local/levitate/lib.php');
-        $tokensettings =get_config('local_levitate');
+        $tokensettings = get_config('local_levitate');
         $tokenid = $tokensettings->secret;
-        /**
-         * Task to create scorm activity in the course
-         */
-        
         $taskdetails = $DB->get_records('local_levitate_task_details', ['taskexecuted' => 0]);
         $taskids = [];
 
@@ -82,12 +78,8 @@ class create_course extends \core\task\scheduled_task {
                     $newcourse = create_course($coursedata);
                     foreach ($contextids as $key => $cmid) {
                         $this->log($cmid);
-                        // $tinyscorm = local_levitate_get_tiny_scorm($cmid, $tokenid);
-                        $jsondata = array(
-                            'cmid' => $cmid
-                        );
-                        
-                        $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms',$jsondata);
+                        $jsondata = ['cmid' => $cmid];
+                        $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms', $jsondata);
                         $output = preg_replace("/%u([0-9a-f]{3,4})/i", "&#x\\1;", urldecode($enrollusers->$key));
                         local_levitate_add_scorm_module($newcourse, html_entity_decode($output, null, 'UTF-8'), '', '', '',
                                           $scormsection, $tinyscorm);
@@ -112,11 +104,8 @@ class create_course extends \core\task\scheduled_task {
 
                     if (in_array($coursedata->shortname, $shortnames)) {
                         $coursedata->shortname = $coursedata->shortname.'_'.time();
-                        // $tinyscorm = local_levitate_get_tiny_scorm($cmid, $tokenid);
-                        $jsondata = array(
-                            'cmid' => $cmid
-                        );
-                        $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms',$jsondata);
+                        $jsondata = ['cmid' => $cmid];
+                        $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms', $jsondata);
                         $newcourse = create_course($coursedata);
                         local_levitate_add_scorm_module($newcourse, html_entity_decode($output, null, 'UTF-8'), '', '', '',
                                           $scormsection, $tinyscorm);
@@ -132,5 +121,3 @@ class create_course extends \core\task\scheduled_task {
         }
     }
 }
-
-

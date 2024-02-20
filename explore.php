@@ -36,7 +36,7 @@ if (!has_capability('local/levitate:view_levitate_catalog', context_system::inst
     redirect($url, get_string('catalog_capability', 'local_levitate'));
 }
 
-$tokensettings =get_config('local_levitate');
+$tokensettings = get_config('local_levitate');
 $tokenid = $tokensettings->secret;
 if (empty($tokenid)) {
     redirect(new moodle_url('/admin/settings.php?section=local_levitate'));
@@ -65,9 +65,6 @@ foreach ($jsondata as $key => $value) {
         $maxval = $timeparams->max_time;
     }
 }
-/**
- * creating Options for the select
- */
 
 $jsdata = ["tokenid" => $tokenid, "minval" => $minval, "maxval" => $maxval];
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/explorescript.js'));
@@ -82,9 +79,11 @@ $PAGE->requires->js_init_call('createinti', [$jsdata]);
     <div class="course_explore">
         <div class="hl-filters-wrapper">
             <div class="hl-base">
-             <div id="id_clearfilter" class="clearfilter"> <?php echo get_string('clear_filters', 'local_levitate'); ?> </div>
+                <div id="id_clearfilter" class="clearfilter">
+                    <?php echo get_string('clear_filters', 'local_levitate'); ?> </div>
                 <div class="course-search">
-                    <input type="text" class="searchTerm" placeholder="<?php echo get_string('findcourse', 'local_levitate'); ?>" />
+                    <input type="text" class="searchTerm"
+                        placeholder="<?php echo get_string('findcourse', 'local_levitate'); ?>" />
                     <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
                     </button>
@@ -105,9 +104,10 @@ $PAGE->requires->js_init_call('createinti', [$jsdata]);
                                 <span id="value">60</span>
                             </div>
                         </div>
-                        
-                        <input id="minDval_input"  data-filtername='time_params' name='filter_checkbox' type="range" tabindex="0" value="<?php echo $minval ?>"
-                            max="<?php echo $maxval ?>" min="<?php echo $minval ?>" step="5" oninput="
+
+                        <input id="minDval_input" data-filtername='time_params' name='filter_checkbox' type="range"
+                            tabindex="0" value="<?php echo $minval ?>" max="<?php echo $maxval ?>"
+                            min="<?php echo $minval ?>" step="5" oninput="
                     this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
                     var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)
                                         -(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
@@ -119,8 +119,9 @@ $PAGE->requires->js_init_call('createinti', [$jsdata]);
                     children[11].childNodes[1].innerHTML=this.value;
                     changeminDval(this.value)
                     " />
-                        <input id="maxDval_input" data-filtername='time_params' name='filter_checkbox' type="range" tabindex="0" value="<?php echo $maxval ?>"
-                            max="<?php echo $maxval ?>" min="<?php echo $minval ?>" step="5" oninput="
+                        <input id="maxDval_input" data-filtername='time_params' name='filter_checkbox' type="range"
+                            tabindex="0" value="<?php echo $maxval ?>" max="<?php echo $maxval ?>"
+                            min="<?php echo $minval ?>" step="5" oninput="
                     this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
                     var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)
                                         -(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
@@ -149,7 +150,8 @@ $PAGE->requires->js_init_call('createinti', [$jsdata]);
                 </div>
 
                 <div class="filters-summary">
-                <p id="total_course_value" class="hl-filter" hidden><?php echo $jsondata["All_courses_count"]; ?></p>
+                    <p id="total_course_value" class="hl-filter" hidden><?php echo $jsondata["All_courses_count"]; ?>
+                    </p>
                     <ul class="hl-filters">
                         <?php
                         foreach ($jsondata as $key => $value) {
@@ -220,20 +222,25 @@ $PAGE->requires->js_init_call('createinti', [$jsdata]);
                                 <p class='total_courses'></p>
                             </div>
                             <div class="course_submit">
-                        <input type="submit" value="<?php echo get_string('create_courses', 'local_levitate');?>" disabled />
+                                <input type="submit"
+                                    value="<?php echo get_string('create_courses', 'local_levitate');?>" disabled />
                             </div>
                         </div>
                         <div class='explorecourses'>
-                        <div class="loading">
-                        <img id="image_loading" src="<?php echo $CFG->wwwroot.'/local/levitate/images/levitate-logo.svg';?>" alt="this slowpoke moves"  width="250" />
-                        <p><?php echo get_string('loading','local_levitate'); ?></p>
-                        </div>
-                        <div class='nocourse'>
-                            <h4 class='nocoursetext'> <?php echo get_string('no_course_found', 'local_levitate');?> <h4>
-                        </div>
+                            <div class="loading">
+                                <img id="image_loading"
+                                    src="<?php echo $CFG->wwwroot.'/local/levitate/images/levitate-logo.svg';?>"
+                                    alt="this slowpoke moves" width="250" />
+                                <p><?php echo get_string('loading', 'local_levitate'); ?></p>
+                            </div>
+                            <div class='nocourse'>
+                                <h4 class='nocoursetext'> <?php echo get_string('no_course_found', 'local_levitate');?>
+                                    <h4>
+                            </div>
                         </div>
                         <div class="text-container">
-                        <input type="submit" value="<?php echo get_string('create_courses', 'local_levitate');?>" disabled />
+                            <input type="submit" value="<?php echo get_string('create_courses', 'local_levitate');?>"
+                                disabled />
                         </div>
                         <div class='explore-details-wrapper clearfix' id='explore-details-wrapper-actual'
                             style='display: none;'>
@@ -262,7 +269,8 @@ $PAGE->requires->js_init_call('createinti', [$jsdata]);
                                                 <div></div>
                                             </div>
                                             <div class='explore-learning-objectives'>
-                                                <h4><?php echo get_string('learning_objectives', 'local_levitate'); ?></h4>
+                                                <h4><?php echo get_string('learning_objectives', 'local_levitate'); ?>
+                                                </h4>
                                                 <div></div>
                                             </div>
                                         </div>

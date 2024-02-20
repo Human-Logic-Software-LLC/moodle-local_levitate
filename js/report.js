@@ -31,9 +31,9 @@ function createDataTable(Y,data,rawDataJSON,courses_table) {
         item.timespent = item.timespent+' mins';
     });
     rawDataJSON = JSON.parse(rawDataJSON);
-    // console.log(rawDataJSON);
+
     rawDataJSON = year_rawdata_json(rawDataJSON,$(".table_select").val());
-    // console.log(rawDataJSON);
+ 
     
     // Define the DataTable columns
     var columns = [
@@ -66,7 +66,7 @@ function createDataTable(Y,data,rawDataJSON,courses_table) {
     if(Y !== 'update'){
         $.noConflict();
         // Create the DataTable
-        console.log(data);
+       
         try {
             creating_table = $('#datatable').DataTable({
                 data: data,
@@ -76,7 +76,6 @@ function createDataTable(Y,data,rawDataJSON,courses_table) {
         }
         catch(err) {
         setTimeout(function () {
-            console.log("i came here");
            creating_table = $('#datatable').DataTable({
                 data: data,
                 columns: columns
@@ -132,7 +131,7 @@ function roundNumber(number, decimal_digit) {
     return result;
  }
 function drawGraph(scormId, data) {
-    console.log(data);
+  
     var allMonths = [
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -201,12 +200,7 @@ function drawGraph(scormId, data) {
         return sortableA - sortableB;
     });
     
-    console.log(chartData);
 
-
-    // var x = d3.scaleTime()
-    //     .domain(d3.extent(chartData, function (d) { return parseTime(d.monthYear); }))
-    //     .range([0, width]);
 
     var xscale = d3.scaleBand()
     .domain(allMonths) // Use allMonths array for x-axis domain
@@ -585,11 +579,7 @@ function course_statistics(Y,aggregatedData){
         var dataArray = Object.keys(aggregatedData).map(function (key) {
             return aggregatedData[key];
         });
-        // console.log(dataArray);
-        // var allMonths = [
-        //     "Jan", "Feb", "Mar", "Apr", "May 2023", "Jun 2023",
-        //     "Jul 2023", "Aug 2023", "Sep 2023", "Oct 2023", "Nov 2023", "Dec 2023"
-        // ];
+
         var allMonths = [
             "Jan", "Feb", "Mar", "Apr", "May", "Jun",
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -726,9 +716,7 @@ function process_data(returnArray){
     var totalCourses = returnArray['total_courses'];
     var courseBasedData = returnArray['course_based_data'];
     var courses_table = returnArray['courses_table'];
-    // courses_table = JSON.parse(courses_table);
     var resultArray = JSON.parse(courseBasedData);
-    console.log(resultArray);
 
     var dataPoints = [];
     var allcourses = [];
@@ -774,7 +762,6 @@ function process_data(returnArray){
     var aggregatedEnrolments = [];
     var coursetemp = [];
     var aggregatedData = {};
-    console.log(allcourses);
     $.each(allcourses, function(index, entry) {
         var timestamp = entry["timecreated"];
         var date = new Date(timestamp * 1000);
@@ -812,7 +799,6 @@ function process_data(returnArray){
             aggregatedData[monthYear]["completions"]++;
         }
     });
-    console.log(aggregatedData);
     return [tableData,rawDataJSON,allcourses,aggregatedData,courses_table];
 }
 function get_analytics_data(domainvalue, callback) {
@@ -910,10 +896,9 @@ function year_rawdata_json(resultArray,year){
 $(document).ready(function(){
   
     let tableData,rawDataJSON,allcourses,aggregatedData,courses_table;
- 
+
         get_analytics_data('', function(analytics_data) {
-            console.log("loadSecondJS")
-            console.log(analytics_data);
+          
 
             not_processed_tableData = analytics_data[0];
             rawDataJSON = analytics_data[1];

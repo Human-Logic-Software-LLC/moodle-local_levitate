@@ -94,4 +94,4 @@ $string['analytics_capability'] = 'You have no capabilities to explore the levit
 $string['privacy:metadata'] = 'Levitate plugin only displays existing course metadata in levitate server.';
 $string['to'] = 'to';
 $string['no_course_found'] = 'No courses found for the selected filters';
-$string['loading']='loading...';
+$string['loading'] = 'loading...';

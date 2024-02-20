@@ -29,7 +29,7 @@ require_once($CFG->libdir . '/formslib.php');
 /**
  * Task to store files
  */
- class local_levitate_form extends moodleform {
+class local_levitate_form extends moodleform {
     /**
      * Instantiate simplehtml_form
      */
@@ -75,6 +75,9 @@ require_once($CFG->libdir . '/formslib.php');
         $this->add_action_buttons(get_string('cancel', 'local_levitate'), get_string('submit', 'local_levitate'));
     }
 }
+/**
+ * local_levitate_storedfile to store the file
+ */
 function local_levitate_storedfile($name, $packageid, $scorm) {
     global $USER;
 
@@ -101,14 +104,21 @@ function local_levitate_storedfile($name, $packageid, $scorm) {
 
     return $fs->create_file_from_string($record, $scorm);
 }
-function local_levitate_curlcall($function_name = '',$jsondata='') {
-    $tokensettings =get_config('local_levitate');
+/**
+ * local_levitate_curlcall to make the curl calls
+ */
+function local_levitate_curlcall($fnname = '', $jsondata='') {
+    $tokensettings = get_config('local_levitate');
     $tokenid = $tokensettings->secret;
-    $url = 'https://levitate.human-logic.com/webservice/rest/server.php?wstoken='.$tokenid.'&wsfunction='.$function_name.'&moodlewsrestformat=json';
+    $serverurl = 'https://levitate.human-logic.com/webservice/rest/server.php?wstoken=';
+    $url = $serverurl.$tokenid.'&wsfunction='.$fnname.'&moodlewsrestformat=json';
     $curl = new curl();
     $response = $curl->post($url, $jsondata);
     return $response;
 }
+/**
+ * local_levitate_get_option_text to create options for select
+ */
 function local_levitate_get_option_text ($params, $idvalue) {
     foreach ($params as $trmparr) {
         $optiontext = $optiontext.'<li>
@@ -121,6 +131,9 @@ function local_levitate_get_option_text ($params, $idvalue) {
     }
     return $optiontext;
 }
+/**
+ * local_levitate_add_scorm_module to add scorm to the course
+ */
 function local_levitate_add_scorm_module($course, $name, $itemid, $descriptionhtml, $assessable, $section = 0, $scormcontentvalue=null) {
     global $CFG, $DB;
     require_once($CFG->dirroot.'/mod/scorm/lib.php');
