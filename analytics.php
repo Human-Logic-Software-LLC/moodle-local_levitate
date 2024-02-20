@@ -33,7 +33,6 @@ if (!has_capability('local/levitate:view_levitate_analytics', context_system::in
     redirect($url, get_string('analytics_capability', 'local_levitate'));
 }
 
-// $PAGE->requires->jquery();
 $PAGE->requires->jquery_plugin('ui');
 
 $PAGE->requires->js(new \moodle_url('https://levitate.human-logic.com/blocks/levitate_report/javascript/datatables.min.js'), true);
@@ -48,7 +47,7 @@ $PAGE->set_pagelayout('base');
 
 echo $OUTPUT->header();
 
-$tokensettings =get_config('local_levitate');
+$tokensettings = get_config('local_levitate');
 $tokenid = $tokensettings->secret;
 if (empty($tokenid)) {
     redirect(new moodle_url('/admin/settings.php?section=local_levitate'));
@@ -144,7 +143,9 @@ $graphvalue = ($utilizationpercentage / 100) * 630;
         </div>
   </div>
   <div class='right-region'>
-      <div class="blocks company-logo"><img src="<?php echo $levitatedata->CompanyLogoUrl ? $levitatedata->CompanyLogoUrl : $CFG->wwwroot.'/local/levitate/images/company-logo.png';?>" /></div>
+    <div class="blocks company-logo">
+        <img src="<?php echo $levitatedata->CompanyLogoUrl ? $levitatedata->CompanyLogoUrl : $CFG->wwwroot.'/local/levitate/images/company-logo.png';?>" />
+    </div>
         <div class="blocks">
             <div class="heads">
                 <h2><?php echo get_string('my_details', 'local_levitate'); ?> </h2>

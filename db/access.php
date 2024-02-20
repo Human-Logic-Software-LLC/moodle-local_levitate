@@ -24,6 +24,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 $capabilities = [
+    // Ability to explore levitate courses.
     'local/levitate:view_levitate_catalog' => [
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
@@ -32,7 +33,7 @@ $capabilities = [
             'manager' => CAP_ALLOW
         ]
     ],
-    
+    // Ability to access the levitate analytics.
     'local/levitate:view_levitate_analytics' => [
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'read',

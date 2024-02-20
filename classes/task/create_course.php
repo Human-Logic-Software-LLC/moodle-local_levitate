@@ -55,7 +55,7 @@ class create_course extends \core\task\scheduled_task {
          * Task to create scorm activity in the course
          */
         
-        $taskdetails = $DB->get_records('levitate_task_details', ['taskexecuted' => 0]);
+        $taskdetails = $DB->get_records('local_levitate_task_details', ['taskexecuted' => 0]);
         $taskids = [];
 
         foreach ($taskdetails as $taskid => $tasks) {
@@ -128,7 +128,7 @@ class create_course extends \core\task\scheduled_task {
             $dbupdate = new \stdclass();
             $dbupdate->id = $taskid;
             $dbupdate->taskexecuted = 1;
-            $updated = $DB->update_record('levitate_task_details', $dbupdate);
+            $updated = $DB->update_record('local_levitate_task_details', $dbupdate);
         }
     }
 }

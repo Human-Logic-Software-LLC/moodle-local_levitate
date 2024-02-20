@@ -78,7 +78,7 @@ if ($mform->is_cancelled()) {
         $notification = get_string('shortname_exists', 'local_levitate');
         \core\notification::info($notification);
     } else {
-        $updated = $DB->insert_record('levitate_task_details', $formvalues);
+        $updated = $DB->insert_record('local_levitate_task_details', $formvalues);
         $nexttaskruntime = $DB->get_field('task_scheduled', 'nextruntime',
                                   ['classname' => '\local_levitate\task\create_course'], MUST_EXIST);
         $notificationtext = get_string('task_time', 'local_levitate', date('l, d F Y, g:i A', $nexttaskruntime).PHP_EOL);
