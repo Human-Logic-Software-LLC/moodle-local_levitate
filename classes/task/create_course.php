@@ -49,89 +49,12 @@ class create_course extends \core\task\scheduled_task {
     public function execute() {
         global $DB, $CFG;
         require_once($CFG->dirroot.'/local/levitate/lib.php');
-        $tokensettings = $DB->get_record('config_plugins', ['plugin' => 'local_levitate', 'name' => 'secret'], 'value');
-        $tokenid = $tokensettings->value;
+        $tokensettings =get_config('local_levitate');
+        $tokenid = $tokensettings->secret;
         /**
          * Task to create scorm activity in the course
          */
-        function add_scorm_module($course, $name, $itemid, $descriptionhtml, $assessable, $section = 0, $scormcontentvalue=null) {
-            global $CFG, $DB;
-            require_once($CFG->dirroot.'/mod/scorm/lib.php');
-            require_once($CFG->dirroot . '/course/modlib.php');
-            $moduleinfo = new \stdClass();
-            $moduleinfo->name = $name;
-            $moduleinfo->modulename = 'scorm';
-            $moduleinfo->module = $DB->get_field('modules', 'id', ['name' => 'scorm'], MUST_EXIST);
-            $moduleinfo->cmidnumber = "";
-
-            $moduleinfo->visible = 1;
-            $moduleinfo->section = $section;
-
-            $moduleinfo->intro = '';
-            $moduleinfo->introformat = FORMAT_HTML;
-
-            $moduleinfo->popup = 1;
-            $moduleinfo->width = 100;
-            $moduleinfo->height = 100;
-            $moduleinfo->skipview = 2;
-            $moduleinfo->hidebrowse = 1;
-            $moduleinfo->displaycoursestructure = 0;
-            $moduleinfo->hidetoc = 3;
-            $moduleinfo->nav = 1;
-            $moduleinfo->displayactivityname = false;
-            $moduleinfo->displayattemptstatus = 1;
-            $moduleinfo->forcenewattempt = 1;
-            $moduleinfo->maxattempt = 0;
-
-            $moduleinfo->scormtype = SCORM_TYPE_LOCAL;
-            $packagefile = storedfile($name, $itemid, $scormcontentvalue);
-            $moduleinfo->packagefile = $packagefile->get_itemid();
-            return add_moduleinfo($moduleinfo, $course);
-        }
-        /**
-         * Task to create scorm activity in the course
-         */
-        function get_cmids ($clientname) {
-            $curl = curl_init();
-            curl_setopt_array($curl, [
-            CURLOPT_URL => 'https://levitate.human-logic.com/webservice/rest/server.php?wstoken='
-                                .$tokenid.'&wsfunction=mod_scormremote_get_courseids&moodlewsrestformat=json',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => ['clientname' => $clientname],
-            ]);
-            $responsesub = curl_exec($curl);
-            curl_close($curl);
-            return $responsesub;
-        }
-        /**
-         * Task to get tiny scorm using api
-         */
-        function get_tiny_scorm ($cmid, $tokenvalue) {
-
-            $curl = curl_init();
-                curl_setopt_array($curl, [
-                CURLOPT_URL => 'https://levitate.human-logic.com/webservice/rest/server.php?wstoken='
-                                    .$tokenvalue.'&wsfunction=mod_levitateserver_get_tiny_scorms',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => ['cmid' => $cmid],
-                ]);
-
-                $tinyscorm = curl_exec($curl);
-                curl_close($curl);
-                return $tinyscorm;
-        }
+        
         $taskdetails = $DB->get_records('levitate_task_details', ['taskexecuted' => 0]);
         $taskids = [];
 
@@ -158,9 +81,15 @@ class create_course extends \core\task\scheduled_task {
                 if (!in_array($formdata->courseshortname, $shortnames)) {
                     $newcourse = create_course($coursedata);
                     foreach ($contextids as $key => $cmid) {
-                        $tinyscorm = get_tiny_scorm($cmid, $tokenid);
+                        $this->log($cmid);
+                        // $tinyscorm = local_levitate_get_tiny_scorm($cmid, $tokenid);
+                        $jsondata = array(
+                            'cmid' => $cmid
+                        );
+                        
+                        $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms',$jsondata);
                         $output = preg_replace("/%u([0-9a-f]{3,4})/i", "&#x\\1;", urldecode($enrollusers->$key));
-                        add_scorm_module($newcourse, html_entity_decode($output, null, 'UTF-8'), '', '', '',
+                        local_levitate_add_scorm_module($newcourse, html_entity_decode($output, null, 'UTF-8'), '', '', '',
                                           $scormsection, $tinyscorm);
                     }
                 }
@@ -183,9 +112,13 @@ class create_course extends \core\task\scheduled_task {
 
                     if (in_array($coursedata->shortname, $shortnames)) {
                         $coursedata->shortname = $coursedata->shortname.'_'.time();
-                        $tinyscorm = get_tiny_scorm($cmid, $tokenid);
+                        // $tinyscorm = local_levitate_get_tiny_scorm($cmid, $tokenid);
+                        $jsondata = array(
+                            'cmid' => $cmid
+                        );
+                        $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms',$jsondata);
                         $newcourse = create_course($coursedata);
-                        add_scorm_module($newcourse, html_entity_decode($output, null, 'UTF-8'), '', '', '',
+                        local_levitate_add_scorm_module($newcourse, html_entity_decode($output, null, 'UTF-8'), '', '', '',
                                           $scormsection, $tinyscorm);
                     }
                 }

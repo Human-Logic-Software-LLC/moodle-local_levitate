@@ -3,15 +3,10 @@ function separateByScormId(data, scormId) {
 }
 function format(d) {
 
-    return '<div id="chart_div_'+d.scorm_remote_id+'" style="width: 800px; height: 400px;"></div>';
+    return '<div id="chart_div_'+d.scorm_remote_id+'" style="position:relative; width: 800px; height: 400px;"></div>';
 }
 function updateDataTable(newData, rawDataJSON,courses_table) {
     creating_table.clear().draw();
-    
-
-    // $('#datatable').DataTable().destroy();
-
-    // $('#datatable tbody').empty();
 
     createDataTable('update', newData, rawDataJSON,courses_table);
 }
@@ -145,15 +140,15 @@ function drawGraph(scormId, data) {
     var margin = { top: 20, right: 50, bottom: 50, left: 50 };
     var width = 800 - margin.left - margin.right;
     var height = 400 - margin.top - margin.bottom;
-  
+    var legendPadding = 30;
 
     var svg = d3
         .select('#chart_div_' + scormId)
         .append('svg')
         .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom)
+        .attr('height', height + margin.top + margin.bottom + legendPadding)
         .append('g')
-        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+        .attr('transform', 'translate(' + margin.left + ',' + (margin.top + legendPadding) + ')');
 
     var parseTime = d3.timeParse('%b %Y');
 
@@ -271,12 +266,12 @@ function drawGraph(scormId, data) {
                 .style("opacity", 0.9); 
             tooltip.html("Month: " + event.monthYear + "<br>Timespent: " + event.timespent+ "<br>Enrolments: " + event.enrollments+ "<br>Completions: " + event.completions)
                 .style("left", (x + 75) + "px")
-                .style("top", (y + 100) + "px");
+                .style("top", (y ) + "px");
         })
         .on("mousemove", function (event, d) {
             var [x, y] = d3.mouse(this);
             tooltip.style("left", (x + 75) + "px")
-                .style("top", (y + 100) + "px");
+                .style("top", (y ) + "px");
         })
         .on("mouseout", function () {
             tooltip.transition()
@@ -285,78 +280,119 @@ function drawGraph(scormId, data) {
         });
 
 
-    var line1 = d3.line()
-        .x(function (d) { var parts = d.monthYear.split(" ");
-        var shortenedMonthName = parts[0]; return xscale(shortenedMonthName); })
-        .y(function (d) { return y1(d.completions); })
-        ;
+    // Add bars for completion count
+svg.selectAll('.bar-completions')
+    .data(chartData)
+    .enter()
+    .append('rect')
+    .attr('class', 'bar-completions')
+    // .attr("x", function (d, key) { return xScale(Object.keys(aggregatedData)[key].replace(' '+$(".completion_statistics").val(),'')) + xScale.bandwidth() / 3; }) // Shift x position for grouped bars
 
-        // var xScale = d3.scaleTime()
-        // .domain(d3.extent(chartData, function (d) { return parseTime(d.monthYear); }))
-        // .range([0, width]);
+    .attr("x", function (d, key) { var parts = d.monthYear.split(" ");
+        var shortenedMonthName = parts[0]; return xscale(shortenedMonthName)+ xscale.bandwidth() / 2; })
+    .attr('y', function (d) { return y1(d.completions); })
+    .attr('width', 5)
+    .attr('height', function (d) { return height - y1(d.completions); })
+    .attr("rx", 3) // Set the x-axis corner radius
+    .attr("ry", 3) // Set the y-axis corner radius
+    .style('fill', '#FBC02D')
+    .on("mouseover", function (event, d) {
+        var [x, y] = d3.mouse(this);
+        tooltip.transition()
+            .duration(200)
+            .style("opacity", 0.9); 
+        tooltip.html("Month: " + event.monthYear + "<br>Timespent: " + event.timespent+ "<br>Enrolments: " + event.enrollments+ "<br>Completions: " + event.completions)
+            .style("left", (x + 75) + "px")
+            .style("top", (y ) + "px");
+    })
+    .on("mousemove", function (event, d) {
+        var [x, y] = d3.mouse(this);
+        tooltip.style("left", (x + 75) + "px")
+            .style("top", (y ) + "px");
+    })
+    .on("mouseout", function () {
+        tooltip.transition()
+            .duration(500)
+            .style("opacity", 0);
+    });
 
-    var line2 = d3.line()
-        .x(function (d) { var parts = d.monthYear.split(" ");
-        var shortenedMonthName = parts[0];  return xscale(shortenedMonthName); })
-        .y(function (d) { return y1(d.enrollments); })
-        .curve(d3.curveBasis);
-        
-        svg.append('path')
-        .datum(chartData)
-        .attr("fill", "none")
-        .attr('class', 'line')
-        .style('stroke', '#FBC02D')
-        .attr("stroke-width", 5)
-        .attr('d', line1)
-        .on("mouseover",(event, d)=>{
-            //check what we're passing to the m_over function
-            console.log('data:', d); 
-            
-      });
-        
+// Add bars for enrollment count
+svg.selectAll('.bar-enrollments')
+    .data(chartData)
+    .enter()
+    .append('rect')
+    .attr('class', 'bar-enrollments')
+    .attr('x', function (d) { var parts = d.monthYear.split(" ");
+        var shortenedMonthName = parts[0]; return xscale(shortenedMonthName)+ xscale.bandwidth(); })
+    .attr('y', function (d) { return y1(d.enrollments); })
+    .attr('width', 5)
+    .attr('height', function (d) { return height - y1(d.enrollments); })
+    .attr("rx", 3) // Set the x-axis corner radius
+    .attr("ry", 3) // Set the y-axis corner radius
+    .style('fill', '#4050E7')
+    .on("mouseover", function (event, d) {
+        var [x, y] = d3.mouse(this);
+        tooltip.transition()
+            .duration(200)
+            .style("opacity", 0.9); 
+        tooltip.html("Month: " + event.monthYear + "<br>Timespent: " + event.timespent+ "<br>Enrolments: " + event.enrollments+ "<br>Completions: " + event.completions)
+            .style("left", (x + 75) + "px")
+            .style("top", (y ) + "px");
+    })
+    .on("mousemove", function (event, d) {
+        var [x, y] = d3.mouse(this);
+        tooltip.style("left", (x + 75) + "px")
+            .style("top", (y ) + "px");
+    })
+    .on("mouseout", function () {
+        tooltip.transition()
+            .duration(500)
+            .style("opacity", 0);
+    });
 
-        svg.append('path')
-        .datum(chartData)
-        .attr("fill", "none")
-        .attr('class', 'line')
-        .style('stroke', '#4050E7')
-        .attr("stroke-width", 5)
-        .attr('d', line2)
+// Create a legend
+var legend = svg.append('g')
+    .attr('class', 'legend')
+    .attr('transform', 'translate(' + (width - 150) + ',' + -legendPadding + ')');// Adjust the coordinates as needed
 
-        .on("mousemove", function (event, d) {
-            var xValue = d; // The month name directly from the data
-            // Now you can use xValue in your tooltip or other interactions.
-            console.log("Mouse is over:", xValue);
-            console.log(event);
-            // console.log("mouse moved");
-            // var [x, y] = d3.mouse(this); // Get the mouse coordinates relative to the current element
-            
-            // // Convert x-coordinate to the corresponding date using the xScale
-            // var xValue = xscale.invert(x);
-            // console.log(xValue);
-    
-            // // Find the closest data point in chartData
-            // var bisectDate = d3.bisector(function (d) { return parseTime(d.monthYear); }).left;
-            // console.log(bisectDate);
-            // var index = bisectDate(chartData, xValue, 1);
-            // console.log(index);
-    
-            // // Get the data point at the found index
-            // var selectedData = chartData[index - 1];
-    
-            // tooltip.transition()
-            //     .duration(200)
-            //     .style("opacity", 0.9);
-    
-            // tooltip.html("Month: " + selectedData.monthYear + "<br>Enrollments: " + selectedData.enrollments)
-            //     .style("left", (x + 10) + "px")
-            //     // .style("top", (y - 30) + "px");
-        })
-        .on("mouseout", function () {
-            tooltip.transition()
-                .duration(500)
-                .style("opacity", 0);
-        });
+// Legend for Completions
+legend.append('circle')
+    .attr('cx', -140)
+    .attr('cy', 5)
+    .attr('r', 5)
+    .style('fill', '#FBC02D');
+
+legend.append('text')
+    .attr('x', -130)
+    .attr('y', 8)
+    .text('Completions');
+
+// Legend for Enrollments
+legend.append('circle')
+    .attr('cx', -25) // Adjust the distance between legend items
+    .attr('cy', 5)
+    .attr('r', 5)
+    .style('fill', '#4050E7');
+
+legend.append('text')
+    .attr('x', -15) // Adjust the distance between legend items
+    .attr('y', 8)
+    .text('Enrollments');
+
+// Legend for Timespent
+legend.append('circle')
+    .attr('cx', 90)
+    .attr('cy', 5)
+    .attr('r', 5)
+    .style('fill', 'green');
+
+legend.append('text')
+    .attr('x', 100)
+    .attr('y', 8)
+    .text('Timespent');
+
+
+
     
         
 
@@ -620,12 +656,12 @@ function course_statistics(Y,aggregatedData){
                   
                 tooltip.html("enrollments: " + event.enrollments + "<br>completions: " + event.completions)
                     .style("left", (x + 75) + "px")
-                    .style("top", (y + 700) + "px");
+                    .style("top", (y + 100) + "px");
             })
             .on("mousemove", function (event, d) {
                 var [x, y] = d3.mouse(this);
                 tooltip.style("left", (x + 75) + "px")
-                .style("top", (y + 700) + "px");
+                .style("top", (y + 100) + "px");
             })
             .on("mouseout", function () {
                 tooltip.transition()
@@ -654,12 +690,12 @@ function course_statistics(Y,aggregatedData){
                   
                 tooltip.html("enrollments: " + event.enrollments + "<br>completions: " + event.completions)
                     .style("left", (x + 75) + "px")
-                    .style("top", (y + 700) + "px");
+                    .style("top", (y + 100) + "px");
             })
             .on("mousemove", function (event, d) {
                 var [x, y] = d3.mouse(this);
                 tooltip.style("left", (x + 75) + "px")
-                .style("top", (y + 700) + "px");
+                .style("top", (y + 100) + "px");
             })
             .on("mouseout", function () {
                 tooltip.transition()
@@ -874,16 +910,7 @@ function year_rawdata_json(resultArray,year){
 $(document).ready(function(){
   
     let tableData,rawDataJSON,allcourses,aggregatedData,courses_table;
-    // function checkFirstJSLoaded() {
-    //     if ( ! $.fn.DataTable.isDataTable( '#datatable' ) ) {
-    //     loadSecondJS();
-    //     }
-    //    else {
-    //                 setTimeout(checkFirstJSLoaded, 100); // Check again after 100 milliseconds 
-    //             }
-    // }
-    // checkFirstJSLoaded(); 
-    // function loadSecondJS(){
+ 
         get_analytics_data('', function(analytics_data) {
             console.log("loadSecondJS")
             console.log(analytics_data);

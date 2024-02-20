@@ -188,14 +188,14 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-body{
+.path-local-levitate.body{
 	font-family: 'Roboto';
 	background: rgba(64, 80, 231, 0.01);
 	margin: 0;
 	padding: 0;
 }
 
-.dashboard{
+.path-local-levitate .dashboard{
 	max-width:1440px;
 	margin: auto;
 	padding:30px;
@@ -204,18 +204,18 @@ body{
 	gap:30px;
 }
 
-.dashboard .main-region{
+.path-local-levitate .dashboard .main-region{
 	width: calc(100% - 400px);
 }
 
-.dashboard .main-region .total-statistics{
+.path-local-levitate .dashboard .main-region .total-statistics{
 	display:flex;
 	gap: 35px;
 }
 
-.dashboard .main-region .total-statistics .total-users,
-.dashboard .main-region .total-statistics .total-minutes,
-.dashboard .main-region .total-statistics .total-courses{
+.path-local-levitate .dashboard .main-region .total-statistics .total-users,
+.path-local-levitate .dashboard .main-region .total-statistics .total-minutes,
+.path-local-levitate .dashboard .main-region .total-statistics .total-courses{
 	display:flex;
 	padding: 30px;
 	border-radius: 15px;
@@ -226,65 +226,65 @@ body{
 	flex-grow: 1;
 }
 
-.dashboard .main-region .total-statistics .total-users:hover,
-.dashboard .main-region .total-statistics .total-minutes:hover,
-.dashboard .main-region .total-statistics .total-courses:hover{
+.path-local-levitate .dashboard .main-region .total-statistics .total-users:hover,
+.path-local-levitate .dashboard .main-region .total-statistics .total-minutes:hover,
+.path-local-levitate .dashboard .main-region .total-statistics .total-courses:hover{
 	background-color: #4050E7;
 	transition: all 0.5s ease;
 }
 
-.dashboard .main-region .total-statistics .total-users .stats,
-.dashboard .main-region .total-statistics .total-minutes .stats,
-.dashboard .main-region .total-statistics .total-courses .stats{
+.path-local-levitate .dashboard .main-region .total-statistics .total-users .stats,
+.path-local-levitate .dashboard .main-region .total-statistics .total-minutes .stats,
+.path-local-levitate .dashboard .main-region .total-statistics .total-courses .stats{
 	margin-left: 25px;
 }
 
-.dashboard .main-region .total-statistics .total-users .stats .lead,
-.dashboard .main-region .total-statistics .total-minutes .stats .lead,
-.dashboard .main-region .total-statistics .total-courses .stats .lead{
+.path-local-levitate .dashboard .main-region .total-statistics .total-users .stats .lead,
+.path-local-levitate .dashboard .main-region .total-statistics .total-minutes .stats .lead,
+.path-local-levitate .dashboard .main-region .total-statistics .total-courses .stats .lead{
 	min-width: 100%;
 	color: #231F20;
 	font-size: 16px;
 	font-weight: 400;
 }
 
-.dashboard .main-region .total-statistics .total-users .stats .nums,
-.dashboard .main-region .total-statistics .total-minutes .stats .nums,
-.dashboard .main-region .total-statistics .total-courses .stats .nums{
+.path-local-levitate .dashboard .main-region .total-statistics .total-users .stats .nums,
+.path-local-levitate .dashboard .main-region .total-statistics .total-minutes .stats .nums,
+.path-local-levitate .dashboard .main-region .total-statistics .total-courses .stats .nums{
 	color: #000;
 	font-size: 42px;
 	font-style: normal;
 	font-weight: 500;
 }
 
-.dashboard .main-region .total-statistics .total-users:hover .nums,
-.dashboard .main-region .total-statistics .total-minutes:hover .nums,
-.dashboard .main-region .total-statistics .total-courses:hover .nums,
-.dashboard .main-region .total-statistics .total-users:hover .lead,
-.dashboard .main-region .total-statistics .total-minutes:hover .lead,
-.dashboard .main-region .total-statistics .total-courses:hover .lead{
+.path-local-levitate .dashboard .main-region .total-statistics .total-users:hover .nums,
+.path-local-levitate .dashboard .main-region .total-statistics .total-minutes:hover .nums,
+.path-local-levitate .dashboard .main-region .total-statistics .total-courses:hover .nums,
+.path-local-levitate .dashboard .main-region .total-statistics .total-users:hover .lead,
+.path-local-levitate .dashboard .main-region .total-statistics .total-minutes:hover .lead,
+.path-local-levitate .dashboard .main-region .total-statistics .total-courses:hover .lead{
 	color: #ffffff;
 }
 
-.course-statistics{
+.path-local-levitate .course-statistics{
 	border-radius: 15px;
 	background: #F7F8FF;
 	padding: 30px;
 	margin-top:30px;
 }
 
-.course-statistics .heads{
+.path-local-levitate .course-statistics .heads{
 	display: flex;
 }
 
-.course-statistics .heads h2{
+.path-local-levitate .course-statistics .heads h2{
 	margin-top: 0;
 	flex-grow: 1;
 	font-weight: 500;
 	font-size: 30px;
 }
 
-.course-statistics .heads select{
+.path-local-levitate .course-statistics .heads select{
 	width: 125px;
 	height: 40px;
 	border-radius: 8px;
@@ -298,11 +298,11 @@ body{
 	box-shadow: 0px 1px 10px 0px rgba(81, 45, 168, 0.01);
 }
 
-.right-region{
+.path-local-levitate .right-region{
 	min-width:380px;
 }
 
-.right-region .blocks{
+.path-local-levitate .right-region .blocks{
 	border-radius: 15px;
 	background: #F7F8FF;
 	width: 380px;
@@ -312,12 +312,12 @@ body{
 	margin-bottom: 30px;
 }
 
-.right-region .blocks.company-logo{
+.path-local-levitate .right-region .blocks.company-logo{
 	height: 210px;
 	display: flex;
 }
 
-.right-region .blocks .heads{
+.path-local-levitate .right-region .blocks .heads{
 	display: flex;
 	align-items:center;
 	width: 100%;
@@ -325,14 +325,14 @@ body{
 	text-align:left;
 }
 
-.right-region .blocks .heads h2{
+.path-local-levitate .right-region .blocks .heads h2{
 	flex-grow: 1;
 	font-weight: 500;
 	margin: 0;
 	font-size: 30px;
 }
 
-.right-region .blocks .heads .chev-down{
+.path-local-levitate .right-region .blocks .heads .chev-down{
 	width: 30px;
 	height: 30px;
 	align-items: center;
@@ -341,19 +341,19 @@ body{
 	display:none;
 }
 
-.right-region .blocks .heads .chev-down img{
+.path-local-levitate .right-region .blocks .heads .chev-down img{
 	width:15px;
 	height:8px;
 }
 
-.right-region .detail-item{
+.path-local-levitate .right-region .detail-item{
 	display: flex;
 	align-items: center;
 	margin-bottom: 30px;
     min-height: 80px;
 }
 
-.right-region .detail-item .detail-item-icon{
+.path-local-levitate .right-region .detail-item .detail-item-icon{
 	width: 56px;
 	height: 56px;
 	box-shadow: 0px 0px 20px 0px #512DA80D;
@@ -364,14 +364,14 @@ body{
     justify-content: center;
 }
 
-.right-region .detail-item .details p{
+.path-local-levitate .right-region .detail-item .details p{
 	font-size: 16px;
 	font-weight: 500;
 	color: #666666;
 	margin: 7px 0 7px 20px;
 }
 
-.right-region .detail-item .details .lead{
+.path-local-levitate .right-region .detail-item .details .lead{
 	font-size: 14px;
 	font-weight: 600;
 	color: #000000;
@@ -383,7 +383,7 @@ body{
   }
 }
 
-.progress {
+.path-local-levitate .progress {
   position: relative;
   display: inline-block;
   padding: 0;
@@ -394,7 +394,7 @@ body{
   box-shadow: none;
 }
 
-.progress .bar {
+.path-local-levitate .progress .bar {
   display: inline-block;
   position: relative;
   text-align: center;
@@ -406,7 +406,7 @@ body{
   border-radius: 50%;
 }
 
-.progress .bar:after {
+.path-local-levitate .progress .bar:after {
   content: attr(data-percent);
   position: absolute;
   width: 100%;
@@ -416,19 +416,19 @@ body{
   text-align: center;
 }
 
-.progress svg {
+.path-local-levitate .progress svg {
   width: 200px;
   height: 200px;
 }
 
-.progress svg:nth-child(2) {
+.path-local-levitate .progress svg:nth-child(2) {
   position: absolute;
   left: 0;
   top: 0;
   transform: rotate(-90deg);
 }
 
-.progress svg:nth-child(2) path {
+.path-local-levitate .progress svg:nth-child(2) path {
   fill: none;
   stroke-width: 10;
   stroke-dasharray: 629;
@@ -436,23 +436,23 @@ body{
   animation: load 2s;
 }
 
-.seat-utilization{
+.path-local-levitate .seat-utilization{
 	text-align: center;
 }
 
-.right-region .seat-utilization .heads{
+.path-local-levitate .right-region .seat-utilization .heads{
 	margin-bottom: 0px;
     margin-top: 40px;
 }
 
-.right-region .utilization{
+.path-local-levitate .right-region .utilization{
 	display:flex;
 	text-align:left;
 	gap:15px;
 }
 
-.right-region .utilization .total-bought,
-.right-region .utilization .total-used{
+.path-local-levitate .right-region .utilization .total-bought,
+.path-local-levitate .right-region .utilization .total-used{
 	border-radius: 15px;
 	background: #FFF;
 	box-shadow: 0px 4px 30px 0px rgba(81, 45, 168, 0.10);
@@ -460,18 +460,18 @@ body{
 	padding:15px;
 }
 
-.right-region .utilization .total-used{
+.path-local-levitate .right-region .utilization .total-used{
 	background: #4050E7;
 	color: white;
 }
 
-.right-region .utilization .lead{
+.path-local-levitate .right-region .utilization .lead{
 	font-size: 12px;
 	font-style: normal;
 	font-weight: 600;
 }
 
-.right-region .utilization .nums{
+.path-local-levitate .right-region .utilization .nums{
 	font-size: 36px;
 	font-style: normal;
 	font-weight: 500;
@@ -479,7 +479,7 @@ body{
 }
 
 
-.total-statistics .graph-icon{
+.path-local-levitate .total-statistics .graph-icon{
 	min-width:64px;
 	min-height:51px;
 	background-repeat: no-repeat;
@@ -488,47 +488,47 @@ body{
 	transition: all 0.5s ease;
 }
 
-.total-statistics .total-users .graph-icon{
+.path-local-levitate .total-statistics .total-users .graph-icon{
 	background-image:url("../images/graph.svg");
 }
 
-.total-statistics .total-minutes .graph-icon{
+.path-local-levitate .total-statistics .total-minutes .graph-icon{
 	background-image:url("../images/graph1.svg");
 }
 
-.total-statistics .total-courses .graph-icon{
+.path-local-levitate .total-statistics .total-courses .graph-icon{
 	background-image:url("../images/graph2.svg");
 }
 
-.total-statistics .total-users:hover .graph-icon{
+.path-local-levitate .total-statistics .total-users:hover .graph-icon{
 	background-image:url("../images/graph-hover.svg");
 }
 
-.total-statistics .total-minutes:hover .graph-icon{
+.path-local-levitate .total-statistics .total-minutes:hover .graph-icon{
 	background-image:url("../images/graph1-hover.svg");
 }
 
-.total-statistics .total-courses:hover .graph-icon{
+.path-local-levitate .total-statistics .total-courses:hover .graph-icon{
 	background-image:url("../images/graph2-hover.svg");
 }
 
-.popular-courses .legends{
+.path-local-levitate .popular-courses .legends{
 	display:flex;
 	justify-content:flex-end;
 	margin:10px 0;
 }
 
-.popular-courses .legends .ttl-enrolls,
-.popular-courses .legends .ttl-completes{
+.path-local-levitate .popular-courses .legends .ttl-enrolls,
+.path-local-levitate .popular-courses .legends .ttl-completes{
 	position:relative;
 }
 
-.popular-courses .legends .ttl-enrolls{
+.path-local-levitate .popular-courses .legends .ttl-enrolls{
 	margin-right:30px;
 }
 
-.popular-courses .legends .ttl-enrolls:before,
-.popular-courses .legends .ttl-completes:before{
+.path-local-levitate .popular-courses .legends .ttl-enrolls:before,
+.path-local-levitate .popular-courses .legends .ttl-completes:before{
 	content:"";
 	position:absolute;
 	left: -15px;
@@ -539,67 +539,67 @@ body{
 	border-radius:50%;
 }
 
-.popular-courses .legends .ttl-completes:before{
+.path-local-levitate .popular-courses .legends .ttl-completes:before{
 	background: #FBC02D;
 }
 
-.popular-table table{
+.path-local-levitate .popular-table table{
 	width: 100%;
 	font-size:16px;
 	margin-top:10px;
 }
 
-.popular-table table tr th,
-.popular-table table tr td{
+.path-local-levitate .popular-table table tr th,
+.path-local-levitate .popular-table table tr td{
 	border-bottom: 1px solid #512DA80D
 }
 
-.popular-table table tr th{
+.path-local-levitate .popular-table table tr th{
 	padding-bottom: 20px;
 }
 
-.popular-table table th{
+.path-local-levitate .popular-table table th{
 	font-weight:500;
 }
 
-.popular-table table th:nth-child(1){
+.path-local-levitate .popular-table table th:nth-child(1){
 	width: 20px;
 }
 
-.popular-table table th:nth-child(3){
+.path-local-levitate .popular-table table th:nth-child(3){
 	width: 130px;
 	text-align:right;
 }
 
-.popular-table table th:nth-child(4){
+.path-local-levitate .popular-table table th:nth-child(4){
 	width: 170px;
 	text-align:right;
 }
 
-.popular-table table th:nth-child(5){
+.path-local-levitate .popular-table table th:nth-child(5){
 	width: 50px;
 }
 
-.popular-table table td:nth-child(2),
-.popular-table table td:nth-child(3),
-.popular-table table td:nth-child(4){
+.path-local-levitate .popular-table table td:nth-child(2),
+.path-local-levitate .popular-table table td:nth-child(3),
+.path-local-levitate .popular-table table td:nth-child(4){
 	text-align:center;
 }
 
-.popular-table + .pagenation{
+.path-local-levitate .popular-table + .pagenation{
 	text-align:right;
 }
 
-.popular-table + .pagenation ul{
+.path-local-levitate .popular-table + .pagenation ul{
 	list-style:none;
 }
 
-.popular-table + .pagenation ul li{
+.path-local-levitate .popular-table + .pagenation ul li{
 	display:inline-block;
 	margin: 0 2px;
 }
 
-.popular-table + .pagenation ul li a{
+.path-local-levitate .popular-table + .pagenation ul li a{
 	padding:8px 12px;
 	border-radius: 6px;
 	border: 1px solid #666;
@@ -607,35 +607,35 @@ body{
 	cursor:pointer;
 }
 
-.popular-table + .pagenation ul li a.disabled{
+.path-local-levitate .popular-table + .pagenation ul li a.disabled{
 	opacity:0.5;
 	cursor: default;
 }
 
-.popular-table + .pagenation ul li a:hover,
-.popular-table + .pagenation ul li a.active{
+.path-local-levitate .popular-table + .pagenation ul li a:hover,
+.path-local-levitate .popular-table + .pagenation ul li a.active{
 	border: 1px solid #4050E7;
 	color: #4050E7;
 }
 
-#enroll_graph,
-#course_graph{
+.path-local-levitate #enroll_graph,
+.path-local-levitate #course_graph{
 	overflow-x: auto;
 }
 
 @media screen and (max-width: 1330px) {
-	.dashboard .main-region .total-statistics{
+	.path-local-levitate .dashboard .main-region .total-statistics{
 		flex-wrap: wrap;
 	}
-	.dashboard .main-region .total-statistics .total-users,
-	.dashboard .main-region .total-statistics .total-minutes,
-	.dashboard .main-region .total-statistics .total-courses{
+	.path-local-levitate .dashboard .main-region .total-statistics .total-users,
+	.path-local-levitate .dashboard .main-region .total-statistics .total-minutes,
+	.path-local-levitate .dashboard .main-region .total-statistics .total-courses{
 		width: calc(50% - 50px);
 	}
 }
 
-.progress svg,
-.progress svg:nth-child(2) {
+.path-local-levitate .progress svg,
+.path-local-levitate .progress svg:nth-child(2) {
     width: 200px;
     height: 200px;
     top: -4px;
@@ -643,20 +643,20 @@ body{
     position: absolute;
 }
 
-.progress .bar {
+.path-local-levitate .progress .bar {
     width: 192px;
     height: 192px;
 }
 
-.dataTables_wrapper{
+.path-local-levitate .dataTables_wrapper{
 	overflow-x: auto;
 }
 
-.open_graph .icon img {
+.path-local-levitate .open_graph .icon img {
     display: none;
 }
 
-td.open_graph .icon {
+.path-local-levitate td.open_graph .icon {
     background-image: url("../images/graphIcon.svg");
     width: 72px;
     height: 72px;
@@ -666,12 +666,12 @@ td.open_graph .icon {
 	margin-right: 0;
 }
 
-td.open_graph.disable {
+.path-local-levitate td.open_graph.disable {
 	position:relative;
 	cursor: default;
 }
 
-td.open_graph.disable:after {
+.path-local-levitate td.open_graph.disable:after {
 	content:'';
 	position:absolute;
 	top:0;
@@ -683,28 +683,28 @@ td.open_graph.disable:after {
 }
 
 
-td.open_graph,
-th.open_graph{
+.path-local-levitate td.open_graph,
+.path-local-levitate th.open_graph{
 	text-align:center;
 	width: 50px !important;
 }
 
-.popular-table table.dataTable td:nth-child(1), 
-.popular-table table.dataTable th:nth-child(1){
+.path-local-levitate .popular-table table.dataTable td:nth-child(1), 
+.path-local-levitate .popular-table table.dataTable th:nth-child(1){
     width: auto!important;
 }
 
-.popular-table table tr th, .popular-table table tr td {
+.path-local-levitate .popular-table table tr th, .popular-table table tr td {
     border-bottom: 1px solid #512DA80D !important;
 }
 
-.popular-table table.dataTable tr.odd,
-.popular-table table.dataTable tr.even,
-.popular-table table.dataTable tr td.sorting_1 {
+.path-local-levitate .popular-table table.dataTable tr.odd,
+.path-local-levitate .popular-table table.dataTable tr.even,
+.path-local-levitate .popular-table table.dataTable tr td.sorting_1 {
     background-color: transparent;
 }
 
-.dataTables_wrapper .dataTables_filter input {
+.path-local-levitate .dataTables_wrapper .dataTables_filter input {
     background-color: white;
     padding: 5px 10px;
     margin-left: 10px;
@@ -713,45 +713,92 @@ th.open_graph{
     border: 0;
 }
 
-#datatable th:first-child, #datatable th:last-child {
+.path-local-levitate #datatable th:first-child, #datatable th:last-child {
     pointer-events: none;
     font-size: 0;
 }
 
-#datatable th:last-child {
+.path-local-levitate #datatable th:last-child {
     pointer-events: none;
     font-size: 0;
 }
 
-table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sorting_asc:after, table.dataTable thead>tr>th.sorting_desc:before, table.dataTable thead>tr>th.sorting_desc:after, table.dataTable thead>tr>th.sorting_asc_disabled:before, table.dataTable thead>tr>th.sorting_asc_disabled:after, table.dataTable thead>tr>th.sorting_desc_disabled:before, table.dataTable thead>tr>th.sorting_desc_disabled:after, table.dataTable thead>tr>td.sorting:before, table.dataTable thead>tr>td.sorting:after, table.dataTable thead>tr>td.sorting_asc:before, table.dataTable thead>tr>td.sorting_asc:after, table.dataTable thead>tr>td.sorting_desc:before, table.dataTable thead>tr>td.sorting_desc:after, table.dataTable thead>tr>td.sorting_asc_disabled:before, table.dataTable thead>tr>td.sorting_asc_disabled:after, table.dataTable thead>tr>td.sorting_desc_disabled:before, table.dataTable thead>tr>td.sorting_desc_disabled:after {
+.path-local-levitate table.dataTable thead>tr>th.sorting:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting:after, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_asc:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_asc:after, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_desc:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_desc:after, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_asc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_asc_disabled:after, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_desc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_desc_disabled:after, 
+.path-local-levitate table.dataTable thead>tr>td.sorting:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting:after, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_asc:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_asc:after, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_desc:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_desc:after, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_asc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_asc_disabled:after, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_desc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_desc_disabled:after {
     font-size: .8em;
 }
 
-table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sorting_desc:before, table.dataTable thead>tr>th.sorting_asc_disabled:before, table.dataTable thead>tr>th.sorting_desc_disabled:before, table.dataTable thead>tr>td.sorting:before, table.dataTable thead>tr>td.sorting_asc:before, table.dataTable thead>tr>td.sorting_desc:before, table.dataTable thead>tr>td.sorting_asc_disabled:before, table.dataTable thead>tr>td.sorting_desc_disabled:before, table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_asc:after, table.dataTable thead>tr>th.sorting_desc:after, table.dataTable thead>tr>th.sorting_asc_disabled:after, table.dataTable thead>tr>th.sorting_desc_disabled:after, table.dataTable thead>tr>td.sorting:after, table.dataTable thead>tr>td.sorting_asc:after, table.dataTable thead>tr>td.sorting_desc:after, table.dataTable thead>tr>td.sorting_asc_disabled:after, table.dataTable thead>tr>td.sorting_desc_disabled:after {
+.path-local-levitate table.dataTable thead>tr>th.sorting:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_asc:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_desc:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_asc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_desc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_asc:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_desc:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_asc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_desc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting:after, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_asc:after, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_desc:after, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_asc_disabled:after, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_desc_disabled:after, 
+.path-local-levitate table.dataTable thead>tr>td.sorting:after, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_asc:after, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_desc:after, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_asc_disabled:after, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_desc_disabled:after {
     color: #231F20;
     opacity: 0.3;
     margin: 1px 0;
 }
 
-table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sorting_desc:before, table.dataTable thead>tr>th.sorting_asc_disabled:before, table.dataTable thead>tr>th.sorting_desc_disabled:before, table.dataTable thead>tr>td.sorting:before, table.dataTable thead>tr>td.sorting_asc:before, table.dataTable thead>tr>td.sorting_desc:before, table.dataTable thead>tr>td.sorting_asc_disabled:before, table.dataTable thead>tr>td.sorting_desc_disabled:before {
+.path-local-levitate table.dataTable thead>tr>th.sorting:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_asc:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_desc:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_asc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>th.sorting_desc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_asc:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_desc:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_asc_disabled:before, 
+.path-local-levitate table.dataTable thead>tr>td.sorting_desc_disabled:before {
     bottom: 50%;
     content: "▲";
     content: "▲"/"";
 }
 
-.dataTables_length, .dataTables_info {
+.path-local-levitate .dataTables_length, .dataTables_info {
     display: none;
 }
 
-#datatable_filter{
+.path-local-levitate #datatable_filter{
 	margin: 10px 0 0 0;
 }
 
-#datatable .sorting{
+.path-local-levitate #datatable .sorting{
 	background: none;
 }
 
-.dataTables_wrapper .dataTables_paginate .paginate_button {
+.path-local-levitate .dataTables_wrapper .dataTables_paginate .paginate_button {
     box-sizing: border-box;
     display: inline-block;
     padding: 6px 14px;
@@ -767,7 +814,7 @@ table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting_
 	min-width: 1.5em;
 }
 
-.paginate_button.previous, .paginate_button.next {
+.path-local-levitate .paginate_button.previous, .paginate_button.next {
     background-image: url("../images/pagenation-right.svg") !important;
     background-position: center !important;
     border: 1px solid #4050E7 !important;
@@ -780,21 +827,25 @@ table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting_
     background-repeat: no-repeat !important;
 }
 
-.paginate_button.previous {
+.path-local-levitate .paginate_button.previous {
     background-image: url("../images/pagenation-left.svg") !important;
 }
 
-.paginate_button.previous.disabled, .paginate_button.next.disabled {
+.path-local-levitate .paginate_button.previous.disabled, .paginate_button.next.disabled {
     opacity: 0.5;
     cursor: default;
 }
 
-.dataTables_wrapper .dataTables_paginate {
+.path-local-levitate .dataTables_wrapper .dataTables_paginate {
     display: flex;
     margin: 15px 0;
 }
 
-.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover, .dataTables_wrapper .dataTables_paginate .paginate_button:hover, .dataTables_wrapper .dataTables_paginate .paginate_button:active, .dataTables_wrapper .dataTables_paginate .paginate_button:active:hover {
+.path-local-levitate .dataTables_wrapper .dataTables_paginate .paginate_button.current, 
+.path-local-levitate .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover, 
+.path-local-levitate .dataTables_wrapper .dataTables_paginate .paginate_button:hover, 
+.path-local-levitate .dataTables_wrapper .dataTables_paginate .paginate_button:active, 
+.path-local-levitate .dataTables_wrapper .dataTables_paginate .paginate_button:active:hover {
     border: 1px solid #4050E7;
     color: #4050E7 !important;
     background: #FFF;
@@ -802,25 +853,29 @@ table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting_
     border-radius: 6px;
 }
 
+.path-local-levitate .course-statistics.popular-table svg{
+	direction:ltr;
+}
+
 @media screen and (max-width: 1280px) {
-	.dashboard{
+	.path-local-levitate .dashboard{
 		flex-direction: column;
 		width: 100%;
 		max-width: 100%;
 	}
-	.dashboard .main-region {
+	.path-local-levitate .dashboard .main-region {
 		width: 100%;
 	}
 }
 
 @media screen and (max-width: 800px) {
-	.right-region .blocks,
-	.right-region{
+	.path-local-levitate .right-region .blocks,
+	.path-local-levitate .right-region{
 		width: 100%;
 		padding: 25px;
 		min-width: 100%;
 	}
-	.right-region{
+	.path-local-levitate .right-region{
 		padding:0;
 	}
 }

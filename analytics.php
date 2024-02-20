@@ -24,8 +24,15 @@
 
 require_once('../../config.php');
 global $CFG, $DB, $PAGE;
+require_once($CFG->dirroot . '/local/levitate/lib.php');
 $PAGE->set_context(context_system::instance());
 require_login();
+
+if (!has_capability('local/levitate:view_levitate_analytics', context_system::instance())) {
+    $url = $CFG->wwwroot.'/my/';
+    redirect($url, get_string('analytics_capability', 'local_levitate'));
+}
+
 // $PAGE->requires->jquery();
 $PAGE->requires->jquery_plugin('ui');
 
@@ -40,34 +47,15 @@ echo "<div id='topofthePage'></div>";
 $PAGE->set_pagelayout('base');
 
 echo $OUTPUT->header();
-// echo '<script src="https://levitate.human-logic.com/blocks/levitate_report/javascript/datatables.min.js"></script>';
 
-
-$tokensettings = $DB->get_record('config_plugins', ['plugin' => 'local_levitate', 'name' => 'secret'], 'value');
-$tokenid = $tokensettings->value;
+$tokensettings =get_config('local_levitate');
+$tokenid = $tokensettings->secret;
 if (empty($tokenid)) {
     redirect(new moodle_url('/admin/settings.php?section=local_levitate'));
     die();
 }
-$curl = curl_init();
 
-
-curl_setopt_array($curl, [
-CURLOPT_URL => 'https://levitate.human-logic.com/webservice/rest/server.php?wstoken='.$tokenid.
-                    '&wsfunction=mod_levitateserver_get_analytics&moodlewsrestformat=json',
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => '',
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 0,
-CURLOPT_FOLLOWLOCATION => true,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => 'POST',
-CURLOPT_SSL_VERIFYPEER => false,
-CURLOPT_SSL_VERIFYHOST => false,
-]);
-
-$response = curl_exec($curl);
-curl_close($curl);
+$response = local_levitate_curlcall('mod_levitateserver_get_analytics');
 
 
 $json = json_decode($response);
@@ -116,7 +104,7 @@ $graphvalue = ($utilizationpercentage / 100) * 630;
     </div>
 </div>
         <div class='graphs-container'>
-			<div class="course-statistics popular-courses">
+			<div class="course-statistics popular-courses" style="display:none">
 				<div class="heads">
 					<h2><?php echo get_string('course_statistics', 'local_levitate'); ?> </h2>
 					<select class="course_statistics">
@@ -156,7 +144,7 @@ $graphvalue = ($utilizationpercentage / 100) * 630;
         </div>
   </div>
   <div class='right-region'>
-      <div class="blocks company-logo"><img src="<?php echo $CFG->wwwroot;?>/local/levitate/images/company-logo.png" /></div>
+      <div class="blocks company-logo"><img src="<?php echo $levitatedata->CompanyLogoUrl ? $levitatedata->CompanyLogoUrl : $CFG->wwwroot.'/local/levitate/images/company-logo.png';?>" /></div>
         <div class="blocks">
             <div class="heads">
                 <h2><?php echo get_string('my_details', 'local_levitate'); ?> </h2>
@@ -189,7 +177,7 @@ $graphvalue = ($utilizationpercentage / 100) * 630;
                 <div class="detail-item-icon"><img src="<?php echo $CFG->wwwroot;?>/local/levitate/images/calendar.svg" /></div>
                 <div class="details">
                     <p class="lead"><?php echo get_string('subscripton_start', 'local_levitate'); ?> </p>
-                    <p><?php echo date("F d, Y", $levitatedata->subscriptionstart)?></p>
+                    <p><?php echo date("M d, Y", $levitatedata->subscriptionstart).' - '.date("M d, Y", $levitatedata->subscriptionend)?></p>
                 </div>
             </div>
 
@@ -234,7 +222,7 @@ $graphvalue = ($utilizationpercentage / 100) * 630;
                     </div>
                     <div class="total-used">
                         <div class="lead"><?php echo get_string('seats_used', 'local_levitate'); ?> </div>
-                        <div class="nums"><?php echo $totalusers; ?></div>
+                        <div class="nums"><?php echo $levitatedata->seats - $totalusers; ?></div>
                     </div>
                 </div>
             </div>

@@ -24,18 +24,26 @@
 
 require_once('../../config.php');
 require_once($CFG->dirroot.'/lib/formslib.php');
+require_once($CFG->dirroot . '/local/levitate/lib.php');
 global $CFG, $DB;
 
-$tokensettings = $DB->get_record('config_plugins', ['plugin' => 'local_levitate', 'name' => 'secret'], 'value');
-$tokenid = $tokensettings->value;
+$PAGE->set_context(context_system::instance());
+
+require_login();
+
+if (!has_capability('local/levitate:view_levitate_catalog', context_system::instance())) {
+    $url = $CFG->wwwroot.'/my/';
+    redirect($url, get_string('catalog_capability', 'local_levitate'));
+}
+
+$tokensettings =get_config('local_levitate');
+$tokenid = $tokensettings->secret;
 if (empty($tokenid)) {
     redirect(new moodle_url('/admin/settings.php?section=local_levitate'));
     die();
 }
 
-$PAGE->set_context(context_system::instance());
 
-require_login();
 
 $PAGE->set_title(get_string('explorenow', 'local_levitate'));
 $PAGE->set_heading(get_string('explorenow', 'local_levitate'));
@@ -44,24 +52,10 @@ echo "<div id='topofthePage'></div>";
 $PAGE->set_pagelayout('base');
 
 echo $OUTPUT->header();
-$curl = curl_init();
+$response = local_levitate_curlcall('mod_levitateserver_get_tags_categories');
 
-curl_setopt_array($curl, [
-CURLOPT_URL => 'https://levitate.human-logic.com/webservice/rest/server.php?wstoken='
-                    .$tokenid.'&wsfunction=mod_levitateserver_get_tags_categories&moodlewsrestformat=json',
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => '',
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 0,
-CURLOPT_FOLLOWLOCATION => true,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => 'POST',
-CURLOPT_SSL_VERIFYPEER => false,
-CURLOPT_SSL_VERIFYHOST => false,
-]);
 
-$response = curl_exec($curl);
-curl_close($curl);
+
 $json = json_decode($response);
 $jsondata = json_decode(json_encode($json), true);
 foreach ($jsondata as $key => $value) {
@@ -74,18 +68,7 @@ foreach ($jsondata as $key => $value) {
 /**
  * creating Options for the select
  */
-function get_option_text ($params, $idvalue) {
-    foreach ($params as $trmparr) {
-        $optiontext = $optiontext.'<li>
-        <label class="common-customCheckbox">
-            <input name="filter_checkbox" data-filtername="'.$idvalue.'" type="checkbox" value="'.$trmparr.'" />
-            <span>'.$trmparr.'</span>
-            <div class="common-checkboxIndicator"></div>
-        </label>
-    </li>';
-    }
-    return $optiontext;
-}
+
 $jsdata = ["tokenid" => $tokenid, "minval" => $minval, "maxval" => $maxval];
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/explorescript.js'));
 $PAGE->requires->js_init_call('createinti', [$jsdata]);
@@ -154,7 +137,7 @@ $PAGE->requires->js_init_call('createinti', [$jsdata]);
                                     <!-- <option value="0">Min</option> -->
                                 </select>
                             </span>
-                            <span>to</span>
+                            <span><?php echo get_string('to', 'local_levitate')?></span>
                             <span>
                                 <select name="maxDval" id="maxDval"></select>
                             </span>
@@ -198,7 +181,7 @@ $PAGE->requires->js_init_call('createinti', [$jsdata]);
                                 if (count(json_decode(json_decode($value))) > 0) {
                                     echo ' <div class="hl-FiltersOptions '.$key.' ">
                                     <ul class="hl-values hl-hidden">';
-                                    $tagsoptions = get_option_text(json_decode(json_decode($value)), $key);
+                                    $tagsoptions = local_levitate_get_option_text(json_decode(json_decode($value)), $key);
                                     echo  $tagsoptions;
                                     echo "</ul>";
                                     echo "</div>";
@@ -210,7 +193,7 @@ $PAGE->requires->js_init_call('createinti', [$jsdata]);
                                     if (count($array) > 0) {
                                         echo ' <div class="hl-FiltersOptions '.$key.' ">
                                                 <ul class="hl-values hl-hidden">';
-                                        $tagsoptions = get_option_text($array, $key);
+                                        $tagsoptions = local_levitate_get_option_text($array, $key);
                                         echo  $tagsoptions;
                                         echo "</ul>";
                                         echo "</div>";
@@ -241,6 +224,13 @@ $PAGE->requires->js_init_call('createinti', [$jsdata]);
                             </div>
                         </div>
                         <div class='explorecourses'>
+                        <div class="loading">
+                        <img id="image_loading" src="<?php echo $CFG->wwwroot.'/local/levitate/images/levitate-logo.svg';?>" alt="this slowpoke moves"  width="250" />
+                        <p><?php echo get_string('loading','local_levitate'); ?></p>
+                        </div>
+                        <div class='nocourse'>
+                            <h4 class='nocoursetext'> <?php echo get_string('no_course_found', 'local_levitate');?> <h4>
+                        </div>
                         </div>
                         <div class="text-container">
                         <input type="submit" value="<?php echo get_string('create_courses', 'local_levitate');?>" disabled />

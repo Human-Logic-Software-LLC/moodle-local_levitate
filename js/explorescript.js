@@ -6,6 +6,8 @@ function toHoursAndMinutes(totalMinutes) {
 
 
 function get_courses_data(title = "", filter_params = "") {
+    var $spinner = $('.loading');
+    $spinner.show();
     var form = new FormData();
     form.append("title", title);
     form.append("filter_params", filter_params);
@@ -22,7 +24,7 @@ function get_courses_data(title = "", filter_params = "") {
     $.ajax(settings).done(function (response) {
     
         $(".coursecard").remove();
-        $(".nocourse").remove();
+        // $(".nocourse").remove();
         
         var data = $.parseJSON($.parseJSON(response));
         if(Object.keys(data).length>0){
@@ -70,13 +72,20 @@ function get_courses_data(title = "", filter_params = "") {
                 $(".explorecourses").append(text);
 
             });
+            $(".nocourse").css({"display": "none"});
+            $spinner.hide();
         }
         else{
-            var text = `
-            <div class='nocourse' >
-                <h4 class='nocoursetext'> No courses found for the selected filters <h4>
-            </div>`;
-                $(".explorecourses").append(text);
+            $spinner.hide();
+            $(".nocourse").css({"display": "block"});
+
+        
+
+            // var text = `
+            // <div class='nocourse' >
+            //     <h4 class='nocoursetext'> No courses found for the selected filters <h4>
+            // </div>`;
+            //     $(".explorecourses").append(text);
         }
     });
 }
@@ -121,6 +130,17 @@ function createinti(Y,phpvalues){
             $('.explore-details-pointer').css('left', ($(this).position().left + ($(this).width() / 2) - 80) +
             'px');
             $('.explore-details-wrapper').css('top', ($(this).position().top + $(this).height() + 25) + 'px');
+            const classname = $( ".explore-details" ).attr( "class" );
+            const lang_value = $(this).find( ".coursebody" ).attr( "class" ).split(" ");
+            const class_lang =classname.split(" ");
+            console.log(class_lang);
+            if(class_lang[1]){
+                $('.explore-details').removeClass(class_lang[1]);
+            }
+             
+             
+             $('.explore-details').addClass(lang_value[1]);
+
         }
 
     });
