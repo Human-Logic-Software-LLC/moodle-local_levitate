@@ -4,7 +4,7 @@
 
 .path-local-levitate #page-local-levitate #page-content,
 .path-local-levitate #page-local-levitate-chakri #page-content {
-    padding-bottom: 0 !important;
+    padding-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .path-local-levitate #page-local-levitate #region-main,
@@ -25,7 +25,7 @@
 .path-local-levitate .explorecourses {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     margin-top: 0;
     justify-content: flex-start;
 }
@@ -95,6 +95,7 @@
 }
 
 .path-local-levitate .explorecourses .coursecard .courseimage {
+    /* replaced aspect-ratio: 1 / 0.6; with height due to moodle grut error */
     height: 180px;
     position: relative;
 }
@@ -238,7 +239,7 @@
     margin-right: 0;
     margin-left: 0;
     width: 100%;
-    max-height: 400px !important;
+    max-height: 400px !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .path-local-levitate .explore-details-main {
@@ -278,13 +279,13 @@
 }
 
 
-.path-local-levitate .explorecourses+.text-container {
+.path-local-levitate .explorecourses + .text-container {
     text-align: right;
     margin-top: 20px;
 }
 
 .path-local-levitate #course_selection .text-container input[type="submit"],
-.path-local-levitate .explorecourses+.text-container input[type="submit"] {
+.path-local-levitate .explorecourses + .text-container input[type="submit"] {
     color: #fff;
     font-weight: 400;
     background-color: var(--primary);
@@ -300,7 +301,7 @@
 }
 
 .path-local-levitate #course_selection .text-container input[type="submit"]:hover,
-.path-local-levitate .explorecourses+.text-container input[type="submit"]:hover {
+.path-local-levitate .explorecourses + .text-container input[type="submit"]:hover {
     color: #fff;
     background-color: var(--primary);
     border-color: var(--primary);
@@ -358,8 +359,8 @@
 }
 
 .path-local-levitate .hl-values {
-    display: block !important;
-    margin: 15px 0 0 15px !important;
+    display: block !important; /* stylelint-disable-line declaration-no-important */
+    margin: 15px 0 0 15px !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .path-local-levitate .filters-summary {
@@ -380,7 +381,7 @@
     border-radius: 10px;
 }
 
-.path-local-levitate .nocourse>h4 {
+.path-local-levitate .nocourse > h4 {
     text-align: center;
     width: 100%;
     margin: 30px;
@@ -464,8 +465,6 @@
     top: 5px;
 }
 
-
-
 .path-local-levitate .hl-filters {
     font-size: 14px;
     display: block;
@@ -497,10 +496,10 @@
 
 .path-local-levitate .hl-filters label.hl-filter.hl-selected,
 .path-local-levitate .hl-filters label.hl-filter.hl-selected:hover {
-    background-color: #dddddd;
+    background-color: #ddd;
 }
 
-.path-local-levitate .hl-filters label.hl-filter>input[type="radio"] {
+.path-local-levitate .hl-filters label.hl-filter > input[type="radio"] {
     display: none;
 }
 
@@ -544,19 +543,15 @@
     display: block;
 }
 
-/* --- checkbox filter selected --- */
-
 .path-local-levitate .hl-values {
     font-size: 14px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     flex-flow: row wrap;
     text-transform: capitalize;
     padding: 10px;
-    margin: 0 !important;
+    margin: 0 !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .path-local-levitate .hl-values li {
@@ -565,7 +560,7 @@
     min-width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-bottom: 1px #cccccc dashed;
+    border-bottom: 1px #ccc dashed;
 }
 
 .path-local-levitate .hl-values li:last-child {
@@ -593,7 +588,7 @@
     visibility: hidden;
 }
 
-.path-local-levitate .common-customCheckbox input[type="checkbox"]+span {
+.path-local-levitate .common-customCheckbox input[type="checkbox"] + span {
     color: inherit;
     font-size: 14px;
     position: relative;
@@ -628,12 +623,12 @@
     transform: rotate(-45deg);
 }
 
-.path-local-levitate .common-customCheckbox input:checked~.common-checkboxIndicator {
+.path-local-levitate .common-customCheckbox input:checked ~ .common-checkboxIndicator {
     border: none;
     background-color: var(--primary);
 }
 
-.path-local-levitate .common-customCheckbox input:checked~.common-checkboxIndicator:after {
+.path-local-levitate .common-customCheckbox input:checked ~ .common-checkboxIndicator:after {
     display: block;
 }
 
@@ -709,7 +704,7 @@
     transform: scale(0.7);
 }
 
-.path-local-levitate .filter-summary-filterList input[type="checkbox"]+span {
+.path-local-levitate .filter-summary-filterList input[type="checkbox"] + span {
     font-size: 12px;
     font-weight: 500;
     position: relative;
@@ -728,7 +723,7 @@
     height: 90px;
 }
 
-.path-local-levitate .slider-wrapper>p.label {
+.path-local-levitate .slider-wrapper > p.label {
     font-size: 14px;
     color: #555;
     margin-bottom: 5px;
@@ -788,19 +783,19 @@
     margin-top: 10px
 }
 
-.path-local-levitate [slider]>div {
+.path-local-levitate [slider] > div {
     position: absolute;
     left: 0;
     right: 0;
     height: 5px;
 }
 
-.path-local-levitate [slider]>div:first-child {
+.path-local-levitate [slider] > div:first-child {
     width: calc(100% - 10px);
     left: 15px;
 }
 
-.path-local-levitate [slider]>div>[inverse-left] {
+.path-local-levitate [slider] > div > [inverse-left] {
     position: absolute;
     left: 0;
     height: 5px;
@@ -810,7 +805,7 @@
     width: 100%;
 }
 
-.path-local-levitate [slider]>div>[inverse-right] {
+.path-local-levitate [slider] > div > [inverse-right] {
     position: absolute;
     right: 0;
     height: 5px;
@@ -819,7 +814,7 @@
     margin: 0;
 }
 
-.path-local-levitate [slider]>div>[range] {
+.path-local-levitate [slider] > div > [range] {
     position: absolute;
     left: 0;
     right: 0;
@@ -828,7 +823,7 @@
     background-color: var(--primary);
 }
 
-.path-local-levitate [slider]>div>[thumb] {
+.path-local-levitate [slider] > div > [thumb] {
     position: absolute;
     top: -7.5px;
     z-index: 2;
@@ -843,7 +838,7 @@
     outline: none;
 }
 
-.path-local-levitate [slider]>input[type="range"] {
+.path-local-levitate [slider] > input[type="range"] {
     position: absolute;
     pointer-events: none;
     -webkit-appearance: none;
@@ -854,16 +849,16 @@
     opacity: 0;
 }
 
-.path-local-levitate div[slider]>input[type="range"]:focus::-webkit-slider-runnable-track {
+.path-local-levitate div[slider] > input[type="range"]:focus::-webkit-slider-runnable-track {
     background: transparent;
     border: transparent;
 }
 
-.path-local-levitate div[slider]>input[type="range"]:focus {
+.path-local-levitate div[slider] > input[type="range"]:focus {
     outline: none;
 }
 
-.path-local-levitate div[slider]>input[type="range"]::-webkit-slider-thumb {
+.path-local-levitate div[slider] > input[type="range"]::-webkit-slider-thumb {
     pointer-events: all;
     width: 28px;
     height: 28px;
@@ -1026,7 +1021,7 @@
     }
 
     .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection .explore-details-content .explore-details-main,
-    .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection .explore-details-content .explore-details-main+.col-md-4 {
+    .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection .explore-details-content .explore-details-main + .col-md-4 {
         width: 100%;
         flex: 0 0 100%;
         max-width: 100%;
@@ -1070,7 +1065,6 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    /* background: #e9ecef !important; */
     padding: 0;
     border-radius: 10px;
     color: #7d7d7d;
@@ -1087,7 +1081,7 @@
 }
 
 .path-local-levitate #course_selection .course_count_div p {
-    margin-bottom: 0 !important;
+    margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .path-local-levitate .pull-right {
@@ -1141,11 +1135,11 @@
 .path-local-levitate.dir-rtl .explore-details.ar,
 .path-local-levitate.dir-rtl .explore-details.en,
 .path-local-levitate.dir-rtl .explorecourses .coursecard {
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .15) !important;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .15) !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .path-local-levitate.dir-rtl .common-checkboxIndicator:after {
-    border-style: none none solid solid !important;
+    border-style: none none solid solid !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .path-local-levitate.dir-rtl #datatable_wrapper {
