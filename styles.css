@@ -46,7 +46,7 @@
 
 .path-local-levitate .explorecourses .loading img {
     width: 100px;
-    height: 100px
+    height: 100px;
 }
 
 .path-local-levitate .explorecourses .loading p {
@@ -119,7 +119,6 @@
 }
 
 .path-local-levitate .explorecourses .coursecard .coursebody .coursedescription {
-    margin-bottom: 10px;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -297,7 +296,8 @@
     border-radius: 0.5rem;
     text-align: center;
     vertical-align: middle;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, 
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .path-local-levitate #course_selection .text-container input[type="submit"]:hover,
@@ -328,11 +328,11 @@
 }
 
 #fitem_id_coursefullname {
-    display: none
+    display: none;
 }
 
 #fitem_id_courseshortname {
-    display: none
+    display: none;
 }
 
 .path-local-levitate select {
@@ -387,9 +387,6 @@
     margin: 30px;
     font-weight: 500;
 }
-
-
-
 
 .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection {
     position: relative;
@@ -641,8 +638,6 @@
 }
 
 .path-local-levitate .filter-summary-filterList {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -780,7 +775,7 @@
     position: relative;
     height: 40px;
     margin: 0;
-    margin-top: 10px
+    margin-top: 10px;
 }
 
 .path-local-levitate [slider] > div {
@@ -862,7 +857,7 @@
     pointer-events: all;
     width: 28px;
     height: 28px;
-    border-radius: 0px;
+    border-radius: 1px;
     border: 0 none;
     -webkit-appearance: none;
 }
@@ -1020,8 +1015,10 @@
         flex-direction: row;
     }
 
-    .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection .explore-details-content .explore-details-main,
-    .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection .explore-details-content .explore-details-main + .col-md-4 {
+    .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection 
+    .explore-details-content .explore-details-main,
+    .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection 
+    .explore-details-content .explore-details-main + .col-md-4 {
         width: 100%;
         flex: 0 0 100%;
         max-width: 100%;
@@ -1036,12 +1033,11 @@
     position: relative;
 }
 
-
 .path-local-levitate .tooltip {
     background: white;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0px 4px 30px 0px rgba(81, 45, 168, 0.10);
+    box-shadow: 0.1px 4px 30px 0.1px rgba(81, 45, 168, 0.10);
 }
 
 .path-local-levitate .graph svg {
@@ -1058,7 +1054,7 @@
     transform: rotate(90deg);
     top: 0px;
     width: 10px;
-    height: 15px
+    height: 15px;
 }
 
 .path-local-levitate #course_selection .course_count_div {
