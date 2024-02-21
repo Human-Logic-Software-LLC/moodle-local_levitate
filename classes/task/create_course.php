@@ -101,15 +101,13 @@ class create_course extends \core\task\scheduled_task {
                         $coursedata->format = 'topics';
                         $scormsection = 1;
                     }
+                    $coursedata->shortname = $coursedata->shortname.'_'.time();
+                    $jsondata = ['cmid' => $cmid];
+                    $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms', $jsondata);
+                    $newcourse = create_course($coursedata);
+                    local_levitate_add_scorm_module($newcourse, html_entity_decode($output, null, 'UTF-8'), '', '', '',
+                                        $scormsection, $tinyscorm);
 
-                    if (in_array($coursedata->shortname, $shortnames)) {
-                        $coursedata->shortname = $coursedata->shortname.'_'.time();
-                        $jsondata = ['cmid' => $cmid];
-                        $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms', $jsondata);
-                        $newcourse = create_course($coursedata);
-                        local_levitate_add_scorm_module($newcourse, html_entity_decode($output, null, 'UTF-8'), '', '', '',
-                                          $scormsection, $tinyscorm);
-                    }
                 }
             }
         }
