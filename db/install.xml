@@ -8,8 +8,7 @@
                 <FIELD NAME="taskexecuted" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="The task executed or not"/>
                 <FIELD NAME="formdata" TYPE="text" LENGTH="5000" NOTNULL="false" SEQUENCE="false" COMMENT="The form description which has course meta."/>
                 <FIELD NAME="coursedata" TYPE="text" LENGTH="5000" NOTNULL="true" SEQUENCE="false" COMMENT="The form description which has all the courses selected"/>
-                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="User id who initiated the process"/>
-               <FIELD NAME="timecreated" TYPE="int" LENGTH="10"  NOTNULL="false" SEQUENCE="false" COMMENT="The form creation datetime"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10"  NOTNULL="false" SEQUENCE="false" COMMENT="The form creation datetime"/>
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="The unique id for form"/>
