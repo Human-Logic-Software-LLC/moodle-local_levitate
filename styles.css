@@ -330,11 +330,11 @@
     text-decoration: none;
 }
 
-#fitem_id_coursefullname {
+.path-local-levitate #fitem_id_coursefullname {
     display: none;
 }
 
-#fitem_id_courseshortname {
+.path-local-levitate #fitem_id_courseshortname {
     display: none;
 }
 
@@ -1137,4 +1137,8 @@
 
 .path-local-levitate.dir-rtl #datatable_wrapper {
     direction: ltr;
+}
+.path-local-levitate .company-logo img {
+    height: 100%;
+    width: auto;
 }

@@ -67,7 +67,6 @@ if ($mform->is_cancelled()) {
     unset($formdata->previous_form_values);
     $currentform = json_encode($formdata);
     $formvalues->formdata = $currentform;
-    $formvalues->userid = $USER->id;
     $formvalues->timecreated = time();
     $query = "SELECT id, shortname FROM {course}";
     $courseshortnames = $DB->get_records_sql($query);

@@ -376,7 +376,7 @@
     color: #000000;
 }
 
-@keyframes load {
+@keyframes local_levitate_load {
     0% {
         stroke-dashoffset: 0;
     }
@@ -432,7 +432,7 @@
     stroke-width: 10;
     stroke-dasharray: 629;
     stroke: #d9dcfa;
-    animation: load 2s;
+    animation: local_levitate_load 2s;
 }
 
 .path-local-levitate .seat-utilization {
