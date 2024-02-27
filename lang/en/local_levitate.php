@@ -95,3 +95,5 @@ $string['privacy:metadata'] = 'Levitate plugin only displays existing course met
 $string['to'] = 'to';
 $string['no_course_found'] = 'No courses found for the selected filters';
 $string['loading'] = 'loading...';
+$string['levitate:view_levitate_analytics'] = 'Capability to view Analytics';
+$string['levitate:view_levitate_catalog'] = 'Capability to explore Course Catalog';
