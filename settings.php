@@ -29,16 +29,14 @@ $PAGE->requires->js_init_call('update_token', []);
 
 if ($hassiteconfig) {
     $ADMIN->add('localplugins', new admin_category('local_levitate_settings', new lang_string('pluginname', 'local_levitate')));
-    $ADMIN->add('local_levitate_settings', new admin_externalpage('locallevitateexplorecourses', new lang_string('explore_courses', 'local_levitate'),
-                                                  "$CFG->wwwroot/local/levitate/explore.php"));
+    $ADMIN->add('local_levitate_settings', new admin_externalpage('locallevitateexplorecourses',
+     new lang_string('explore_courses', 'local_levitate') , "$CFG->wwwroot/local/levitate/explore.php"));
 
-    $ADMIN->add('local_levitate_settings', new admin_externalpage('locallevitateanalytics', new lang_string('analytics', 'local_levitate'),
-                                                  "$CFG->wwwroot/local/levitate/analytics.php"));
+    $ADMIN->add('local_levitate_settings', new admin_externalpage('locallevitateanalytics',
+    new lang_string('analytics', 'local_levitate') , "$CFG->wwwroot/local/levitate/analytics.php"));
 
     $settings = new admin_settingpage('locallevitategettoken', new lang_string('gettoken', 'local_levitate'));
     $ADMIN->add('local_levitate_settings', $settings);
-    
-
     if ($ADMIN->fulltree) {
         $string = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $encoded = urlencode($string);
