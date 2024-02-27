@@ -28,24 +28,21 @@ $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/levitate.j
 $PAGE->requires->js_init_call('update_token', []);
 
 if ($hassiteconfig) {
-    $ADMIN->add('localplugins', new admin_category('cat_levitate', get_string('pluginname', 'local_levitate')));
-    $ADMIN->add('cat_levitate', new admin_externalpage('explorecourses', get_string('explore_courses', 'local_levitate'),
-                                                  "$CFG->wwwroot/local/levitate/explore.php"));
-    $ADMIN->add('cat_levitate', new admin_externalpage('analytics', get_string('analytics', 'local_levitate'),
-                                                  "$CFG->wwwroot/local/levitate/analytics.php"));
-    $settings = new admin_settingpage('local_levitate', get_string('gettoken', 'local_levitate'));
-    $ADMIN->add('cat_levitate', $settings);
+    $ADMIN->add('localplugins', new admin_category('local_levitate_settings', new lang_string('pluginname', 'local_levitate')));
+    $ADMIN->add('local_levitate_settings', new admin_externalpage('locallevitateexplorecourses',
+     new lang_string('explore_courses', 'local_levitate') , "$CFG->wwwroot/local/levitate/explore.php"));
 
-    $ADMIN->add('root', new admin_category('levitateroot', get_string('pluginname', 'local_levitate')));
+    $ADMIN->add('local_levitate_settings', new admin_externalpage('locallevitateanalytics',
+    new lang_string('analytics', 'local_levitate') , "$CFG->wwwroot/local/levitate/analytics.php"));
 
-    $ADMIN->add('courses', new admin_externalpage('explorecourses', get_string('pluginname', 'local_levitate'),
-                                                  "$CFG->wwwroot/local/levitate/explore.php"));
+    $settings = new admin_settingpage('locallevitategettoken', new lang_string('gettoken', 'local_levitate'));
+    $ADMIN->add('local_levitate_settings', $settings);
     if ($ADMIN->fulltree) {
         $string = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $encoded = urlencode($string);
 
-        $settings->add(new admin_setting_configpasswordunmask('local_levitate/secret', get_string('secret', 'local_levitate'),
+        $settings->add(new admin_setting_configpasswordunmask('local_levitate/secret', new lang_string('secret', 'local_levitate'),
                           "<a href='https://levitate.human-logic.com/create_token.php?$encoded'>"
-                          .get_string('secret', 'local_levitate')."</a>", ''));
+                          .new lang_string('secret', 'local_levitate')."</a>", ''));
     }
 }
