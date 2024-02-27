@@ -50,7 +50,7 @@ echo $OUTPUT->header();
 $tokensettings = get_config('local_levitate');
 $tokenid = $tokensettings->secret;
 if (empty($tokenid)) {
-    redirect(new moodle_url('/admin/settings.php?section=local_levitate'));
+    redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'));
     die();
 }
 
