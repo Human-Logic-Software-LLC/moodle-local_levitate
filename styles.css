@@ -1028,6 +1028,13 @@
     .path-local-levitate .explore-details-main {
         max-height: unset;
     }
+	
+	/*added mobile 04032024*/
+	.path-local-levitate .filter-summary-selectedFilterContainer form#course_selection .explore-details-content .explore-details-main {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+	/*added mobile 04032024*/
 }
 
 .path-local-levitate .graphs-container {
@@ -1141,4 +1148,42 @@
 .path-local-levitate .company-logo img {
     height: 100%;
     width: auto;
+}
+
+
+/* get token stles 04032024 */
+
+#page-admin-setting-locallevitategettoken a[data-passwordunmask="edit"]{
+	border: 1px solid rgba(0,0,0,0.5);
+	padding:7px 5px 7px 15px;
+	border-radius: 10px;
+    margin-right: 15px;
+}
+
+#page-admin-setting-locallevitategettoken a[data-passwordunmask="edit"]:hover{
+	text-decoration: none;
+}
+
+#page-admin-setting-locallevitategettoken [data-passwordunmaskid="id_s_local_levitate_secret"] a:focus{
+	outline: 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+#page-admin-setting-locallevitategettoken #id_s_local_levitate_secret {
+	margin-top: -6px;
+	margin-right: 10px;
+	width:249px;
+}
+
+#page-admin-setting-locallevitategettoken #id_s_local_levitate_secret.form-control:focus {
+	outline: 0;
+    box-shadow: none;
+}
+
+#page-admin-setting-locallevitategettoken #admin-secret .form-password {
+	margin-top: 10px;
+}
+#page-admin-setting-locallevitategettoken .form-description a {
+    display: block;
 }

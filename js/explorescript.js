@@ -22,6 +22,9 @@ function get_courses_data(title = "", filter_params = "") {
     };
 
     $.ajax(settings).done(function (response) {
+        if($.parseJSON(response).errorcode){
+            window.location.href = window.location.href+'?errorcode=invalidtoken';
+        }
     
         $(".coursecard").remove();
         // $(".nocourse").remove();

@@ -60,13 +60,11 @@ class create_course extends \core\task\scheduled_task {
             $coursedata = json_decode($tasks->coursedata);
             $contextids = json_decode($coursedata->context_id);
             $enrollusers = json_decode($coursedata->enrollusers);
-            $query = "SELECT id, shortname FROM {course}";
-            $courseshortnames = $DB->get_records_sql($query);
+            $courseshortnames = $DB->get_records('course');
             foreach ($courseshortnames as $courseshort) {
                 $shortnames[] = $courseshort->shortname;
             }
             if ($formdata->course_type == 1) {
-                $this->log("ica me here  -> ");
                 $coursedata = new \stdClass();
                 $coursedata->coursetype = $formdata->course_type;
                 $coursedata->category = $formdata->coursecategory;

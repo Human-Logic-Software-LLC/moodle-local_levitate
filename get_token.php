@@ -27,3 +27,4 @@ require_once($CFG->dirroot . '/local/levitate/lib.php');
 require_login();
 $response = local_levitate_curlcall('mod_levitateserver_get_analytics');
 echo $response;
+exit;
