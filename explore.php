@@ -26,11 +26,10 @@ require_once('../../config.php');
 require_once($CFG->dirroot.'/lib/formslib.php');
 require_once($CFG->dirroot . '/local/levitate/lib.php');
 global $CFG, $DB;
-$error_param = optional_param('errorcode',null,PARAM_TEXT);
-if($error_param == 'invalidtoken'){
+$errorparam = optional_param('errorcode', null, PARAM_TEXT);
+if ($errorparam == 'invalidtoken') {
     redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'), get_string('invalidtoken', 'local_levitate'));
-     die();
-
+    die();
 }
 
 $PAGE->set_context(context_system::instance());
@@ -76,8 +75,8 @@ foreach ($jsondata as $key => $value) {
 $jsdata = ["tokenid" => $tokenid, "minval" => $minval, "maxval" => $maxval];
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/explorescript.js'));
 $PAGE->requires->js_init_call('createinti', [$jsdata]);
-$explore_params = (object) [
-                'clear_filters' => get_string('findcourse', 'local_levitate'),
+$exploreparams = (object) [
+                'clear_filters' => get_string('clear_filters', 'local_levitate'),
                 'findcourse' => get_string('findcourse', 'local_levitate'),
                 'duration' => get_string('duration', 'local_levitate'),
                 'maxval' => $maxval,
@@ -93,7 +92,7 @@ $params = (object) [
                 'about_course' => get_string('about_course', 'local_levitate'),
                 'learning_objectives' => get_string('learning_objectives', 'local_levitate'),
             ];
-echo $OUTPUT->render_from_template('local_levitate/explore', $explore_params);
+echo $OUTPUT->render_from_template('local_levitate/explore', $exploreparams);
 foreach ($jsondata as $key => $value) {
     if ($key !== "All_courses_count" && $key !== "subscribed_courses_count" &&
             $key !== "custom_courses_count"
@@ -146,5 +145,4 @@ foreach ($jsondata as $key => $value) {
 }
 echo "</ul></div></div></div>";
 echo $OUTPUT->render_from_template('local_levitate/explore_footer', $params);
- 
 echo $OUTPUT->footer();

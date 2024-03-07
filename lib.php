@@ -116,9 +116,8 @@ function local_levitate_curlcall($fnname = '', $jsondata='') {
     $url = $serverurl.$tokenid.'&wsfunction='.$fnname.'&moodlewsrestformat=json';
     $curl = new curl();
     $response = $curl->post($url, $jsondata);
-    if (isset(json_decode($response)->errorcode)){
-         
-       redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'), get_string('invalidtoken', 'local_levitate'));
+    if (isset(json_decode($response)->errorcode)) {
+        redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'), get_string('invalidtoken', 'local_levitate'));
         die();
     }
     return $response;

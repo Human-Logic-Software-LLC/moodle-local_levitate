@@ -1145,13 +1145,11 @@
 .path-local-levitate.dir-rtl #datatable_wrapper {
     direction: ltr;
 }
+
 .path-local-levitate .company-logo img {
     height: 100%;
     width: auto;
 }
-
-
-/* get token stles 04032024 */
 
 #page-admin-setting-locallevitategettoken a[data-passwordunmask="edit"]{
 	border: 1px solid rgba(0,0,0,0.5);
@@ -1184,6 +1182,7 @@
 #page-admin-setting-locallevitategettoken #admin-secret .form-password {
 	margin-top: 10px;
 }
+
 #page-admin-setting-locallevitategettoken .form-description a {
     display: block;
 }

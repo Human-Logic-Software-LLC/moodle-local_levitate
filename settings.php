@@ -38,8 +38,6 @@ if ($hassiteconfig) {
     $settings = new admin_settingpage('locallevitategettoken', new lang_string('gettoken', 'local_levitate'));
     $ADMIN->add('local_levitate_settings', $settings);
     if ($ADMIN->fulltree) {
-        // $string = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-        // $string = $CFG->wwwroot.'/admin/settings.php?section=locallevitategettoken';
         $string = new \moodle_url($CFG->wwwroot.'/admin/settings.php?section=locallevitategettoken');
         $encoded = urlencode($string);
 

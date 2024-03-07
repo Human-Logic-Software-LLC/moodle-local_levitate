@@ -23,7 +23,7 @@
  */
 
 require_once('../../config.php');
-global $CFG, $DB, $PAGE,$OUTPUT;
+global $CFG, $DB, $PAGE, $OUTPUT;
 require_once($CFG->dirroot . '/local/levitate/lib.php');
 $PAGE->set_context(context_system::instance());
 require_login();
@@ -38,7 +38,7 @@ $PAGE->requires->jquery_plugin('ui');
 $PAGE->requires->js(new \moodle_url('https://levitate.human-logic.com/blocks/levitate_report/javascript/datatables.min.js'), true);
 $PAGE->requires->css(new \moodle_url('https://levitate.human-logic.com/blocks/levitate_report/javascript/datatables.min.css'));
 $PAGE->requires->js(new \moodle_url('https://d3js.org/d3.v4.js'), true);
-$PAGE->requires->css(new \moodle_url($CFG->wwwroot.'/local/levitate/css/styles.css')); 
+$PAGE->requires->css(new \moodle_url($CFG->wwwroot.'/local/levitate/css/styles.css'));
 
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/report.js'), true);
 $PAGE->set_title(get_string('heading_analytics', 'local_levitate'));
@@ -92,9 +92,8 @@ $params = (object) [
                 'utilizationpercentage' => $utilizationpercentage,
                 'graphvalue' => $graphvalue,
                 'totalseats' => $levitatedata->seats,
-                'remainingseats' => $levitatedata->seats - $totalusers
+                'remainingseats' => $levitatedata->seats - $totalusers,
             ];
 
 echo $OUTPUT->render_from_template('local_levitate/analytics', $params);
-// $PAGE->add_header_action($settingstrigger);
 echo $OUTPUT->footer();
