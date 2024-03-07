@@ -92,7 +92,14 @@ $params = (object) [
                 'about_course' => get_string('about_course', 'local_levitate'),
                 'learning_objectives' => get_string('learning_objectives', 'local_levitate'),
             ];
+echo '<div class="course_explore">
+    <div class="hl-filters-wrapper">
+        <div class="hl-base">';
 echo $OUTPUT->render_from_template('local_levitate/explore', $exploreparams);
+echo '<div class="filters-summary">
+                <p id="total_course_value" class="hl-filter" hidden>'. $jsondata["All_courses_count"].'
+                </p>
+                <ul class="hl-filters">';
 foreach ($jsondata as $key => $value) {
     if ($key !== "All_courses_count" && $key !== "subscribed_courses_count" &&
             $key !== "custom_courses_count"
