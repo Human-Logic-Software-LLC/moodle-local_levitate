@@ -17,11 +17,6 @@
 {{!
     @template local_levitate/explore
 
-    Context variables required for this template:
-    * maxval maximum value of time range.
-    * minval minimum value of time range.
-    * All_courses_count Count of all the courses available.
-
     Example context (json):
     {
         "maxval" => "90",
@@ -36,8 +31,7 @@
                 {{#str}} clear_filters, local_levitate {{/str}}
             </div>
             <div class="course-search">
-                <input type="text" class="searchTerm"
-                    placeholder="{{#str}} findcourse, local_levitate {{/str}}" />
+                <input type="text" class="searchTerm" placeholder="{{#str}} findcourse, local_levitate {{/str}}" >
                 <button type="submit" class="searchButton">
                     <i class="fa fa-search"></i>
                 </button>
@@ -72,7 +66,7 @@
                         children[7].style.left=value+'%';children[11].style.left=value+'%';
                         children[11].childNodes[1].innerHTML=this.value;
                         changeminDval(this.value)" 
-                    />
+                    >
                     <input id="maxDval_input" data-filtername='time_params' name='filter_checkbox' type="range"
                         tabindex="0" value="{{maxval}}" max="{{maxval}}"
                         min="{{minval}}" step="5" oninput="
@@ -85,7 +79,7 @@
                         children[9].style.left=value+'%';children[13].style.left=value+'%';
                         children[13].childNodes[1].innerHTML=this.value;
                         changemaxDval(this.value)" 
-                    />
+                    >
                     <div class="box-minmax">
                         <span>
                             <select name="minDval" id="minDval">

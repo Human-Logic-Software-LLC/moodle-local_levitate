@@ -17,14 +17,6 @@
 {{!
     @template local_levitate/analytics
 
-    Template which defines a analytics graphs and tables.
-
-    Classes required for JS:
-    * none
-
-    Data attributes required for JS:
-    * none
-
     Example context (json):
     {
         'totalusers': "10",
@@ -78,10 +70,8 @@
                     <div class="heads">
                         <h2>{{#str}} course_statistics, local_levitate {{/str}} </h2>
                         <select class="course_statistics">
-
                         </select>
                     </div>
-
                     <div class="graph" id="enroll_graph">
                     </div>
                 </div>
@@ -108,24 +98,25 @@
                 </div>
                 <div class="popular-table">
                     <table id="datatable">
-
                     </table>
                 </div>
             </div>
         </div>
         <div class='right-region'>
             <div class="blocks company-logo">
-                <img src="{{logourl}}" />
+                <img src="{{logourl}}" >
             </div>
             <div class="blocks">
                 <div class="heads">
                     <h2>{{#str}} my_details, local_levitate {{/str}} </h2>
-                    <div class="chev-down"><img
-                            src="{{svg}}/local/levitate/pix/chevron-down.svg" /></div>
+                    <div class="chev-down">
+                        <img src="{{svg}}/local/levitate/pix/chevron-down.svg" >
+                    </div>
                 </div>
                 <div class="detail-item">
-                    <div class="detail-item-icon"><img
-                            src="{{contact-person_svg}}" /></div>
+                    <div class="detail-item-icon">
+                        <img src="{{contact-person_svg}}" >
+                    </div>
                     <div class="details">
                         <p class="lead">{{#str}} contact_person, local_levitate {{/str}} </p>
                         <p>{{contactname}}</p>
@@ -133,8 +124,9 @@
                     </div>
                 </div>
                 <div class="detail-item">
-                    <div class="detail-item-icon"><img
-                            src="{{contact-details_svg}}" /></div>
+                    <div class="detail-item-icon">
+                        <img src="{{contact-details_svg}}" >
+                    </div>
                     <div class="details">
                         <p class="lead">{{#str}} contact_details, local_levitate {{/str}} </p>
                         <p>{{contactemail}}</p>
@@ -142,16 +134,18 @@
                     </div>
                 </div>
                 <div class="detail-item">
-                    <div class="detail-item-icon"><img
-                            src="{{access-domain_svg}}" /></div>
+                    <div class="detail-item-icon">
+                        <img src="{{access-domain_svg}}" >
+                    </div>
                     <div class="details">
                         <p class="lead">{{#str}} access_domain, local_levitate {{/str}} </p>
                         <p>{{primarydomain}}></p>
                     </div>
                 </div>
                 <div class="detail-item">
-                    <div class="detail-item-icon"><img
-                            src="{{calendar_svg}}" /></div>
+                    <div class="detail-item-icon">
+                        <img src="{{calendar_svg}}" >
+                    </div>
                     <div class="details">
                         <p class="lead">{{#str}} subscripton_start, local_levitate {{/str}} </p>
                         <p>{{datevalues}}
