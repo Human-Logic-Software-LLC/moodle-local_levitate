@@ -1029,8 +1029,8 @@
         max-height: unset;
     }
 
-    .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection 
-    .explore-details-content .explore-details-main {
+    .path-local-levitate .filter-summary-selectedFilterContainer form
+    #course_selection .explore-details-content .explore-details-main {
         flex: 0 0 100%;
         max-width: 100%;
     }
