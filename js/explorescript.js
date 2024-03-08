@@ -157,9 +157,9 @@ function createinti(Y,phpvalues){
                 "#minDval_input").attr('max')) - parseInt($("#minDval_input").attr(
                 'min')))) * parseInt($("#minDval_input").attr('min'));
             $("#minDval_input").val(this.value);
-            $("[inverse-left]").css("width", minvalue + '%');
-            $("[range]").css("left", minvalue + '%');
-            $("[minthumb]").css("left", minvalue + '%');
+            $(".inverse-left").css("width", minvalue + '%');
+            $(".range").css("left", minvalue + '%');
+            $(".minthumb").css("left", minvalue + '%');
             $('.error').hide();
             $(".errortext").text("");
         } else {
@@ -176,9 +176,9 @@ function createinti(Y,phpvalues){
                 "#maxDval_input").attr('max')) - parseInt($("#maxDval_input").attr(
                 'min')))) * parseInt($("#maxDval_input").attr('min'));
             $("#maxDval_input").val(this.value);
-            $("[inverse-right]").css("width", 100 - maxvalue + '%');
-            $("[range]").css("right", 100 - maxvalue + '%');
-            $("[maxthumb]").css("left", maxvalue + '%');
+            $(".inverse-right").css("width", 100 - maxvalue + '%');
+            $(".range").css("right", 100 - maxvalue + '%');
+            $(".maxthumb").css("left", maxvalue + '%');
             $(".errortext").text("");
             $('.error').hide();
         } else {

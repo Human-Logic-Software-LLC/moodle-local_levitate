@@ -773,7 +773,7 @@
     margin: 0 0 10px 0;
 }
 
-.path-local-levitate [slider] {
+.path-local-levitate .slider {
     width: calc(100% - 14px);
     position: relative;
     height: 40px;
@@ -781,19 +781,19 @@
     margin-top: 10px;
 }
 
-.path-local-levitate [slider] > div {
+.path-local-levitate .slider > div {
     position: absolute;
     left: 0;
     right: 0;
     height: 5px;
 }
 
-.path-local-levitate [slider] > div:first-child {
+.path-local-levitate .slider > div:first-child {
     width: calc(100% - 10px);
     left: 15px;
 }
 
-.path-local-levitate [slider] > div > [inverse-left] {
+.path-local-levitate .slider > div > .inverse-left {
     position: absolute;
     left: 0;
     height: 5px;
@@ -803,7 +803,7 @@
     width: 100%;
 }
 
-.path-local-levitate [slider] > div > [inverse-right] {
+.path-local-levitate .slider > div > .inverse-right {
     position: absolute;
     right: 0;
     height: 5px;
@@ -812,7 +812,7 @@
     margin: 0;
 }
 
-.path-local-levitate [slider] > div > [range] {
+.path-local-levitate .slider > div > .range {
     position: absolute;
     left: 0;
     right: 0;
@@ -821,7 +821,7 @@
     background-color: var(--primary);
 }
 
-.path-local-levitate [slider] > div > [thumb] {
+.path-local-levitate .slider > div > .thumb {
     position: absolute;
     top: -7.5px;
     z-index: 2;
@@ -836,7 +836,7 @@
     outline: none;
 }
 
-.path-local-levitate [slider] > input[type="range"] {
+.path-local-levitate .slider > input[type="range"] {
     position: absolute;
     pointer-events: none;
     -webkit-appearance: none;
@@ -847,16 +847,16 @@
     opacity: 0;
 }
 
-.path-local-levitate div[slider] > input[type="range"]:focus::-webkit-slider-runnable-track {
+.path-local-levitate div.slider > input[type="range"]:focus::-webkit-slider-runnable-track {
     background: transparent;
     border: transparent;
 }
 
-.path-local-levitate div[slider] > input[type="range"]:focus {
+.path-local-levitate div.slider > input[type="range"]:focus {
     outline: none;
 }
 
-.path-local-levitate div[slider] > input[type="range"]::-webkit-slider-thumb {
+.path-local-levitate div.slider > input[type="range"]::-webkit-slider-thumb {
     pointer-events: all;
     width: 28px;
     height: 28px;
@@ -873,7 +873,7 @@
     margin-top: 30px;
 }
 
-.path-local-levitate [sign] {
+.path-local-levitate .sign {
     opacity: 0;
 }
 
