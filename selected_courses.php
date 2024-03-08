@@ -31,14 +31,28 @@ require_once('../../course/modlib.php');
 global $CFG, $USER, $DB;
 require_once($CFG->dirroot . '/local/levitate/lib.php');
 
+$imageurls = optional_param_array('image_urls', '', PARAM_TEXT);
+$contextid = optional_param_array('context_id', '', PARAM_TEXT);
+$enrollusers = optional_param_array('enrollusers', '', PARAM_TEXT);
+$wstoken = optional_param('wstoken', '', PARAM_TEXT);
+
+$passdata = [
+                "image_urls" => json_encode($imageurls),
+                "context_id" => json_encode($contextid),
+                "enrollusers" => json_encode($enrollusers),
+                "wwstoken" => $wstoken,
+            ];
+
 require_login();
 
 $PAGE->requires->jquery_plugin('ui');
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title(get_string('addnewcourse', 'local_levitate'));
 $PAGE->set_heading(get_string('addnewcourse', 'local_levitate'));
-
+$PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/levitate.js'), true);
+$PAGE->requires->js_init_call('selected_course_js', []);
 $PAGE->set_pagelayout('base');
+$PAGE->set_url('/local/levitate/selected_courses.php');
 echo $OUTPUT->header();
 
 echo "<h4>".get_string('coursesettings', 'local_levitate')."</h4>";
@@ -46,7 +60,7 @@ if (!has_capability('local/levitate:view_levitate_catalog', context_system::inst
     $url = $CFG->wwwroot.'/my/';
     redirect($url, get_string('catalog_capability', 'local_levitate'));
 }
-$mform = new local_levitate_form();
+$mform = new local_levitate_form(null, $passdata);
 $mform->display();
 
 // Form processing and displaying is done here.
@@ -68,8 +82,7 @@ if ($mform->is_cancelled()) {
     $currentform = json_encode($formdata);
     $formvalues->formdata = $currentform;
     $formvalues->timecreated = time();
-    $query = "SELECT id, shortname FROM {course}";
-    $courseshortnames = $DB->get_records_sql($query);
+    $courseshortnames = $DB->get_records('course');
     foreach ($courseshortnames as $courseshort) {
         $shortnames[] = $courseshort->shortname;
     }
@@ -91,41 +104,3 @@ if ($mform->is_cancelled()) {
 }
 
 echo $OUTPUT->footer();
-
-?>
-
-<script>
-    
-$(document).ready(function(){
-    var course_type_name='<?php echo $formdata->course_type; ?>';
-    $('input[type=radio][name=course_type]').change(function() {
-        
-        if (this.value == 0) {
-            $('#fitem_id_coursefullname').css('display','none');
-            $('#fitem_id_courseshortname').css('display','none');
-            $('#fgroup_id_radioar1').css('display','flex');
-
-        }
-        else if (this.value == 1) {
-            $('#fitem_id_coursefullname').css('display','flex');
-            $('#fitem_id_courseshortname').css('display','flex');
-            $('#fgroup_id_radioar1').css('display','none');
-        }
-    });
-    
-    if (course_type_name == 0) {
-            $('#fitem_id_coursefullname').css('display','none');
-            $('#fitem_id_courseshortname').css('display','none');
-            $('#fgroup_id_radioar1').css('display','flex');
-
-        }
-    else if (course_type_name == 1) {
-
-        $('#fitem_id_coursefullname').css('display','flex');
-        $('#fitem_id_courseshortname').css('display','flex');
-        $('#fgroup_id_radioar1').css('display','none');
-    }
-    
-});
-    
-</script>

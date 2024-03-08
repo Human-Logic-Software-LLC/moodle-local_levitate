@@ -805,10 +805,13 @@ function get_analytics_data(domainvalue, callback) {
     var windowurl = window.location.href;
     let siteurl = windowurl.split("/local");
     siteurl = siteurl[0].concat('/local/levitate/get_token.php');
+    console.log(siteurl);
     // siteurl = 'https://'+siteurl;
     $.ajax({url: siteurl,
         success: function(response){
+            console.log(response);
             response = JSON.parse(response);
+            console.log(response);
             //Handle the response here
             let processed_data = process_data(response);
 

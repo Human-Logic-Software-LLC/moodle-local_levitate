@@ -17,6 +17,10 @@ The Levitate plugin enables LMS users to explore a wide range of interactive, im
   - Course completion tracking
 
 
+## Prerequisites
+The Levitate plugin requires Levitate library subscription. The subscription will provide you with the login credentials to used to obtain the token. The subscription can be obtained  through [https://www.levitate.coach/contact-us/](https://www.levitate.coach/contact-us/) or by writing directly to levitate@human-logic.com
+
+
 ## Installation
 1.	Copy this levitate plugin to the local directory of your Moodle instance: git clone [https://github.com/Human-Logic-Software-LLC/levitate.git](https://github.com/Human-Logic-Software-LLC/levitate.git) local/levitate
 2.	Visit the notifications page to complete the installation process.

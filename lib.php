@@ -35,43 +35,36 @@ class local_levitate_form extends moodleform {
      */
     public function definition() {
         global $DB, $CFG;
-        $imageurls = optional_param('image_urls', '', PARAM_TEXT);
-        $contextid = optional_param('context_id', '', PARAM_TEXT);
-        $enrollusers = optional_param('enrollusers', '', PARAM_TEXT);
-        $wstoken = optional_param('wstoken', '', PARAM_TEXT);
-        $passdata = [
-            "image_urls" => json_encode($imageurls),
-            "context_id" => json_encode($contextid),
-            "enrollusers" => json_encode($enrollusers),
-            "wwstoken" => $wstoken,
-        ];
         $mform = $this->_form;
+        $passdata = $this->_customdata;
         $radioarray = [];
         $radioarray[] = $mform->createElement('radio', 'course_type', '',
-                            get_string('multi_coursetype', 'local_levitate'), 0, $attributes);
+                            get_string('multi_coursetype', 'local_levitate'), 0);
         $radioarray[] = $mform->createElement('radio', 'course_type', '',
-                            get_string('single_coursetype', 'local_levitate'), 1, $attributes);
+                            get_string('single_coursetype', 'local_levitate'), 1);
         $mform->addGroup($radioarray, 'radioar', get_string('coursetype', 'local_levitate'), [''], false);
         $mform->setDefault('course_type', 0);
         $mform->addHelpButton ( 'radioar', 'coursetype', 'local_levitate');
         $radioarray1 = [];
         $radioarray1[] = $mform->createElement('radio', 'courseformat', '',
-                                   get_string('single_activity_course', 'local_levitate'), 0, $attributes);
+                                   get_string('single_activity_course', 'local_levitate'), 0);
         $radioarray1[] = $mform->createElement('radio', 'courseformat', '',
-                                   get_string('multi_activity_course', 'local_levitate'), 1, $attributes);
+                                   get_string('multi_activity_course', 'local_levitate'), 1);
         $mform->addGroup($radioarray1, 'radioar1', get_string('coursecreation', 'local_levitate'), [''], false);
         $mform->setDefault('courseformat', 0);
         $mform->addHelpButton ( 'radioar1', 'coursecreation', 'local_levitate');
         $mform->addElement('text', 'coursefullname', get_string('coursefullname', 'local_levitate'));
+        $mform->setType('coursefullname', PARAM_TEXT);
         $mform->addElement('text', 'courseshortname', get_string('courseshortname', 'local_levitate'));
+        $mform->setType('courseshortname', PARAM_TEXT);
         $coursecategories[0] = get_string('selectcategory', 'local_levitate');
-        $query = "SELECT * FROM {course_categories}";
-        $categories = $DB->get_records_sql($query);
+        $categories = $DB->get_records('course_categories');
         foreach ($categories as $category) {
             $coursecategories[$category->id] = $category->name;
         }
         $mform->addElement('select', 'coursecategory', get_string('coursecategory', 'local_levitate'), $coursecategories);
         $mform->addElement('hidden', 'previous_form_values', json_encode( $passdata ));
+        $mform->setType('previous_form_values', PARAM_TEXT);
         $this->add_action_buttons(get_string('cancel', 'local_levitate'), get_string('submit', 'local_levitate'));
     }
 }
@@ -116,12 +109,17 @@ function local_levitate_storedfile($name, $packageid, $scorm) {
  * @return string the contents of the requested call.
  */
 function local_levitate_curlcall($fnname = '', $jsondata='') {
+    global $CFG;
     $tokensettings = get_config('local_levitate');
     $tokenid = $tokensettings->secret;
     $serverurl = 'https://levitate.human-logic.com/webservice/rest/server.php?wstoken=';
     $url = $serverurl.$tokenid.'&wsfunction='.$fnname.'&moodlewsrestformat=json';
     $curl = new curl();
     $response = $curl->post($url, $jsondata);
+    if (isset(json_decode($response)->errorcode)) {
+        redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'), get_string('invalidtoken', 'local_levitate'));
+        die();
+    }
     return $response;
 }
 /**
@@ -131,6 +129,7 @@ function local_levitate_curlcall($fnname = '', $jsondata='') {
  * @return string the list of options for the requested select.
  */
 function local_levitate_get_option_text ($params, $idvalue) {
+    $optiontext = '';
     foreach ($params as $trmparr) {
         $optiontext = $optiontext.'<li>
         <label class="common-customCheckbox">

@@ -23,7 +23,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-global $CFG, $PAGE;
+global $CFG, $PAGE, $OUTPUT;
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/levitate.js'), true);
 $PAGE->requires->js_init_call('update_token', []);
 
@@ -38,11 +38,12 @@ if ($hassiteconfig) {
     $settings = new admin_settingpage('locallevitategettoken', new lang_string('gettoken', 'local_levitate'));
     $ADMIN->add('local_levitate_settings', $settings);
     if ($ADMIN->fulltree) {
-        $string = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        $string = new \moodle_url($CFG->wwwroot.'/admin/settings.php?section=locallevitategettoken');
         $encoded = urlencode($string);
 
         $settings->add(new admin_setting_configpasswordunmask('local_levitate/secret', new lang_string('secret', 'local_levitate'),
+                          new lang_string('secret_help', 'local_levitate').
                           "<a href='https://levitate.human-logic.com/create_token.php?$encoded'>"
-                          .new lang_string('secret', 'local_levitate')."</a>", ''));
+                          .new lang_string('secret_url', 'local_levitate')."</a>", ''));
     }
 }

@@ -291,7 +291,7 @@
     -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
-    background-image:url("../images/chevron-down.svg");
+    background-image:url("../pix/chevron-down.svg");
     background-repeat: no-repeat;
     background-position: right 15px center;
     box-shadow: 0px 1px 10px 0px rgba(81, 45, 168, 0.01);
@@ -488,27 +488,27 @@
 }
 
 .path-local-levitate .total-statistics .total-users .graph-icon {
-    background-image:url("../images/graph.svg");
+    background-image:url("../pix/graph.svg");
 }
 
 .path-local-levitate .total-statistics .total-minutes .graph-icon {
-    background-image:url("../images/graph1.svg");
+    background-image:url("../pix/graph1.svg");
 }
 
 .path-local-levitate .total-statistics .total-courses .graph-icon {
-    background-image:url("../images/graph2.svg");
+    background-image:url("../pix/graph2.svg");
 }
 
 .path-local-levitate .total-statistics .total-users:hover .graph-icon {
-    background-image:url("../images/graph-hover.svg");
+    background-image:url("../pix/graph-hover.svg");
 }
 
 .path-local-levitate .total-statistics .total-minutes:hover .graph-icon {
-    background-image:url("../images/graph1-hover.svg");
+    background-image:url("../pix/graph1-hover.svg");
 }
 
 .path-local-levitate .total-statistics .total-courses:hover .graph-icon {
-    background-image:url("../images/graph2-hover.svg");
+    background-image:url("../pix/graph2-hover.svg");
 }
 
 .path-local-levitate .popular-courses .legends {
@@ -633,6 +633,35 @@
     }
 }
 
+/*added mobile 04032024*/
+
+@media screen and (max-width: 600px) {
+	.path-local-levitate .dashboard .main-region .total-statistics .total-users,
+    .path-local-levitate .dashboard .main-region .total-statistics .total-minutes,
+    .path-local-levitate .dashboard .main-region .total-statistics .total-courses {
+        width: 100%;
+    }
+	
+	.path-local-levitate .dashboard .main-region .total-statistics {
+		flex-direction: column;
+	}
+	
+	.path-local-levitate .dataTables_wrapper .dataTables_paginate .paginate_button {
+		margin: 2px;
+	}
+	.path-local-levitate .dashboard {
+		padding: 30px 5px;
+	}
+}
+
+@media screen and (max-width: 365px) {
+	.path-local-levitate .course-statistics .heads h2 {
+		font-size: 22px;
+	}
+}
+
+/*added mobile 04032024*/
+
 .path-local-levitate .progress svg,
 .path-local-levitate .progress svg:nth-child(2) {
     width: 200px;
@@ -656,7 +685,7 @@
 }
 
 .path-local-levitate td.open_graph .icon {
-    background-image: url("../images/graphIcon.svg");
+    background-image: url("../pix/graphIcon.svg");
     width: 72px;
     height: 72px;
     background-size: contain;
@@ -814,7 +843,7 @@
 }
 
 .path-local-levitate .paginate_button.previous, .paginate_button.next {
-    background-image: url("../images/pagenation-right.svg") !important;
+    background-image: url("../pix/pagenation-right.svg") !important;
     background-position: center !important;
     border: 1px solid #4050E7 !important;
     color: #4050E7 !important;
@@ -827,7 +856,7 @@
 }
 
 .path-local-levitate .paginate_button.previous {
-    background-image: url("../images/pagenation-left.svg") !important;
+    background-image: url("../pix/pagenation-left.svg") !important;
 }
 
 .path-local-levitate .paginate_button.previous.disabled, .paginate_button.next.disabled {

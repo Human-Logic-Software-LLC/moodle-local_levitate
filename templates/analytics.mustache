@@ -1,0 +1,202 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_levitate/analytics
+
+    Example context (json):
+    {
+        "totalusers": "10",
+        "totaltimespent":"50",
+        "totalcourses": "10",
+        "logourl": "https://levitate.human-logic.com/company-logo.png",
+        "contact-person_svg": "https://levitate.human-logic.com/company-logo.png",
+        "contact-details_svg": "https://levitate.human-logic.com/company-logo.png",
+        "access-domain_svg": "https://levitate.human-logic.com/company-logo.png",
+        "calendar_svg": "https://levitate.human-logic.com/company-logo.png",
+        "contactname": "Admin User",
+        "profesion": "SE",
+        "contactemail": "admin@dumy.com",
+        "mobile": "9963361111",
+        "primarydomain": "https://levitate.human-logic.com",
+        "datevalues": "Nov 23, 2023 - Nov 23, 2024",
+        "utilizationpercentage": "15",
+        "graphvalue": "25",
+        "totalseats": "100",
+        "remainingseats": "85"
+    }
+}}
+<div>
+    <div class='dashboard'>
+        <div class='main-region'>
+            <div class='total-statistics'>
+                <div class='total-users'>
+                    <div class='graph-icon'>&nbsp;</div>
+                    <div class='stats'>
+                        <div class='lead'>{{#str}} total_users, local_levitate {{/str}}</div>
+                        <div class='nums'>{{totalusers}} </div>
+                    </div>
+                </div>
+                <div class='total-minutes'>
+                    <div class='graph-icon'>&nbsp;</div>
+                    <div class='stats'>
+                        <div class='lead'>{{#str}} total_minutes, local_levitate {{/str}}</div>
+                        <div class='nums'>{{totaltimespent}}</div>
+                    </div>
+                </div>
+                <div class='total-courses'>
+                    <div class='graph-icon'>&nbsp;</div>
+                    <div class='stats'>
+                        <div class='lead'>{{#str}} total_courses, local_levitate {{/str}} </div>
+                        <div class='nums'>{{totalcourses}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class='graphs-container'>
+                <div class="course-statistics popular-courses" style="display:none">
+                    <div class="heads">
+                        <h2>{{#str}} course_statistics, local_levitate {{/str}} </h2>
+                        <select class="course_statistics">
+                        </select>
+                    </div>
+                    <div class="graph" id="enroll_graph">
+                    </div>
+                </div>
+
+                <div class="course-statistics popular-courses">
+                    <div class="heads">
+                        <h2>{{#str}} completion_statistics, local_levitate {{/str}}</h2>
+                        <select class="completion_statistics">
+                        </select>
+                    </div>
+                    <div class="legends">
+                        <span class="ttl-enrolls">{{#str}} total_enrolls, local_levitate {{/str}}</span>
+                        <span class="ttl-completes">{{#str}} total_completions, local_levitate {{/str}}
+                        </span>
+                    </div>
+                    <div class="graph" id="course_graph">
+                    </div>
+                </div>
+            </div>
+            <div class="course-statistics popular-table">
+                <div class="heads">
+                    <h2>{{#str}} popular_courses, local_levitate {{/str}}</h2>
+                    <select class="table_select"></select>
+                </div>
+                <div class="popular-table">
+                    <table id="datatable">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class='right-region'>
+            <div class="blocks company-logo">
+                <img alt="Company Logo" src="{{logourl}}" >
+            </div>
+            <div class="blocks">
+                <div class="heads">
+                    <h2>{{#str}} my_details, local_levitate {{/str}} </h2>
+                    <div class="chev-down">
+                        <img alt="chevron down" src="{{svg}}/local/levitate/pix/chevron-down.svg" >
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-item-icon">
+                        <img alt="contact Logo" src="{{contact-person_svg}}" >
+                    </div>
+                    <div class="details">
+                        <p class="lead">{{#str}} contact_person, local_levitate {{/str}} </p>
+                        <p>{{contactname}}</p>
+                        <p>{{profession}}</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-item-icon">
+                        <img alt="contact Logo" src="{{contact-details_svg}}" >
+                    </div>
+                    <div class="details">
+                        <p class="lead">{{#str}} contact_details, local_levitate {{/str}} </p>
+                        <p>{{contactemail}}</p>
+                        <p>{{mobile}}</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-item-icon">
+                        <img alt="access Logo" src="{{access-domain_svg}}" >
+                    </div>
+                    <div class="details">
+                        <p class="lead">{{#str}} access_domain, local_levitate {{/str}} </p>
+                        <p>{{primarydomain}}></p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-item-icon">
+                        <img alt="calendar Logo" src="{{calendar_svg}}" >
+                    </div>
+                    <div class="details">
+                        <p class="lead">{{#str}} subscripton_start, local_levitate {{/str}} </p>
+                        <p>{{datevalues}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="seat-utilization">
+                    <div class="heads">
+                        <h2>{{#str}} seat_utilization, local_levitate {{/str}} </h2>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" data-name="SVG Skill" data-percent="{{utilizationpercentage}}%">
+                            <svg viewBox="-10 -10 220 220">
+                                <g fill="none" stroke-width="9" transform="translate(100,100)">
+                                    <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#cl1)" />
+                                    <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#cl1)" />
+                                    <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#cl1)" />
+                                    <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#cl1)" />
+                                    <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#cl1)" />
+                                    <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#cl1)" />
+                                </g>
+                            </svg>
+                            <svg viewBox="-10 -10 220 220">
+                                <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,
+                                   100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z"
+                                    stroke-dashoffset="{{graphvalue}}">
+                                </path>
+                            </svg>
+                        </div>
+                        <svg width="0" height="0">
+                            <defs>
+                                <linearGradient id="cl1" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#4050E7" />
+                                    <stop offset="100%" stop-color="#4050E7" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="utilization">
+                        <div class="total-bought">
+                            <div class="lead">{{#str}} seats_bought, local_levitate {{/str}}</div>
+                            <div class="nums">{{totalseats}}</div>
+                        </div>
+                        <div class="total-used">
+                            <div class="lead">{{#str}} seats_used, local_levitate {{/str}}</div>
+                            <div class="nums">{{remainingseats}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
