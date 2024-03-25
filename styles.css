@@ -340,7 +340,7 @@
 
 .path-local-levitate select {
     border: none;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     border-radius: 5px;
 }
 
@@ -1088,7 +1088,7 @@
 }
 
 .path-local-levitate .coursebody.ar,
-.path-local-levitate.dir-rtl .coursebody.ar {
+.path-local-levitate.dir-rtl .coursebody.ar{
     direction: rtl;
     text-align: right;
 }

@@ -25,49 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 global $DB, $CFG;
 require_once($CFG->dirroot.'/course/lib.php');
-require_once($CFG->libdir . '/formslib.php');
-/**
- * Task to store files
- */
-class local_levitate_form extends moodleform {
-    /**
-     * Instantiate simplehtml_form
-     */
-    public function definition() {
-        global $DB, $CFG;
-        $mform = $this->_form;
-        $passdata = $this->_customdata;
-        $radioarray = [];
-        $radioarray[] = $mform->createElement('radio', 'course_type', '',
-                            get_string('multi_coursetype', 'local_levitate'), 0);
-        $radioarray[] = $mform->createElement('radio', 'course_type', '',
-                            get_string('single_coursetype', 'local_levitate'), 1);
-        $mform->addGroup($radioarray, 'radioar', get_string('coursetype', 'local_levitate'), [''], false);
-        $mform->setDefault('course_type', 0);
-        $mform->addHelpButton ( 'radioar', 'coursetype', 'local_levitate');
-        $radioarray1 = [];
-        $radioarray1[] = $mform->createElement('radio', 'courseformat', '',
-                                   get_string('single_activity_course', 'local_levitate'), 0);
-        $radioarray1[] = $mform->createElement('radio', 'courseformat', '',
-                                   get_string('multi_activity_course', 'local_levitate'), 1);
-        $mform->addGroup($radioarray1, 'radioar1', get_string('coursecreation', 'local_levitate'), [''], false);
-        $mform->setDefault('courseformat', 0);
-        $mform->addHelpButton ( 'radioar1', 'coursecreation', 'local_levitate');
-        $mform->addElement('text', 'coursefullname', get_string('coursefullname', 'local_levitate'));
-        $mform->setType('coursefullname', PARAM_TEXT);
-        $mform->addElement('text', 'courseshortname', get_string('courseshortname', 'local_levitate'));
-        $mform->setType('courseshortname', PARAM_TEXT);
-        $coursecategories[0] = get_string('selectcategory', 'local_levitate');
-        $categories = $DB->get_records('course_categories');
-        foreach ($categories as $category) {
-            $coursecategories[$category->id] = $category->name;
-        }
-        $mform->addElement('select', 'coursecategory', get_string('coursecategory', 'local_levitate'), $coursecategories);
-        $mform->addElement('hidden', 'previous_form_values', json_encode( $passdata ));
-        $mform->setType('previous_form_values', PARAM_TEXT);
-        $this->add_action_buttons(get_string('cancel', 'local_levitate'), get_string('submit', 'local_levitate'));
-    }
-}
+
 /**
  * local_levitate_storedfile to store the file
  *
@@ -118,7 +76,6 @@ function local_levitate_curlcall($fnname = '', $jsondata='') {
     $response = $curl->post($url, $jsondata);
     if (isset(json_decode($response)->errorcode)) {
         redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'), get_string('invalidtoken', 'local_levitate'));
-        die();
     }
     return $response;
 }

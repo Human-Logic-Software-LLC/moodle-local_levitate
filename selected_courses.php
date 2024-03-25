@@ -30,6 +30,7 @@ require_once('../../mod/scorm/locallib.php');
 require_once('../../course/modlib.php');
 global $CFG, $USER, $DB;
 require_once($CFG->dirroot . '/local/levitate/lib.php');
+require_once($CFG->dirroot . '/local/levitate/classes/form/local_levitate_form.php');
 
 $imageurls = optional_param_array('image_urls', '', PARAM_TEXT);
 $contextid = optional_param_array('context_id', '', PARAM_TEXT);
@@ -45,6 +46,12 @@ $passdata = [
 
 require_login();
 
+if (!has_capability('local/levitate:view_levitate_catalog', context_system::instance())) {
+//    \core\notification::add(get_string('catalog_capability', 'local_levitate'), \core\notofication::ERROR);
+//    redirect(new moodle_url('/my/'));
+    redirect(new moodle_url('/my/'), \core\notification::info(get_string('catalog_capability', 'local_levitate')));
+}
+
 $PAGE->requires->jquery_plugin('ui');
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title(get_string('addnewcourse', 'local_levitate'));
@@ -53,15 +60,13 @@ $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/levitate.j
 $PAGE->requires->js_init_call('selected_course_js', []);
 $PAGE->set_pagelayout('base');
 $PAGE->set_url('/local/levitate/selected_courses.php');
-echo $OUTPUT->header();
+
+
 
 echo "<h4>".get_string('coursesettings', 'local_levitate')."</h4>";
-if (!has_capability('local/levitate:view_levitate_catalog', context_system::instance())) {
-    $url = $CFG->wwwroot.'/my/';
-    redirect($url, get_string('catalog_capability', 'local_levitate'));
-}
+
 $mform = new local_levitate_form(null, $passdata);
-$mform->display();
+
 
 // Form processing and displaying is done here.
 if ($mform->is_cancelled()) {
@@ -102,5 +107,7 @@ if ($mform->is_cancelled()) {
         \core\notification::info($notificationtextnextline);
     }
 }
+echo $OUTPUT->header();
+$mform->display();
 
 echo $OUTPUT->footer();

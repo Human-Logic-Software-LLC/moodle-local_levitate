@@ -37,10 +37,9 @@ function createDataTable(Y,data,rawDataJSON,courses_table) {
     
     // Define the DataTable columns
     var columns = [
-        {  data: 'label',title: 'Course Name' },
-        {  data: 'enrolments', title: 'Enrolments' },
-        // {  data: 'completions',title: 'Total Completions' },
-        {  data: 'timespent', title: 'Total Time Spent' },
+        {  data: 'label',title: $(".report_timespent").text() },
+        {  data: 'enrolments', title: $(".report_enrolments").text() },
+        {  data: 'timespent', title: $(".report_timespent").text()  },
         {
         className: 'open_graph',
         data: null, // Use 'null' to reference the entire row data
@@ -131,11 +130,7 @@ function roundNumber(number, decimal_digit) {
     return result;
  }
 function drawGraph(scormId, data) {
-  
-    var allMonths = [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
+
     var margin = { top: 20, right: 50, bottom: 50, left: 50 };
     var width = 800 - margin.left - margin.right;
     var height = 400 - margin.top - margin.bottom;
@@ -187,9 +182,8 @@ function drawGraph(scormId, data) {
         };
     });
     function getSortableMonth(monthYear) {
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         const [month, year] = monthYear.split(" ");
-        const monthIndex = monthNames.indexOf(month);
+        const monthIndex = allMonths.indexOf(month);
         return new Date(year, monthIndex).getTime();
     }
     
@@ -258,7 +252,7 @@ function drawGraph(scormId, data) {
             tooltip.transition()
                 .duration(200)
                 .style("opacity", 0.9); 
-            tooltip.html("Month: " + event.monthYear + "<br>Timespent: " + event.timespent+ "<br>Enrolments: " + event.enrollments+ "<br>Completions: " + event.completions)
+            tooltip.html($(".report_month").text()+": " + event.monthYear + "<br>"+$(".report_timespent").text()+": " + event.timespent+ "<br>"+$(".report_enrolments").text()+": " + event.enrollments+ "<br>"+$(".report_completions").text()+": " + event.completions)
                 .style("left", (x + 75) + "px")
                 .style("top", (y ) + "px");
         })
@@ -280,8 +274,6 @@ svg.selectAll('.bar-completions')
     .enter()
     .append('rect')
     .attr('class', 'bar-completions')
-    // .attr("x", function (d, key) { return xScale(Object.keys(aggregatedData)[key].replace(' '+$(".completion_statistics").val(),'')) + xScale.bandwidth() / 3; }) // Shift x position for grouped bars
-
     .attr("x", function (d, key) { var parts = d.monthYear.split(" ");
         var shortenedMonthName = parts[0]; return xscale(shortenedMonthName)+ xscale.bandwidth() / 2; })
     .attr('y', function (d) { return y1(d.completions); })
@@ -295,7 +287,7 @@ svg.selectAll('.bar-completions')
         tooltip.transition()
             .duration(200)
             .style("opacity", 0.9); 
-        tooltip.html("Month: " + event.monthYear + "<br>Timespent: " + event.timespent+ "<br>Enrolments: " + event.enrollments+ "<br>Completions: " + event.completions)
+        tooltip.html($(".report_month").text()+": " + event.monthYear + "<br>"+$(".report_timespent").text()+": " + event.timespent+ "<br>"+$(".report_enrolments").text()+": " + event.enrollments+ "<br>"+$(".report_completions").text()+": " + event.completions)
             .style("left", (x + 75) + "px")
             .style("top", (y ) + "px");
     })
@@ -329,7 +321,7 @@ svg.selectAll('.bar-enrollments')
         tooltip.transition()
             .duration(200)
             .style("opacity", 0.9); 
-        tooltip.html("Month: " + event.monthYear + "<br>Timespent: " + event.timespent+ "<br>Enrolments: " + event.enrollments+ "<br>Completions: " + event.completions)
+            tooltip.html($(".report_month").text()+": " + event.monthYear + "<br>"+$(".report_timespent").text()+": " + event.timespent+ "<br>"+$(".report_enrolments").text()+": " + event.enrollments+ "<br>"+$(".report_completions").text()+": " + event.completions)
             .style("left", (x + 75) + "px")
             .style("top", (y ) + "px");
     })
@@ -416,21 +408,21 @@ function createallcourseschart(aggregatedData){
     });
     var options = {
         title: {
-            text: "Column Chart in jQuery CanvasJS"              
+            text: ""              
         },
         axisYType: "secondary",
         data: [              
         {
-            // Change type to "doughnut", "line", "splineArea", etc.
+
             type: "column",
-            name: "Portal  Entrada",
+            name: $(".report_timespent").text(),
             xValueType: "dateTime",
             showInLegend: true,
             dataPoints: timespent_data
         },
         {
 			type: "line",
-			name: "Expected Sales",
+			name: $(".report_enrolments").text(),
             xValueType: "dateTime",
 			showInLegend: true,
             axisYType: "secondary",
@@ -438,7 +430,7 @@ function createallcourseschart(aggregatedData){
 		},
         {
 			type: "area",
-			name: "Profit",
+			name: $(".report_completions").text(),
 			markerBorderColor: "white",
 			markerBorderThickness: 2,
 			xValueType: "dateTime",
@@ -455,15 +447,8 @@ function createallcourseschart(aggregatedData){
 }
 function create(Y,tabledata,rawData,allcourses,aggregatedData){ 
 
-// google.charts.load('current', {'packages':['corechart']});
-//                 google.charts.setOnLoadCallback(function() {
-//                 var tableData = $.parseJSON(tabledata);
-//                 var rawDataJSON = $.parseJSON(rawData);
-                
-                
-//         });
-createallcourseschart(aggregatedData);
-    }
+    createallcourseschart(aggregatedData);
+}
 function enrollemt_graph(Y,aggregatedData,selected_block){
     // timespent and enrollments are working for this graph
     // Verify it mrudula how to display the graphs
@@ -482,14 +467,7 @@ function enrollemt_graph(Y,aggregatedData,selected_block){
         var dataArray = Object.keys(aggregatedData).map(function (key) {
             return aggregatedData[key];
         });
-        // var allMonths = [
-        //     "Jan", "Feb", "Mar", "Apr", "May 2023", "Jun 2023",
-        //     "Jul 2023", "Aug 2023", "Sep 2023", "Oct 2023", "Nov 2023", "Dec 2023"
-        // ];
-        var allMonths = [
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-        ];
+
         var svgWidth = 900;
         var svgHeight = 400;
 
@@ -513,7 +491,6 @@ function enrollemt_graph(Y,aggregatedData,selected_block){
     var enrol_xScale = d3.scaleBand()
     .domain(allMonths) // Use allMonths array for x-axis domain
     .rangeRound([0, chartWidth])
-    // .style("font-size", "14px")
     .padding(0.65);
 
     const enrol_yScale = d3.scaleLinear()
@@ -580,10 +557,6 @@ function course_statistics(Y,aggregatedData){
             return aggregatedData[key];
         });
 
-        var allMonths = [
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-        ];
         var svgWidth = 900;
         var svgHeight = 400;
 
@@ -643,8 +616,7 @@ function course_statistics(Y,aggregatedData){
                 tooltip.transition()
                     .duration(200)
                     .style("opacity", 0.9);
-                  
-                tooltip.html("enrollments: " + event.enrollments + "<br>completions: " + event.completions)
+                tooltip.html($(".report_enrolments").text()+": " + + event.enrollments + "<br>"+$(".report_completions").text()+": " + event.completions)
                     .style("left", (x + 75) + "px")
                     .style("top", (y + 100) + "px");
             })
@@ -677,8 +649,7 @@ function course_statistics(Y,aggregatedData){
                 tooltip.transition()
                     .duration(200)
                     .style("opacity", 0.9);
-                  
-                tooltip.html("enrollments: " + event.enrollments + "<br>completions: " + event.completions)
+                tooltip.html($(".report_enrolments").text()+": " + + event.enrollments + "<br>"+$(".report_completions").text()+": " + event.completions)
                     .style("left", (x + 75) + "px")
                     .style("top", (y + 100) + "px");
             })
@@ -766,10 +737,7 @@ function process_data(returnArray){
         var timestamp = entry["timecreated"];
         var date = new Date(timestamp * 1000);
         
-        
-    
-        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        var monthYear = monthNames[date.getMonth()] + " " + date.getFullYear();
+        var monthYear = allMonths[date.getMonth()] + " " + date.getFullYear();
        
 
         if (!aggregatedData[monthYear]) {
@@ -788,10 +756,7 @@ function process_data(returnArray){
 
         aggregatedData[monthYear]["timespent"] += parseInt(entry["timespent"]);
 
-        // var prevUserId = aggregatedData[monthYear]["user_id"];
-        // if (prevUserId !== entry["user_id"]) {
-            
-        // }
+
         aggregatedData[monthYear]["enrollments"]++;
         aggregatedData[monthYear]["user_id"] = entry["user_id"];
 
@@ -805,8 +770,6 @@ function get_analytics_data(domainvalue, callback) {
     var windowurl = window.location.href;
     let siteurl = windowurl.split("/local");
     siteurl = siteurl[0].concat('/local/levitate/get_token.php');
-    console.log(siteurl);
-    // siteurl = 'https://'+siteurl;
     $.ajax({url: siteurl,
         success: function(response){
             console.log(response);
@@ -895,8 +858,12 @@ function year_rawdata_json(resultArray,year){
     });
     return resultArray;
 }
-
+var allMonths = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
 $(document).ready(function(){
+    
   
     let tableData,rawDataJSON,allcourses,aggregatedData,courses_table;
 
@@ -947,7 +914,7 @@ $(document).ready(function(){
             
         
         });
-    // }
+
     
     $(".completion_statistics").change(function(){
         let filteredAggregatedData = year_aggregated_data(aggregatedData,this.value);
@@ -960,7 +927,6 @@ $(document).ready(function(){
       $(".table_select").change(function(){
         let filteredtabledata = year_table_data(rawDataJSON,$(".table_select").val());
         updateDataTable(filteredtabledata,rawDataJSON,courses_table);
-        // createDataTable('',filteredtabledata,rawDataJSON);
       });
       $(".total-users").on('click', function() {
         $(".total-minutes").removeClass('active');

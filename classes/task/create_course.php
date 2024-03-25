@@ -79,7 +79,7 @@ class create_course extends \core\task\scheduled_task {
                         $jsondata = ['cmid' => $cmid];
                         $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms', $jsondata);
                         $output = preg_replace("/%u([0-9a-f]{3,4})/i", "&#x\\1;", urldecode($enrollusers->$key));
-                        local_levitate_add_scorm_module($newcourse, html_entity_decode($output, null, 'UTF-8'), '', '', '',
+                        local_levitate_add_scorm_module($newcourse, html_entity_decode($output, ENT_COMPAT, 'UTF-8'), '', '', '',
                                           $scormsection, $tinyscorm);
                     }
                 }
@@ -89,8 +89,8 @@ class create_course extends \core\task\scheduled_task {
                     $coursedata = new \stdClass();
                     $coursedata->coursetype = $formdata->course_type;
                     $coursedata->category = $formdata->coursecategory;
-                    $coursedata->fullname = html_entity_decode($output, null, 'UTF-8');
-                    $coursedata->shortname = html_entity_decode($output, null, 'UTF-8');
+                    $coursedata->fullname = html_entity_decode($output, ENT_COMPAT, 'UTF-8');
+                    $coursedata->shortname = html_entity_decode($output, ENT_COMPAT, 'UTF-8');
                     if ($formdata->courseformat == 0) {
                         $coursedata->format = 'singleactivity';
                         $coursedata->activitytype = 'scorm';
@@ -103,7 +103,7 @@ class create_course extends \core\task\scheduled_task {
                     $jsondata = ['cmid' => $cmid];
                     $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms', $jsondata);
                     $newcourse = create_course($coursedata);
-                    local_levitate_add_scorm_module($newcourse, html_entity_decode($output, null, 'UTF-8'), '', '', '',
+                    local_levitate_add_scorm_module($newcourse, html_entity_decode($output, ENT_COMPAT, 'UTF-8'), '', '', '',
                                         $scormsection, $tinyscorm);
 
                 }
