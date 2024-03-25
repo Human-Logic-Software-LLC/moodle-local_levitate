@@ -25,7 +25,6 @@
 defined('MOODLE_INTERNAL') || die();
 global $DB, $CFG;
 require_once($CFG->dirroot.'/course/lib.php');
-
 /**
  * local_levitate_storedfile to store the file
  *

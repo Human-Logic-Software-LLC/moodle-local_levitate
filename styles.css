@@ -1088,7 +1088,7 @@
 }
 
 .path-local-levitate .coursebody.ar,
-.path-local-levitate.dir-rtl .coursebody.ar{
+.path-local-levitate.dir-rtl .coursebody.ar {
     direction: rtl;
     text-align: right;
 }

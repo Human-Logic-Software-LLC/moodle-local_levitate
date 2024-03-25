@@ -97,10 +97,10 @@ $params = (object) [
                 'graphvalue' => $graphvalue,
                 'totalseats' => $levitatedata->seats,
                 'remainingseats' => $levitatedata->seats - $totalusers,
-                'report_month' =>get_string('report_month', 'local_levitate'),
-                'report_timespent' =>get_string('report_timespent', 'local_levitate'),
-                'report_enrolments' =>get_string('report_enrolments', 'local_levitate'),
-                'report_completions' =>get_string('report_completions', 'local_levitate')
+                'report_month' => get_string('report_month', 'local_levitate'),
+                'report_timespent' => get_string('report_timespent', 'local_levitate'),
+                'report_enrolments' => get_string('report_enrolments', 'local_levitate'),
+                'report_completions' => get_string('report_completions', 'local_levitate'),
             ];
 
 echo $OUTPUT->render_from_template('local_levitate/analytics', $params);

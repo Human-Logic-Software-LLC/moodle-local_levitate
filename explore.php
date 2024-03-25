@@ -28,7 +28,8 @@ require_once($CFG->dirroot . '/local/levitate/lib.php');
 global $CFG, $DB;
 $errorparam = optional_param('errorcode', null, PARAM_TEXT);
 if ($errorparam == 'invalidtoken') {
-    redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'), \core\notification::info(get_string('invalidtoken', 'local_levitate')));
+    redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'),
+    \core\notification::info(get_string('invalidtoken', 'local_levitate')));
 }
 
 require_login();

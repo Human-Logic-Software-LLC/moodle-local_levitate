@@ -26,7 +26,13 @@ defined('MOODLE_INTERNAL') || die();
 global $DB, $CFG;
 
 require_once($CFG->libdir . '/formslib.php');
-
+/**
+ * Allows to fill form for course creation
+ *
+ * @package    local_levitate
+ * @copyright  2023, Human Logic Software LLC
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class local_levitate_form extends moodleform {
     /**
      * Instantiate simplehtml_form
@@ -61,7 +67,8 @@ class local_levitate_form extends moodleform {
             $coursecategories[$category->id] = $category->name;
         }
         $mform->addElement('select', 'coursecategory', get_string('coursecategory', 'local_levitate'), $coursecategories);
-        $mform->addRule('coursecategory', get_string('coursecategory_required', 'local_levitate'), 'nonzero', '', 'client', false, false);
+        $mform->addRule('coursecategory',
+        get_string('coursecategory_required', 'local_levitate'), 'nonzero', '', 'client', false, false);
         $mform->addElement('hidden', 'previous_form_values', json_encode( $passdata ));
         $mform->setType('previous_form_values', PARAM_TEXT);
         $this->add_action_buttons(get_string('cancel', 'local_levitate'), get_string('submit', 'local_levitate'));
