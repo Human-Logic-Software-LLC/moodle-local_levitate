@@ -34,9 +34,11 @@ if ($errorparam == 'invalidtoken') {
 require_login();
 
 if (!has_capability('local/levitate:view_levitate_catalog', context_system::instance())) {
-//    \core\notification::add(get_string('catalog_capability', 'local_levitate'), \core\notofication::ERROR);
-//    redirect(new moodle_url('/my/'));
-    redirect(new moodle_url('/my/'), \core\notification::info(get_string('catalog_capability', 'local_levitate')));
+         \core\notification::add(
+               get_string('catalog_capability', 'local_levitate'),
+                \core\notification::ERROR
+            );
+    redirect(new moodle_url('/my/') );
 }
 
 $PAGE->set_context(context_system::instance());

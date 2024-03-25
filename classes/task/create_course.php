@@ -64,10 +64,14 @@ class create_course extends \core\task\scheduled_task {
             foreach ($courseshortnames as $courseshort) {
                 $shortnames[] = $courseshort->shortname;
             }
+            // Take the default category in case the given does not exist
+            $category = $DB->record_exists('course_categories', ['id' => $formdata->coursecategory]) ?
+                $formdata->coursecategory :
+                \core_course_category::get_default()->id;
             if ($formdata->course_type == 1) {
                 $coursedata = new \stdClass();
                 $coursedata->coursetype = $formdata->course_type;
-                $coursedata->category = $formdata->coursecategory;
+                $coursedata->category = $category;
                 $coursedata->fullname = $formdata->coursefullname;
                 $coursedata->shortname = $formdata->courseshortname;
                 $coursedata->format = 'topics';
@@ -79,8 +83,8 @@ class create_course extends \core\task\scheduled_task {
                         $jsondata = ['cmid' => $cmid];
                         $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms', $jsondata);
                         $output = preg_replace("/%u([0-9a-f]{3,4})/i", "&#x\\1;", urldecode($enrollusers->$key));
-                        local_levitate_add_scorm_module($newcourse, html_entity_decode($output, ENT_COMPAT, 'UTF-8'), '', '', '',
-                                          $scormsection, $tinyscorm);
+                        local_levitate_add_scorm_module($newcourse, html_entity_decode($output,ENT_COMPAT, 'UTF-8'), '', '', '',
+                                           $scormsection, $tinyscorm);
                     }
                 }
             } else if ($formdata->course_type == 0) {
@@ -88,7 +92,7 @@ class create_course extends \core\task\scheduled_task {
                     $output = preg_replace("/%u([0-9a-f]{3,4})/i", "&#x\\1;", urldecode($enrollusers->$key));
                     $coursedata = new \stdClass();
                     $coursedata->coursetype = $formdata->course_type;
-                    $coursedata->category = $formdata->coursecategory;
+                    $coursedata->category = $category;
                     $coursedata->fullname = html_entity_decode($output, ENT_COMPAT, 'UTF-8');
                     $coursedata->shortname = html_entity_decode($output, ENT_COMPAT, 'UTF-8');
                     if ($formdata->courseformat == 0) {
