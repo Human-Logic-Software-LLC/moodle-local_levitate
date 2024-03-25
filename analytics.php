@@ -25,13 +25,18 @@
 require_once('../../config.php');
 global $CFG, $DB, $PAGE, $OUTPUT;
 require_once($CFG->dirroot . '/local/levitate/lib.php');
-$PAGE->set_context(context_system::instance());
 require_login();
 
 if (!has_capability('local/levitate:view_levitate_analytics', context_system::instance())) {
-    $url = $CFG->wwwroot.'/my/';
-    redirect($url, get_string('analytics_capability', 'local_levitate'));
+         \core\notification::add(
+               get_string('analytics_capability', 'local_levitate'),
+                \core\notification::ERROR
+            );
+    redirect(new moodle_url('/my/') );
 }
+
+$PAGE->set_context(context_system::instance());
+
 
 $PAGE->requires->jquery_plugin('ui');
 
@@ -53,7 +58,6 @@ $tokensettings = get_config('local_levitate');
 $tokenid = $tokensettings->secret;
 if (empty($tokenid)) {
     redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'));
-    die();
 }
 
 
@@ -93,6 +97,10 @@ $params = (object) [
                 'graphvalue' => $graphvalue,
                 'totalseats' => $levitatedata->seats,
                 'remainingseats' => $levitatedata->seats - $totalusers,
+                'report_month' => get_string('report_month', 'local_levitate'),
+                'report_timespent' => get_string('report_timespent', 'local_levitate'),
+                'report_enrolments' => get_string('report_enrolments', 'local_levitate'),
+                'report_completions' => get_string('report_completions', 'local_levitate'),
             ];
 
 echo $OUTPUT->render_from_template('local_levitate/analytics', $params);

@@ -31,7 +31,7 @@
                 <div class="text-container">
                     <div class="course_count_div">
                         <p class='filterd_courses'></p>
-                        <p>out of</p>
+                        <p>{{#str}} outof, local_levitate {{/str}}</p>
                         <p class='total_courses'></p>
                     </div>
                     <div class="course_submit">
@@ -40,7 +40,7 @@
                 </div>
                 <div class='explorecourses'>
                     <div class="loading">
-                        <img id="image_loading" src="{{levitate_logo}}" alt="this slowpoke moves" width="250" >
+                        <img id="image_loading" src="{{levitate_logo}}" alt="{{levitate_logo}}" width="250" >
                         <p>{{#str}} loading, local_levitate {{/str}}</p>
                     </div>
                     <div class='nocourse'>
@@ -59,7 +59,7 @@
                         <div class='explore-details-content'>
                             <div class='explore-details-top clearfix'>
                                 <a role='button' onclick='closewrapper()'
-                                    class='explore-details-close pull-right'>×</a>
+                                    class='explore-details-close pull-right'>{{#str}} xvalue, local_levitate {{/str}}</a>
                                 <h4 class='pull-left coursename'></h4>
                             </div>
                             <div class='explore-details-header clearfix'>

@@ -27,17 +27,14 @@ function get_courses_data(title = "", filter_params = "") {
         }
     
         $(".coursecard").remove();
-        // $(".nocourse").remove();
-        
+   
         var data = $.parseJSON($.parseJSON(response));
-        if(Object.keys(data).length>0){
-            $(".filterd_courses").text(Object.keys(data).length);
-            
 
+        $(".filterd_courses").text(Object.keys(data).length);
+        if(Object.keys(data).length>0){
+            
             $.each(data, function (index, courses) {
         
-
-                // const cardcontainer = document.queryselector('.explorecourses');
                 durationtext = toHoursAndMinutes(courses.learning_time);
 
                 let language = (courses.lang === 'en') ? 'English' : (courses.lang === 'ar') ? 'Arabic' : '';
@@ -82,13 +79,7 @@ function get_courses_data(title = "", filter_params = "") {
             $spinner.hide();
             $(".nocourse").css({"display": "block"});
 
-        
 
-            // var text = `
-            // <div class='nocourse' >
-            //     <h4 class='nocoursetext'> No courses found for the selected filters <h4>
-            // </div>`;
-            //     $(".explorecourses").append(text);
         }
     });
 }
@@ -101,6 +92,7 @@ function closewrapper() {
 let tokenid='';
 
 function createinti(Y,phpvalues){
+
     $(".total_courses").text($("#total_course_value").text())
     let minval = parseInt(phpvalues.minval);
     let maxval = parseInt(phpvalues.maxval);
@@ -203,7 +195,6 @@ function createinti(Y,phpvalues){
                 $(':input[class=itemId' + id + ']').prop('disabled', false);
                 $(':input[class=contextId' + id + ']').prop('disabled', false);
                 $(':input[class=wsToken]').prop('disabled', false);
-                // checkboxes[i].checked = true;
                 enable = true;
 
             }
@@ -239,10 +230,9 @@ function createinti(Y,phpvalues){
         onchange_filters();
     });
 
-    // on-change time filter
+
     $("#slider-distance").on("change", function () {
         onchange_filters();
-        // alert( $("#minDval_input").val() );
     });
     $('.searchTerm').keypress(function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -316,10 +306,6 @@ function createinti(Y,phpvalues){
                 }
             
             });
-            // $("#id_clearfilter").removeClass("clearfilter");
-            // $("#id_clearfilter").removeClass("addBtnClear");
-            
-            // $("#id_clearfilter").addClass("clearfilter");
             
             onchange_filters();
         });

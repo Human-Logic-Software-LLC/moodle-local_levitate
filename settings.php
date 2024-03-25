@@ -43,7 +43,7 @@ if ($hassiteconfig) {
 
         $settings->add(new admin_setting_configpasswordunmask('local_levitate/secret', new lang_string('secret', 'local_levitate'),
                           new lang_string('secret_help', 'local_levitate').
-                          "<a href='https://levitate.human-logic.com/create_token.php?$encoded'>"
+                          "<br><a href='https://levitate.human-logic.com/create_token.php?$encoded'>"
                           .new lang_string('secret_url', 'local_levitate')."</a>", ''));
     }
 }

@@ -36,7 +36,11 @@
         "utilizationpercentage": "15",
         "graphvalue": "25",
         "totalseats": "100",
-        "remainingseats": "85"
+        "remainingseats": "85",
+        "report_month": "month",
+        "report_timespent": "timespent",
+        "report_enrolments": "enrolments",
+        "report_completions": "completions"
     }
 }}
 <div>
@@ -104,18 +108,18 @@
         </div>
         <div class='right-region'>
             <div class="blocks company-logo">
-                <img alt="Company Logo" src="{{logourl}}" >
+                <img alt="{{logourl}}" src="{{logourl}}" >
             </div>
             <div class="blocks">
                 <div class="heads">
                     <h2>{{#str}} my_details, local_levitate {{/str}} </h2>
                     <div class="chev-down">
-                        <img alt="chevron down" src="{{svg}}/local/levitate/pix/chevron-down.svg" >
+                        <img alt="{{svg}}" src="{{svg}}/local/levitate/pix/chevron-down.svg" >
                     </div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-item-icon">
-                        <img alt="contact Logo" src="{{contact-person_svg}}" >
+                        <img alt="{{svg}}" src="{{contact-person_svg}}" >
                     </div>
                     <div class="details">
                         <p class="lead">{{#str}} contact_person, local_levitate {{/str}} </p>
@@ -125,7 +129,7 @@
                 </div>
                 <div class="detail-item">
                     <div class="detail-item-icon">
-                        <img alt="contact Logo" src="{{contact-details_svg}}" >
+                        <img alt="{{svg}}" src="{{contact-details_svg}}" >
                     </div>
                     <div class="details">
                         <p class="lead">{{#str}} contact_details, local_levitate {{/str}} </p>
@@ -135,7 +139,7 @@
                 </div>
                 <div class="detail-item">
                     <div class="detail-item-icon">
-                        <img alt="access Logo" src="{{access-domain_svg}}" >
+                        <img alt="{{svg}}" src="{{access-domain_svg}}" >
                     </div>
                     <div class="details">
                         <p class="lead">{{#str}} access_domain, local_levitate {{/str}} </p>
@@ -144,7 +148,7 @@
                 </div>
                 <div class="detail-item">
                     <div class="detail-item-icon">
-                        <img alt="calendar Logo" src="{{calendar_svg}}" >
+                        <img alt="{{svg}}" src="{{calendar_svg}}" >
                     </div>
                     <div class="details">
                         <p class="lead">{{#str}} subscripton_start, local_levitate {{/str}} </p>
@@ -193,6 +197,12 @@
                         <div class="total-used">
                             <div class="lead">{{#str}} seats_used, local_levitate {{/str}}</div>
                             <div class="nums">{{remainingseats}}</div>
+                        </div>
+                        <div style="display:none">
+                            <p class="report_month">{{report_month}}</p>
+                            <p class="report_timespent">{{report_timespent}}</p>
+                            <p class="report_enrolments">{{report_enrolments}}</p>
+                            <p class="report_completions">{{report_completions}}</p>
                         </div>
                     </div>
                 </div>

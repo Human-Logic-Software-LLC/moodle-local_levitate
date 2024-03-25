@@ -28,24 +28,28 @@ require_once($CFG->dirroot . '/local/levitate/lib.php');
 global $CFG, $DB;
 $errorparam = optional_param('errorcode', null, PARAM_TEXT);
 if ($errorparam == 'invalidtoken') {
-    redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'), get_string('invalidtoken', 'local_levitate'));
-    die();
+    redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'),
+    \core\notification::info(get_string('invalidtoken', 'local_levitate')));
 }
-
-$PAGE->set_context(context_system::instance());
 
 require_login();
 
 if (!has_capability('local/levitate:view_levitate_catalog', context_system::instance())) {
-    $url = $CFG->wwwroot.'/my/';
-    redirect($url, get_string('catalog_capability', 'local_levitate'));
+         \core\notification::add(
+               get_string('catalog_capability', 'local_levitate'),
+                \core\notification::ERROR
+            );
+    redirect(new moodle_url('/my/') );
 }
+
+$PAGE->set_context(context_system::instance());
+
+
 
 $tokensettings = get_config('local_levitate');
 $tokenid = $tokensettings->secret;
 if (empty($tokenid)) {
     redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'));
-    die();
 }
 
 
