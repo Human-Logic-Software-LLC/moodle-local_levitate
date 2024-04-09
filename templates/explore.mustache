@@ -21,7 +21,11 @@
     {
         "maxval": 90,
         "minval": 0,
-        "All_courses_count": 180
+        "All_courses_count": 180,
+        'key' => $key,
+        'name' => $name,
+        'isTagOptions' => true,
+        'tagsoptions' => $tagsoptions,
     }
 }}
 <div class="course_explore">
@@ -95,4 +99,28 @@
             <p class="errortext"></p>
         </div>
     </div>
+</div>
+<div class="filters-summary">
+<p id="total_course_value" class="hl-filter" hidden>181
+</p>
+<ul class="hl-filters">
+{{#jsondata}}
+    <li>
+        <label id="{{key}}" class="hl-filter">
+            <input class="{{key}}" name="hlfilters" type="radio" value="{{key}}">
+            <h4 class="hl-title">{{name}}</h4>
+            <span class="chevron-down fa fa-chevron-down"></span>
+        </label>
+        {{#isTagOptions}}
+            <div class="hl-FiltersOptions {{key}}">
+                <ul class="hl-values hl-hidden">
+                    {{{tagsoptions}}}
+                </ul>
+            </div>
+        {{/isTagOptions}}
+    </li>
+{{/jsondata}}
+</ul>
+</div>
+</div>
 </div>

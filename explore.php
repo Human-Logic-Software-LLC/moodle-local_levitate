@@ -79,28 +79,7 @@ foreach ($jsondata as $key => $value) {
 $jsdata = ["tokenid" => $tokenid, "minval" => $minval, "maxval" => $maxval];
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/explorescript.js'));
 $PAGE->requires->js_init_call('createinti', [$jsdata]);
-$exploreparams = (object) [
-                'clear_filters' => get_string('clear_filters', 'local_levitate'),
-                'findcourse' => get_string('findcourse', 'local_levitate'),
-                'duration' => get_string('duration', 'local_levitate'),
-                'maxval' => $maxval,
-                'minval' => $minval,
-                'to' => get_string('to', 'local_levitate'),
-                'All_courses_count' => $jsondata["All_courses_count"],
-            ];
-$params = (object) [
-                'create_courses' => get_string('create_courses', 'local_levitate'),
-                'levitate_logo' => $OUTPUT->image_url('levitate-logo', 'local_levitate'),
-                'loading' => get_string('loading', 'local_levitate'),
-                'no_course_found' => get_string('no_course_found', 'local_levitate'),
-                'about_course' => get_string('about_course', 'local_levitate'),
-                'learning_objectives' => get_string('learning_objectives', 'local_levitate'),
-            ];
-
-echo $OUTPUT->render_from_template('local_levitate/explore', $exploreparams);
-
 $data = [];
-
 foreach ($jsondata as $key => $value) {
     if ($key !== "All_courses_count" && $key !== "subscribed_courses_count" &&
         $key !== "custom_courses_count" && $key !== "time_params") {
@@ -135,8 +114,27 @@ foreach ($jsondata as $key => $value) {
         ];
     }
 }
+$exploreparams = (object) [
+                'clear_filters' => get_string('clear_filters', 'local_levitate'),
+                'findcourse' => get_string('findcourse', 'local_levitate'),
+                'duration' => get_string('duration', 'local_levitate'),
+                'maxval' => $maxval,
+                'minval' => $minval,
+                'to' => get_string('to', 'local_levitate'),
+                'All_courses_count' => $jsondata["All_courses_count"],
+                'jsondata' => $data,
+            ];
+$params = (object) [
+                'create_courses' => get_string('create_courses', 'local_levitate'),
+                'levitate_logo' => $OUTPUT->image_url('levitate-logo', 'local_levitate'),
+                'loading' => get_string('loading', 'local_levitate'),
+                'no_course_found' => get_string('no_course_found', 'local_levitate'),
+                'about_course' => get_string('about_course', 'local_levitate'),
+                'learning_objectives' => get_string('learning_objectives', 'local_levitate'),
+            ];
 
-echo $OUTPUT->render_from_template('local_levitate/options', ['jsondata' => $data]);
+echo $OUTPUT->render_from_template('local_levitate/explore', $exploreparams);
+
 echo $OUTPUT->render_from_template('local_levitate/explore_footer', $params);
 
 echo $OUTPUT->footer();

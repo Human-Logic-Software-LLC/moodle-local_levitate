@@ -21,7 +21,7 @@
  * @author     Sreenu Malae <sreenivas@human-logic.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
+
 require_once('../../config.php');
 global $CFG, $DB, $PAGE;
 require_once($CFG->dirroot . '/local/levitate/lib.php');

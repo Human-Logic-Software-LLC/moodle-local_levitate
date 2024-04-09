@@ -49,7 +49,7 @@ class create_course extends \core\task\scheduled_task {
     public function execute() {
         global $DB, $CFG;
         require_once($CFG->dirroot.'/local/levitate/lib.php');
-require_once($CFG->libdir . '/datalib.php');
+        require_once($CFG->libdir . '/datalib.php');
         $tokensettings = get_config('local_levitate');
         $tokenid = $tokensettings->secret;
         $taskdetails = $DB->get_records('local_levitate_task_details', ['taskexecuted' => 0]);
