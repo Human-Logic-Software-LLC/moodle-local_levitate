@@ -123,8 +123,6 @@ $exploreparams = (object) [
                 'to' => get_string('to', 'local_levitate'),
                 'All_courses_count' => $jsondata["All_courses_count"],
                 'jsondata' => $data,
-            ];
-$params = (object) [
                 'create_courses' => get_string('create_courses', 'local_levitate'),
                 'levitate_logo' => $OUTPUT->image_url('levitate-logo', 'local_levitate'),
                 'loading' => get_string('loading', 'local_levitate'),
@@ -134,7 +132,4 @@ $params = (object) [
             ];
 
 echo $OUTPUT->render_from_template('local_levitate/explore', $exploreparams);
-
-echo $OUTPUT->render_from_template('local_levitate/explore_footer', $params);
-
 echo $OUTPUT->footer();
