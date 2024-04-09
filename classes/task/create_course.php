@@ -49,6 +49,7 @@ class create_course extends \core\task\scheduled_task {
     public function execute() {
         global $DB, $CFG;
         require_once($CFG->dirroot.'/local/levitate/lib.php');
+require_once($CFG->libdir . '/datalib.php');
         $tokensettings = get_config('local_levitate');
         $tokenid = $tokensettings->secret;
         $taskdetails = $DB->get_records('local_levitate_task_details', ['taskexecuted' => 0]);
@@ -60,7 +61,7 @@ class create_course extends \core\task\scheduled_task {
             $coursedata = json_decode($tasks->coursedata);
             $contextids = json_decode($coursedata->context_id);
             $enrollusers = json_decode($coursedata->enrollusers);
-            $courseshortnames = $DB->get_records('course');
+            $courseshortnames = get_courses();
             foreach ($courseshortnames as $courseshort) {
                 $shortnames[] = $courseshort->shortname;
             }

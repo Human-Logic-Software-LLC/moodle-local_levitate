@@ -31,6 +31,7 @@ require_once('../../course/modlib.php');
 global $CFG, $USER, $DB;
 require_once($CFG->dirroot . '/local/levitate/lib.php');
 require_once($CFG->dirroot . '/local/levitate/classes/form/local_levitate_form.php');
+require_once($CFG->libdir . '/datalib.php');
 
 $imageurls = optional_param_array('image_urls', '', PARAM_TEXT);
 $contextid = optional_param_array('context_id', '', PARAM_TEXT);
@@ -89,7 +90,7 @@ if ($mform->is_cancelled()) {
     $currentform = json_encode($formdata);
     $formvalues->formdata = $currentform;
     $formvalues->timecreated = time();
-    $courseshortnames = $DB->get_records('course');
+    $courseshortnames = get_courses();
     foreach ($courseshortnames as $courseshort) {
         $shortnames[] = $courseshort->shortname;
     }

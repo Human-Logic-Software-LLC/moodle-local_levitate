@@ -43,11 +43,7 @@ function get_courses_data(title = "", filter_params = "") {
 
                 var imageURL = courses.imageURL;
                 imageURL = imageURL.replace(/ /g, '%20');
-                if (imageURL == '') {
-                    imageURL =
-                        'https://cdn.elearningindustry.com/wp-content/uploads/2020/08/5-ways-to-improve-your-course-cover-design-1024x575.png'
-                }
-
+                
                 var text = `
                 <div class='coursecard' >
                 <div class='courseimage'>

@@ -40,10 +40,10 @@ $PAGE->set_context(context_system::instance());
 
 $PAGE->requires->jquery_plugin('ui');
 
-$PAGE->requires->js(new \moodle_url('https://levitate.human-logic.com/blocks/levitate_report/javascript/datatables.min.js'), true);
-$PAGE->requires->css(new \moodle_url('https://levitate.human-logic.com/blocks/levitate_report/javascript/datatables.min.css'));
-$PAGE->requires->js(new \moodle_url('https://d3js.org/d3.v4.js'), true);
-$PAGE->requires->css(new \moodle_url($CFG->wwwroot.'/local/levitate/css/styles.css'));
+$PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/datatables.min.js'), true);
+$PAGE->requires->css(new \moodle_url($CFG->wwwroot.'/local/levitate/js/datatables.min.css'));
+$PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/d3.v4.js'), true);
+
 
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/report.js'), true);
 $PAGE->set_title(get_string('heading_analytics', 'local_levitate'));
