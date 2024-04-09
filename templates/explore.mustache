@@ -22,10 +22,29 @@
         "maxval": 90,
         "minval": 0,
         "All_courses_count": 180,
-        'key' => $key,
-        'name' => $name,
-        'isTagOptions' => true,
-        'tagsoptions' => $tagsoptions,
+        "jsondata": [
+            {
+             key: language_params,
+             name: Language,
+             isTagOptions: 1,
+             tagsoptions: [
+                '<li>
+                    <label class="common-customCheckbox">
+                        <input name="filter_checkbox" data-filtername="language_params" type="checkbox" value="English">
+                        <span>English</span>
+                        <div class="common-checkboxIndicator"></div>
+                    </label>
+                </li>',
+                '<li>
+                   <label class="common-customCheckbox">
+                    <input name="filter_checkbox" data-filtername="language_params" type="checkbox" value="Arabic">
+                    <span>Arabic</span>
+                    <div class="common-checkboxIndicator"></div>
+                    </label>
+                </li>'
+             ]
+            }]
+    
     }
 }}
 <div class="course_explore">
@@ -101,7 +120,7 @@
     </div>
 </div>
 <div class="filters-summary">
-<p id="total_course_value" class="hl-filter" hidden>181
+<p id="total_course_value" class="hl-filter" hidden>{{{All_courses_count}}}
 </p>
 <ul class="hl-filters">
 {{#jsondata}}
