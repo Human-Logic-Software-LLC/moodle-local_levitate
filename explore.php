@@ -79,36 +79,12 @@ foreach ($jsondata as $key => $value) {
 $jsdata = ["tokenid" => $tokenid, "minval" => $minval, "maxval" => $maxval];
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/explorescript.js'));
 $PAGE->requires->js_init_call('createinti', [$jsdata]);
-$exploreparams = (object) [
-                'clear_filters' => get_string('clear_filters', 'local_levitate'),
-                'findcourse' => get_string('findcourse', 'local_levitate'),
-                'duration' => get_string('duration', 'local_levitate'),
-                'maxval' => $maxval,
-                'minval' => $minval,
-                'to' => get_string('to', 'local_levitate'),
-                'All_courses_count' => $jsondata["All_courses_count"],
-            ];
-$params = (object) [
-                'create_courses' => get_string('create_courses', 'local_levitate'),
-                'levitate_logo' => $OUTPUT->image_url('levitate-logo', 'local_levitate'),
-                'loading' => get_string('loading', 'local_levitate'),
-                'no_course_found' => get_string('no_course_found', 'local_levitate'),
-                'about_course' => get_string('about_course', 'local_levitate'),
-                'learning_objectives' => get_string('learning_objectives', 'local_levitate'),
-            ];
-echo '<div class="course_explore">
-    <div class="hl-filters-wrapper">
-        <div class="hl-base">';
-echo $OUTPUT->render_from_template('local_levitate/explore', $exploreparams);
-echo '<div class="filters-summary">
-                <p id="total_course_value" class="hl-filter" hidden>'. $jsondata["All_courses_count"].'
-                </p>
-                <ul class="hl-filters">';
+$data = [];
 foreach ($jsondata as $key => $value) {
     if ($key !== "All_courses_count" && $key !== "subscribed_courses_count" &&
-            $key !== "custom_courses_count"
-    && $key !== "time_params") {
+        $key !== "custom_courses_count" && $key !== "time_params") {
         $name = '';
+        $tagsoptions = '';
         switch ($key) {
             case "language_params":
                 $name = get_string('language', 'local_levitate');
@@ -122,38 +98,38 @@ foreach ($jsondata as $key => $value) {
             default:
                 $name = $key;
         }
-        echo '<li>
-        <label id="'.$key.'" class="hl-filter ">
-            <input class="'.$key.'" name="hlfilters" type="radio" value="'.$key.'">
-            <h4 class="hl-title">'.$name.'</h4>
-            <span class="chevron-down fa fa-chevron-down"></span>
-        </label>';
-    }
-    if (is_array(json_decode(json_decode($value)))) {
-        if (count(json_decode(json_decode($value))) > 0) {
-            echo ' <div class="hl-FiltersOptions '.$key.' ">
-            <ul class="hl-values hl-hidden">';
-            $tagsoptions = local_levitate_get_option_text(json_decode(json_decode($value)), $key);
-            echo  $tagsoptions;
-            echo "</ul>";
-            echo "</div>";
-        }
-    } else {
-        if ($key !== "All_courses_count" && $key !== "subscribed_courses_count" &&
-            $key !== "custom_courses_count" && $key !== "time_params") {
+        if (is_array(json_decode(json_decode($value)))) {
+            $array = json_decode(json_decode($value));
+        } else {
             $array = json_decode(json_encode(json_decode(json_decode($value))), true);
-            if (count($array) > 0) {
-                echo ' <div class="hl-FiltersOptions '.$key.' ">
-                        <ul class="hl-values hl-hidden">';
-                $tagsoptions = local_levitate_get_option_text($array, $key);
-                echo  $tagsoptions;
-                echo "</ul>";
-                echo "</div>";
-            }
         }
+        if (count($array) > 0) {
+            $tagsoptions = local_levitate_get_option_text($array, $key);
+        }
+        $data[] = [
+            'key' => $key,
+            'name' => $name,
+            'isTagOptions' => (count($array) > 0),
+            'tagsoptions' => $tagsoptions,
+        ];
     }
-    echo '</li>';
 }
-echo "</ul></div></div></div>";
-echo $OUTPUT->render_from_template('local_levitate/explore_footer', $params);
+$exploreparams = (object) [
+                'clear_filters' => get_string('clear_filters', 'local_levitate'),
+                'findcourse' => get_string('findcourse', 'local_levitate'),
+                'duration' => get_string('duration', 'local_levitate'),
+                'maxval' => $maxval,
+                'minval' => $minval,
+                'to' => get_string('to', 'local_levitate'),
+                'All_courses_count' => $jsondata["All_courses_count"],
+                'jsondata' => $data,
+                'create_courses' => get_string('create_courses', 'local_levitate'),
+                'levitate_logo' => $OUTPUT->image_url('levitate-logo', 'local_levitate'),
+                'loading' => get_string('loading', 'local_levitate'),
+                'no_course_found' => get_string('no_course_found', 'local_levitate'),
+                'about_course' => get_string('about_course', 'local_levitate'),
+                'learning_objectives' => get_string('learning_objectives', 'local_levitate'),
+            ];
+
+echo $OUTPUT->render_from_template('local_levitate/explore', $exploreparams);
 echo $OUTPUT->footer();

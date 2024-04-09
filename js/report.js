@@ -90,7 +90,7 @@ function createDataTable(Y,data,rawDataJSON,courses_table) {
 
     // Customize DataTable options if needed
     creating_table.order([0, 'asc']); // Sort by the first column in ascending order
-    creating_table.on('click', 'span.opengraph', function (e) {
+    creating_table.off('click').on('click', 'span.opengraph', function (e) {
         let tr = e.target.closest('tr');
         let row = creating_table.row(tr);
 

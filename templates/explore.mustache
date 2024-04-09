@@ -21,76 +21,194 @@
     {
         "maxval": 90,
         "minval": 0,
-        "All_courses_count": 180
+        "All_courses_count": 180,
+        "jsondata": [
+                {
+                    "key": "language_params",
+                    "name": "Language",
+                    "isTagOptions": 1,
+                    "tagsoptions": "<li>Option 1</li><li>Option 2</li><li>Option 3</li>"
+                    
+                },
+                {
+                    "key": "category_params",
+                    "name": "Category",
+                    "isTagOptions": 1,
+                    "tagsoptions": "<li>Option 1</li><li>Option 2</li><li>Option 3</li>"
+                }
+            ],
+        "levitate_logo": "https://levitatedemo.human-logic.com/local/levitate/images/company-logo.png"
+    
     }
 }}
-
-<div id="id_clearfilter" class="clearfilter">
-    {{#str}} clear_filters, local_levitate {{/str}}
-</div>
-<div class="course-search">
-    <input type="text" class="searchTerm" placeholder="{{#str}} findcourse, local_levitate {{/str}}" >
-    <button type="submit" class="searchButton">
-        <i class="fa fa-search"></i>
-    </button>
-</div>
-<div class="slider-wrapper">
-    <p class="label">{{#str}} duration, local_levitate {{/str}}</p>
-    <div class="slider" id="slider-distance">
-        <div>
-            <div class="inverse-left" style="width:0%;"></div>
-            <div class="inverse-right" style="width:0%;"></div>
-            <div class="range" style="left:0%;right:0%;"></div>
-            <span class="thumb minthumb" style="left:0%;"></span>
-            <span class="thumb maxthumb" style="left:100%;"></span>
-            <div class="sign" style="left:30%;">
-                <span id="startvalue">30</span>
+<div class="course_explore">
+    <div class="hl-filters-wrapper">
+        <div class="hl-base">
+            <div id="id_clearfilter" class="clearfilter">
+                {{#str}} clear_filters, local_levitate {{/str}}
             </div>
-            <div class="sign" style="left:60%;">
-                <span id="endvalue">60</span>
+            <div class="course-search">
+                <input type="text" class="searchTerm" placeholder="{{#str}} findcourse, local_levitate {{/str}}" >
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+            <div class="slider-wrapper">
+                <p class="label">{{#str}} duration, local_levitate {{/str}}</p>
+                <div class="slider" id="slider-distance">
+                    <div>
+                        <div class="inverse-left" style="width:0%;"></div>
+                        <div class="inverse-right" style="width:0%;"></div>
+                        <div class="range" style="left:0%;right:0%;"></div>
+                        <span class="thumb minthumb" style="left:0%;"></span>
+                        <span class="thumb maxthumb" style="left:100%;"></span>
+                        <div class="sign" style="left:30%;">
+                            <span id="startvalue">30</span>
+                        </div>
+                        <div class="sign" style="left:60%;">
+                            <span id="endvalue">60</span>
+                        </div>
+                    </div>
+
+                    <input id="minDval_input" data-filtername='time_params' name='filter_checkbox' type="range"
+                        tabindex="0" value="{{minval}}" max="{{maxval}}"
+                        min="{{minval}}" step="5" oninput="
+                        this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
+                        var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)
+                                    -(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                        var children = this.parentNode.childNodes[1].childNodes;
+                        console.log(this.parentNode.childNodes[1]);
+                        children[1].style.width=value+'%';
+                        children[5].style.left=value+'%';
+                        children[7].style.left=value+'%';children[11].style.left=value+'%';
+                        children[11].childNodes[1].innerHTML=this.value;
+                        changeminDval(this.value)" 
+                    >
+                    <input id="maxDval_input" data-filtername='time_params' name='filter_checkbox' type="range"
+                        tabindex="0" value="{{maxval}}" max="{{maxval}}"
+                        min="{{minval}}" step="5" oninput="
+                        this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
+                        var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)
+                                            -(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                        var children = this.parentNode.childNodes[1].childNodes;
+                        children[3].style.width=(100-value)+'%';
+                        children[5].style.right=(100-value)+'%';
+                        children[9].style.left=value+'%';children[13].style.left=value+'%';
+                        children[13].childNodes[1].innerHTML=this.value;
+                        changemaxDval(this.value)" 
+                    >
+                    <div class="box-minmax">
+                        <span>
+                            <select name="minDval" id="minDval">
+                                <!-- <option value="0">Min</option> -->
+                            </select>
+                        </span>
+                        <span>{{#str}} to, local_levitate {{/str}}</span>
+                        <span>
+                            <select name="maxDval" id="maxDval"></select>
+                        </span>
+                    </div>
+                    <div class="error">
+                        <p class="errortext"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="filters-summary">
+                <p id="total_course_value" class="hl-filter" hidden>{{{All_courses_count}}}
+                </p>
+                <ul class="hl-filters">
+                {{#jsondata}}
+                    <li>
+                        <label id="{{key}}" class="hl-filter">
+                            <input class="{{key}}" name="hlfilters" type="radio" value="{{key}}">
+                            <span class="hl-title">{{name}}</span>
+                            <span class="chevron-down fa fa-chevron-down"></span>
+                        </label>
+                        {{#isTagOptions}}
+                            <div class="hl-FiltersOptions {{key}}">
+                                <ul class="hl-values hl-hidden">
+                                    {{{tagsoptions}}}
+                                </ul>
+                            </div>
+                        {{/isTagOptions}}
+                    </li>
+                {{/jsondata}}
+                </ul>
             </div>
         </div>
+    </div>
+    <div class="courselist_wrapper">
+        <div class="filter-summary-selectedFilterContainer filter-summary-reduceTopPadding">
+            <ul class="filter-summary-filterList"></ul>
+            <div>
+                <form autocomplete="off" method="post" id="course_selection" action="./selected_courses.php">
+                    <!-- <form id="course_selection"> -->
+                    <div class="text-container">
+                        <div class="course_count_div">
+                            <p class='filterd_courses'></p>
+                            <p>{{#str}} outof, local_levitate {{/str}}</p>
+                            <p class='total_courses'></p>
+                        </div>
+                        <div class="course_submit">
+                            <input type="submit" value="{{#str}} create_courses, local_levitate {{/str}}" disabled >
+                        </div>
+                    </div>
+                    <div class='explorecourses'>
+                        <div class="loading">
+                            <img id="image_loading" src="{{levitate_logo}}" alt="{{levitate_logo}}" width="250" >
+                            <p>{{#str}} loading, local_levitate {{/str}}</p>
+                        </div>
+                        <div class='nocourse'>
+                            <h4 class='nocoursetext'> {{#str}} no_course_found, local_levitate {{/str}} </h4>
+                        </div>
+                    </div>
+                    <div class="text-container">
+                        <input type="submit" value="{{#str}} create_courses, local_levitate {{/str}}" disabled >
+                    </div>
+                    <div class='explore-details-wrapper clearfix' id='explore-details-wrapper-actual'
+                        style='display: none;'>
+                        <div class='explore-details-pointer' style='left: 82.0005px;'>
+                            <div class='explore-empty'></div>
+                        </div>
+                        <div class='explore-details'>
+                            <div class='explore-details-content'>
+                                <div class='explore-details-top clearfix'>
+                                    <a role='button' onclick='closewrapper()'
+                                        class='explore-details-close pull-right'>{{#str}} xvalue, local_levitate {{/str}}</a>
+                                    <h4 class='pull-left coursename'></h4>
+                                </div>
+                                <div class='explore-details-header clearfix'>
+                                    <div class='pull-left'>
+                                        <div class='explore-header-details-cell'>
+                                            <div class='explore-details-delivery'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='explore-details-main col-md-8'>
+                                        <div class='explore-details-description'>
+                                            <h4>{{#str}} about_course, local_levitate {{/str}}</h4>
+                                            <div></div>
+                                        </div>
+                                        <div class='explore-learning-objectives'>
+                                            <h4>{{#str}} learning_objectives, local_levitate {{/str}}
+                                            </h4>
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                    <div class='col-md-4'>
+                                        <div class='explore-details-img'>
+                                            <div class='explore-thumbnail-img'></div>
+                                        </div>
 
-        <input id="minDval_input" data-filtername='time_params' name='filter_checkbox' type="range"
-            tabindex="0" value="{{minval}}" max="{{maxval}}"
-            min="{{minval}}" step="5" oninput="
-            this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
-            var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)
-                        -(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
-            var children = this.parentNode.childNodes[1].childNodes;
-            console.log(this.parentNode.childNodes[1]);
-            children[1].style.width=value+'%';
-            children[5].style.left=value+'%';
-            children[7].style.left=value+'%';children[11].style.left=value+'%';
-            children[11].childNodes[1].innerHTML=this.value;
-            changeminDval(this.value)" 
-        >
-        <input id="maxDval_input" data-filtername='time_params' name='filter_checkbox' type="range"
-            tabindex="0" value="{{maxval}}" max="{{maxval}}"
-            min="{{minval}}" step="5" oninput="
-            this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
-            var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)
-                                -(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
-            var children = this.parentNode.childNodes[1].childNodes;
-            children[3].style.width=(100-value)+'%';
-            children[5].style.right=(100-value)+'%';
-            children[9].style.left=value+'%';children[13].style.left=value+'%';
-            children[13].childNodes[1].innerHTML=this.value;
-            changemaxDval(this.value)" 
-        >
-        <div class="box-minmax">
-            <span>
-                <select name="minDval" id="minDval">
-                    <!-- <option value="0">Min</option> -->
-                </select>
-            </span>
-            <span>{{#str}} to, local_levitate {{/str}}</span>
-            <span>
-                <select name="maxDval" id="maxDval"></select>
-            </span>
-        </div>
-        <div class="error">
-            <p class="errortext"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

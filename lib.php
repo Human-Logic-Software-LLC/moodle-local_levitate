@@ -28,10 +28,10 @@ require_once($CFG->dirroot.'/course/lib.php');
 /**
  * local_levitate_storedfile to store the file
  *
- * @param string $name give file name.
+ * @param string $name is the file name.
  * @param string $packageid contains the scormid
  * @param string $scorm has scorm content to store
- * @return string the file path.
+ * @return stored_file
  */
 function local_levitate_storedfile($name, $packageid, $scorm) {
     global $USER;
