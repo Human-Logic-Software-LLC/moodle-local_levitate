@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<libraries>
+   <library>
+    <location>js/datatables.min.js</location>
+    <name>DataTables</name>
+    <license>MIT</license>
+    <version>1.13.6</version>
+  </library>
+  <library>
+    <location>js/datatables.min.css</location>
+    <name>DataTables</name>
+    <license>MIT</license>
+    <version>1.13.6</version>
+  </library>
+  <library>
+    <location>js/d3/d3.v4.js</location>
+    <name>d3.js</name>
+    <license>ISC License</license>
+    <version>v4.13.0</version>
+  </library>
+  <library>
+    <location>fonts</location>
+    <name>Google Fonts - fonts.gstatic.com</name>
+    <version>v30</version>
+    <license>SIL Open Font License</license>
+    <repository>https://github.com/google/fonts</repository>
+  </library>
+</libraries>
