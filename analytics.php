@@ -42,7 +42,7 @@ $PAGE->requires->jquery_plugin('ui');
 
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/datatables.min.js'), true);
 $PAGE->requires->css(new \moodle_url($CFG->wwwroot.'/local/levitate/js/datatables.min.css'));
-$PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/d3.v4.js'), true);
+$PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/d3/d3.v4.js'), true);
 
 
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/report.js'), true);
