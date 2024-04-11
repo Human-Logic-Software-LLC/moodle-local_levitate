@@ -17,6 +17,7 @@
     <name>d3.js</name>
     <license>ISC License</license>
     <version>v4.13.0</version>
+    <repository>https://github.com/d3/d3/releases/tag/v4.13.0</repository>
   </library>
   <library>
     <location>fonts</location>
