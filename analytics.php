@@ -48,7 +48,6 @@ $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/d3/d3.v4.j
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/report.js'), true);
 $PAGE->set_title(get_string('heading_analytics', 'local_levitate'));
 $PAGE->set_heading(get_string('heading_analytics', 'local_levitate'));
-echo "<div id='topofthePage'></div>";
 $PAGE->set_pagelayout('base');
 $PAGE->set_url('/local/levitate/analytics.php');
 $response = local_levitate_curlcall('mod_levitateserver_get_analytics');

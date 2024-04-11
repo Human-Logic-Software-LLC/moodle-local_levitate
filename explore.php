@@ -57,7 +57,6 @@ if (empty($tokenid)) {
 $PAGE->set_title(get_string('explorenow', 'local_levitate'));
 $PAGE->set_heading(get_string('explorenow', 'local_levitate'));
 $PAGE->requires->jquery_plugin('ui');
-echo "<div id='topofthePage'></div>";
 $PAGE->set_pagelayout('base');
 $PAGE->set_url('/local/levitate/explore.php');
 $response = local_levitate_curlcall('mod_levitateserver_get_tags_categories');
