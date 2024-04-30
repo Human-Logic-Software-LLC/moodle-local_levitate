@@ -5,14 +5,15 @@ function toHoursAndMinutes(totalMinutes) {
 }
 
 
-function get_courses_data(title = "", filter_params = "") {
+function get_courses_data(title = "", filter_params = "",serverurl) {
+    
     var $spinner = $('.loading');
     $spinner.show();
     var form = new FormData();
     form.append("title", title);
     form.append("filter_params", filter_params);
     var settings = {
-        "url": "https://levitate.human-logic.com/webservice/rest/server.php?wstoken="+tokenid+"&wsfunction=mod_levitateserver_get_explore_courses&moodlewsrestformat=json",
+        "url": serverurl+"/webservice/rest/server.php?wstoken="+tokenid+"&wsfunction=mod_levitateserver_get_explore_courses&moodlewsrestformat=json",
         "method": "POST",
         "timeout": 0,
         "processData": false,
@@ -21,7 +22,8 @@ function get_courses_data(title = "", filter_params = "") {
         "data": form
     };
 
-    $.ajax(settings).done(function (response) {
+    $.ajax(settings)
+    .done(function(response) {
         if($.parseJSON(response).errorcode){
             window.location.href = window.location.href+'?errorcode=invalidtoken';
         }
@@ -69,6 +71,8 @@ function get_courses_data(title = "", filter_params = "") {
 
             });
             $(".nocourse").css({"display": "none"});
+            $(".noresponse").css({"display": "none"});
+            
             $spinner.hide();
         }
         else{
@@ -77,6 +81,11 @@ function get_courses_data(title = "", filter_params = "") {
 
 
         }
+    })
+    .fail(function(xhr, status, error) {
+        $spinner.hide();
+        $(".nocourse").css({"display": "none"});
+        $(".noresponse").css({"display": "block"});
     });
 }
 
@@ -105,7 +114,7 @@ function createinti(Y,phpvalues){
             <option value="${i}" ${isMaxSelected}>${isMaxSelectedvalue}</option>
         `);
     }
-    get_courses_data();
+    get_courses_data('','',phpvalues.serverurl);
 
     $(".explorecourses").on("click", ".coursecard", function (e) {
         if(e.target.nodeName !== 'INPUT' ){
@@ -320,7 +329,7 @@ function createinti(Y,phpvalues){
             });
         }
         let searchtext = $('.searchTerm').val();
-        get_courses_data(searchtext, JSON.stringify(filter_params));
+        get_courses_data(searchtext, JSON.stringify(filter_params),phpvalues.serverurl);
     }
 };
 

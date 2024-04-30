@@ -45,5 +45,7 @@ if ($hassiteconfig) {
                           new lang_string('secret_help', 'local_levitate').
                           "<br><a href='https://levitate.human-logic.com/create_token.php?$encoded'>"
                           .new lang_string('secret_url', 'local_levitate')."</a>", ''));
+        $settings->add(new admin_setting_configtext('local_levitate/server_url', get_string('server_url',
+            'local_levitate'), null, 'https://server.levitate.coach'));
     }
 }
