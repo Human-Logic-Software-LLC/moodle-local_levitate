@@ -107,3 +107,5 @@ $string['report_timespent'] = 'قضاء الوقت';
 $string['report_enrolments'] = 'التسجيلات';
 $string['report_completions'] = 'الاكمال';
 $string['coursecategory_required'] = 'يرجى اختيار فئة الدورة التدريبية';
+$string['server_url']= 'عنوان URL للخادم';
+$string['no_response_found']= 'Please update the <a href="{$a}">Sever URL</a> with the correct one.';

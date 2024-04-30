@@ -391,6 +391,21 @@
     font-weight: 500;
 }
 
+.path-local-levitate .noresponse {
+    width: 100%;
+    background: rgba(255, 255, 255, .5);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+    border: solid 1px rgba(0, 0, 0, .1);
+    border-radius: 10px;
+}
+
+.path-local-levitate .noresponse > h4 {
+    text-align: center;
+    width: 100%;
+    margin: 30px;
+    font-weight: 500;
+}
+
 .path-local-levitate .filter-summary-selectedFilterContainer form#course_selection {
     position: relative;
 }

@@ -107,3 +107,5 @@ $string['report_timespent'] = 'Timespent';
 $string['report_enrolments'] = 'Enrolments';
 $string['report_completions'] = 'Completions';
 $string['coursecategory_required'] = 'Kindly select the course category';
+$string['server_url']= 'Server url';
+$string['no_response_found']= 'Please update the <a href="{$a}">Sever URL</a> with the correct one.';

@@ -75,7 +75,7 @@ foreach ($jsondata as $key => $value) {
     }
 }
 
-$jsdata = ["tokenid" => $tokenid, "minval" => $minval, "maxval" => $maxval];
+$jsdata = ["tokenid" => $tokenid, "minval" => $minval, "maxval" => $maxval, "serverurl" => $tokensettings->server_url];
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/explorescript.js'));
 $PAGE->requires->js_init_call('createinti', [$jsdata]);
 $data = [];
@@ -128,6 +128,7 @@ $exploreparams = (object) [
                 'no_course_found' => get_string('no_course_found', 'local_levitate'),
                 'about_course' => get_string('about_course', 'local_levitate'),
                 'learning_objectives' => get_string('learning_objectives', 'local_levitate'),
+                'noresponse_url' => $CFG->wwwroot.'/admin/settings.php?section=locallevitategettoken',
             ];
 
 echo $OUTPUT->render_from_template('local_levitate/explore', $exploreparams);
