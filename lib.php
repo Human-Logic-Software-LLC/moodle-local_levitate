@@ -69,7 +69,6 @@ function local_levitate_curlcall($fnname = '', $jsondata='') {
     global $CFG;
     $tokensettings = get_config('local_levitate');
     $tokenid = $tokensettings->secret;
-    
     $serverurl = $tokensettings->server_url.'/webservice/rest/server.php?wstoken=';
     $url = $serverurl.$tokenid.'&wsfunction='.$fnname.'&moodlewsrestformat=json';
     $curl = new curl();
@@ -77,10 +76,10 @@ function local_levitate_curlcall($fnname = '', $jsondata='') {
     if (isset(json_decode($response)->errorcode)) {
         redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'), get_string('invalidtoken', 'local_levitate'));
     }
-    if(json_decode($response)==null){
-       redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'), get_string('no_response_found', 'local_levitate', new moodle_url('/admin/settings.php?section=locallevitategettoken')));
+    if(json_decode($response) == null){
+        redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'),
+            get_string('no_response_found', 'local_levitate', new moodle_url('/admin/settings.php?section=locallevitategettoken')));
     }
-    
     return $response;
 }
 /**
