@@ -26,7 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG, $PAGE, $OUTPUT;
 $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/levitate.js'), true);
 $PAGE->requires->js_init_call('update_token', []);
-
 if ($hassiteconfig) {
     $ADMIN->add('localplugins', new admin_category('local_levitate_settings', new lang_string('pluginname', 'local_levitate')));
     $ADMIN->add('local_levitate_settings', new admin_externalpage('locallevitateexplorecourses',

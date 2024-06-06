@@ -62,9 +62,6 @@ $PAGE->set_url('/local/levitate/explore.php');
 $response = local_levitate_curlcall('mod_levitateserver_get_tags_categories');
 echo $OUTPUT->header();
 
-
-
-
 $json = json_decode($response);
 $jsondata = json_decode(json_encode($json), true);
 foreach ($jsondata as $key => $value) {

@@ -81,8 +81,7 @@ function createDataTable(Y,data,rawDataJSON,courses_table) {
 
             });
         }, 10000);
-        }
-        
+        }       
     }
     else{
         creating_table.rows.add(data).draw();

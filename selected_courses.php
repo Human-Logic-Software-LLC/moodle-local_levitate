@@ -43,6 +43,7 @@ $passdata = [
                 "context_id" => json_encode($contextid),
                 "enrollusers" => json_encode($enrollusers),
                 "wwstoken" => $wstoken,
+                "coursedescvalue" => json_encode($_POST['coursedescvalue']),
             ];
 
 require_login();
@@ -63,8 +64,6 @@ $PAGE->requires->js(new \moodle_url($CFG->wwwroot.'/local/levitate/js/levitate.j
 $PAGE->requires->js_init_call('selected_course_js', []);
 $PAGE->set_pagelayout('base');
 $PAGE->set_url('/local/levitate/selected_courses.php');
-
-
 
 echo "<h4>".get_string('coursesettings', 'local_levitate')."</h4>";
 

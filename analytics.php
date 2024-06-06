@@ -59,7 +59,6 @@ if (empty($tokenid)) {
     redirect(new moodle_url('/admin/settings.php?section=locallevitategettoken'));
 }
 
-
 $json = json_decode($response);
 $jsondata = json_decode(json_encode($json), true);
 

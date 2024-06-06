@@ -4,7 +4,6 @@ function toHoursAndMinutes(totalMinutes) {
     return `${hours}h ${String(minutes).padStart(2, '0')}m`;
 }
 
-
 function get_courses_data(title = "", filter_params = "",serverurl) {
     
     var $spinner = $('.loading');
@@ -45,16 +44,22 @@ function get_courses_data(title = "", filter_params = "",serverurl) {
 
                 var imageURL = courses.imageURL;
                 imageURL = imageURL.replace(/ /g, '%20');
+                let course_description_value = jQuery('<div />').text(courses.course_description).html();
+                // course_description_value = btoa(unescape(encodeURIComponent(course_description_value)))
+                let imageurlvalue = encodeURIComponent();
+                
+                
                 
                 var text = `
                 <div class='coursecard' >
                 <div class='courseimage'>
                 <img class='imageurl' src=${imageURL}>
                 <input class=coursename${courses.course_id} type='hidden' id='coursename' name ='coursename[${courses.course_id}]' value=${courses.title} disabled>
-                <input class=imageURL${courses.course_id} type='hidden' id='imageURL' name ='image_urls[${courses.course_id}]' value=${courses.imageURL} disabled>
+                <input class=imageURL${courses.course_id} type='hidden' id='imageURL' name ='image_urls[${courses.course_id}]' value=${encodeURIComponent(courses.imageURL)} disabled>
                 <input class=itemId${courses.course_id} type='hidden' id='itemId' name ='image_item_id[${courses.course_id}]' value=${courses.image_itemid} disabled>
                 <input class=contextId${courses.course_id} type='hidden' id='contextId' name ='context_id[${courses.course_id}]' value=${courses.course_id} disabled>
                 <input class=wsToken type='hidden' id='wsToken' name ='wstoken' value="`+tokenid+`" disabled>
+                <input class=coursedescvalue${courses.course_id} type='hidden' id='coursedescvalue' name ='coursedescvalue[${courses.course_id}]' value="${String(course_description_value)}" disabled >
                 <input class=checkboc_cards type=checkbox id=${courses.course_id} name='enrollusers[${courses.course_id}]' value="${encodeURIComponent(courses.title)}">
                 </div>
                 <div class='coursebody ${courses.lang}'>
@@ -200,6 +205,7 @@ function createinti(Y,phpvalues){
                 $(':input[class=itemId' + id + ']').prop('disabled', false);
                 $(':input[class=contextId' + id + ']').prop('disabled', false);
                 $(':input[class=wsToken]').prop('disabled', false);
+                 $(':input[class=coursedescvalue' + id + ']').prop('disabled', false);
                 enable = true;
 
             }

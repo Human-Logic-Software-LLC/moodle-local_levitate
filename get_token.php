@@ -34,7 +34,6 @@ if (!has_capability('local/levitate:view_levitate_analytics', context_system::in
             );
     redirect(new moodle_url('/my/') );
 }
-
 $response = local_levitate_curlcall('mod_levitateserver_get_analytics');
 echo $response;
 exit;
