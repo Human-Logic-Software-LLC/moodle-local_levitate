@@ -130,7 +130,6 @@ class create_course extends \core\task\scheduled_task {
                         $image = file_get_contents(urldecode($image_urls->$key));
                         file_put_contents($CFG->dataroot.'/'.$name.'_'.$timestamp.'.'.$ext, $image);
                         $fs = get_file_storage();
-                        
                         $fileinfo = array(
                                     'contextid' => $context->id, 
                                     'component' => 'course',

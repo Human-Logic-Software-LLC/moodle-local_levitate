@@ -28,7 +28,6 @@ function selected_course_js(){
             $('#fitem_id_coursefullname').css('display','none');
             $('#fitem_id_courseshortname').css('display','none');
             $('#fgroup_id_radioar1').css('display','flex');
-
         }
         else if (this.value == 1) {
             $('#fitem_id_coursefullname').css('display','flex');

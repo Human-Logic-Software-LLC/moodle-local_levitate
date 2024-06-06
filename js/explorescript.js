@@ -4,7 +4,6 @@ function toHoursAndMinutes(totalMinutes) {
     return `${hours}h ${String(minutes).padStart(2, '0')}m`;
 }
 
-
 function get_courses_data(title = "", filter_params = "",serverurl) {
     
     var $spinner = $('.loading');

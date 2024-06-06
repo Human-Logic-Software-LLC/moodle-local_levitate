@@ -65,8 +65,6 @@ $PAGE->requires->js_init_call('selected_course_js', []);
 $PAGE->set_pagelayout('base');
 $PAGE->set_url('/local/levitate/selected_courses.php');
 
-
-
 echo "<h4>".get_string('coursesettings', 'local_levitate')."</h4>";
 
 $mform = new local_levitate_form(null, $passdata);

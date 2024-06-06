@@ -35,7 +35,6 @@ require_once($CFG->dirroot.'/course/lib.php');
  */
 function local_levitate_storedfile($name, $packageid, $scorm) {
     global $USER;
-
     $fs = get_file_storage();
 
     $itemid = file_get_unused_draft_itemid();
