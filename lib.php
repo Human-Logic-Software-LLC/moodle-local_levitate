@@ -126,7 +126,7 @@ $assessable, $section = 0, $scormcontentvalue=null) {
     $moduleinfo->visible = 1;
     $moduleinfo->section = $section;
 
-    $moduleinfo->intro = '';
+    $moduleinfo->intro = $descriptionhtml;
     $moduleinfo->introformat = FORMAT_HTML;
 
     $moduleinfo->popup = 1;

@@ -61,6 +61,8 @@ class create_course extends \core\task\scheduled_task {
             $coursedata = json_decode($tasks->coursedata);
             $contextids = json_decode($coursedata->context_id);
             $enrollusers = json_decode($coursedata->enrollusers);
+            $coursedescvalues = json_decode($coursedata->coursedescvalue);
+            $image_urls = json_decode($coursedata->image_urls);
             $courseshortnames = get_courses();
             foreach ($courseshortnames as $courseshort) {
                 $shortnames[] = $courseshort->shortname;
@@ -96,6 +98,8 @@ class create_course extends \core\task\scheduled_task {
                     $coursedata->category = $category;
                     $coursedata->fullname = html_entity_decode($output, ENT_COMPAT, 'UTF-8');
                     $coursedata->shortname = html_entity_decode($output, ENT_COMPAT, 'UTF-8');
+                    $coursedata->summary = $coursedescvalues->$key;
+
                     if ($formdata->courseformat == 0) {
                         $coursedata->format = 'singleactivity';
                         $coursedata->activitytype = 'scorm';
@@ -108,8 +112,36 @@ class create_course extends \core\task\scheduled_task {
                     $jsondata = ['cmid' => $cmid];
                     $tinyscorm = local_levitate_curlcall('mod_levitateserver_get_tiny_scorms', $jsondata);
                     $newcourse = create_course($coursedata);
+                   
+                    if($newcourse->id){
+                        mtrace("Course Created {$newcourse->id}...");
+                        
                     local_levitate_add_scorm_module($newcourse, html_entity_decode($output, ENT_COMPAT, 'UTF-8'), '', '', '',
                                         $scormsection, $tinyscorm);
+                        $context = \context_course::instance($newcourse->id, MUST_EXIST);
+                        
+                        // $draftitemid = file_get_unused_draft_itemid();
+                            $file = file_get_contents(urldecode($image_urls->$key)); // to get file
+                        // $name = basename($url); // to get file name
+                        $ext = pathinfo(urldecode($image_urls->$key), PATHINFO_EXTENSION); // to get extension
+                        $name =pathinfo(urldecode($image_urls->$key), PATHINFO_FILENAME);
+                        $timestamp =time();
+
+                        $image = file_get_contents(urldecode($image_urls->$key));
+                        file_put_contents($CFG->dataroot.'/'.$name.'_'.$timestamp.'.'.$ext, $image);
+                        $fs = get_file_storage();
+                        
+                        $fileinfo = array(
+                                    'contextid' => $context->id, 
+                                    'component' => 'course',
+                                    'filearea' => 'overviewfiles',
+                                    'itemid' => 0,
+                                    'filepath' => '/',
+                                    'filename' => $name.'_'.$timestamp.'.'.$ext);
+
+                        $fileuploaded = $fs->create_file_from_pathname($fileinfo, $CFG->dataroot.'/'.$name.'_'.$timestamp.'.'.$ext);
+
+                    }
 
                 }
             }

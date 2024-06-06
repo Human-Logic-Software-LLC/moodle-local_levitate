@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_levitate';
-$plugin->version = 2023031422;
+$plugin->version = 2023031423;
 $plugin->requires = 2014051200;
 $plugin->maturity  = MATURITY_RC;
 $plugin->release   = "v1.1.0";

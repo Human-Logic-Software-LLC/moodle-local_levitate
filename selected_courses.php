@@ -43,6 +43,7 @@ $passdata = [
                 "context_id" => json_encode($contextid),
                 "enrollusers" => json_encode($enrollusers),
                 "wwstoken" => $wstoken,
+                "coursedescvalue" => json_encode($_POST['coursedescvalue']),
             ];
 
 require_login();
